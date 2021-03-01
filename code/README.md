@@ -15,6 +15,10 @@ Access JECS-standard figure widths and heights from `config`:
 ````
 fig, ax = plt.subplots(figsize=(config.FIG_WIDTH, config.FIG_HEIGHT), nrows=1, ncols=1)
 ````
+To make a larger figure:
+````
+fig, ax = plt.subplots(figsize=(2 * config.FIG_WIDTH, config.FIG_HEIGHT), nrows=1, ncols=1)
+````
 
 ## Saving figures
 

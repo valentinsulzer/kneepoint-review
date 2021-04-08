@@ -1,0 +1,53 @@
+# Add new file name with path under `paths` and `file-path`
+# Replace every `main` with the branch name (use find and replace all for convenience)
+
+name: Update latexdiff pdf
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - main.tex
+
+jobs:
+  latexdiff:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        file-path: [main.tex]
+
+    steps:
+    - name: latexdiff for ${{ matrix.file-path }}
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+      # Install latexdiff
+    - name: Install latexdiff
+      run: |
+        curl -o latexdiff.zip http://ctan.imsc.res.in/support/latexdiff.zip
+        unzip latexdiff.zip
+        cd latexdiff
+        sudo make install
+        cd ..
+        sudo apt install texlive-latex-base
+      # Save second latest commit as old.tex
+    - name: Save commit into a file
+      run: |
+        git log -n 1 --skip 1 --pretty=format:"%H" main matrix.file−path|xargs−Igitshow:{{ matrix.file-path }} > old.tex
+      # Run latexdiff and save it as a pdf
+    - name: Run latexdiff
+      run: |
+        yes "" | latexdiff-vc -t UNDERLINE --pdf old.tex ${{ matrix.file-path }}
+      # Push the pdf
+    - name: Push the pdf
+      continue-on-error: true
+      run: |
+        git config user.name github-actions[bot]
+        git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+        git add \*.pdf
+        git reset latexdiff/*
+        git commit -m "Track changes in ${{ matrix.file-path }}"
+        git pull
+        git push

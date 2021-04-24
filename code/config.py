@@ -17,6 +17,8 @@ FIG_PATH = Path.cwd().parent / "figures"
 # Set default rcParams for all programmatically-generated figures
 rcParams["lines.markersize"] = 5
 rcParams["lines.linewidth"] = 1.0
+rcParams["xtick.minor.visible"] = True
+rcParams["ytick.minor.visible"] = True
 rcParams["font.size"] = 7
 rcParams["legend.fontsize"] = 7
 rcParams["legend.frameon"] = False

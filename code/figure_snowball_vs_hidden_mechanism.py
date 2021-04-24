@@ -50,8 +50,10 @@ ax[0].set_ylabel("Retention (%)")
 ax[2].set_ylabel("State variable")
 
 # Set axes limits
-ax[2].set_ylim([-2, 30])
+ax[0].set_xlim([-0.5, 500.5])
+ax[0].set_ylim([72.5, 100.1])
+ax[2].set_ylim([-0.5, 30])
 
 # Save figure as both .PNG and .EPS
-fig.savefig(config.FIG_PATH / "snowball_vs_hidden_mechanism.png", format="png")
+fig.savefig(config.FIG_PATH / "snowball_vs_hidden_mechanism.png", format="png", dpi=300)
 fig.savefig(config.FIG_PATH / "snowball_vs_hidden_mechanism.eps", format="eps")

@@ -43,5 +43,5 @@ ax.set_ylabel("Retention (%)")
 ax.legend()
 
 # Save figure as both .PNG and .EPS
-fig.savefig(config.FIG_PATH / "degradation_rates.png", format="png")
+fig.savefig(config.FIG_PATH / "degradation_rates.png", format="png", dpi=300)
 fig.savefig(config.FIG_PATH / "degradation_rates.eps", format="eps")

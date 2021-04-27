@@ -115,24 +115,16 @@ Delamination may also lead to inaccessible negative electrode material, which ca
 \subsection{DCR growth}
 Increasing DC resistance during cycling may also lead to the onset of not only a knee in cell power but also in the accessible capacity. This is intuitive at high currents, when the cell may hit a voltage limit before the majority of lithium has been shuttled across the separator, leading to a lower measured capacity. However, during aging, this rate limitation may occur at much lower than expected C-rates, and appear as a knee in the plots of power and capacity versus cycles. This behavior was thoroughly studied by Ma et al \cite{ma_editors_2019} using lab-made 230mAh NMC532/graphite pouch cells, varying electrolyte composition as well as the type of graphite. Careful study using impedance measurements, both of the full cells as well as symmetric coin cells of the positive and negative electrodes, was used to isolate the loss of performance to a dramatic increase of the cathode impedance during aging. This DC resistance growth was attributed to electrolyte oxidation at the positive electrode, which varied according to the upper cutoff potential as well as the electrolyte composition. Similar onset of a capacity knee due to the selection of the electrolyte composition was previously observed by Li et al as well \href{https://iopscience.iop.org/article/10.1149/2.0861805jes/pdf}{Li et al 2018}. This behavior has been documented in earlier studies as well, for instance, a detailed aging study by Ecker et al \cite{ecker_calendar_2014} observed knee onset correlated with dramatically increased DC resistance (200-400 percent).
 
+{
+\centering
+\includegraphics[scale=0.9]{figures/dcr_growth_knee.eps}
+}
+
 \hfil\includegraphics[scale=0.5]{images/Ma_JES_2019_Fig16.jpg}
 \hfil\includegraphics[scale=0.5]{images/Ecker_2014_fig12.jpg}
 
 
 \textbf{Any other studies showing high correlation between capacity loss and resistance growth could be candidates for this mechanism... any come to mind?}
-
-\subsection{Electrode connectivity}
-
-Electrolyte dry out OR electronic connectivity
-(From Tino, Peter can write) Kupper et al.~\cite{kupper_end--life_2018} model what they call `sudden death' by introducing a percolation threshold in the activity-saturation relationship, which is linked to electrolyte dry-out.
-
-Electronic connectivity: Li, Meyer et al
-
-Distinct from LAM causing plating, as this can cause a knee in its own right
-
-No experimental validation, but plausible
-
-Create figure
 
 \subsection{Additive depletion}
 
@@ -164,6 +156,19 @@ Second, nominally identical cells, cycled identically, but with different initia
 Theoretically, only the FEC consumed in a given cycle manifests in the electrochemical signals from cycling (e.g., differential capacity or differnetial voltage analysis); the excess FEC is not electrochemically detectable as it does not participate in reactions with the electrode.
 Since the \emph{remaining} FEC amount is the main determinant of cycle life in these cells, the knee point of cells exhibiting this mechanism is not predictable via standard electrochemical signals.
 An interesting proposal for future work is to evaluate other nondestructive probes (e.g., electrochemical impedance spectroscopy\cite{zhang_identifying_2020}, acoustic signals\cite{knehr_understanding_2018}) that may be sensitive to FEC concentration in the electrolyte.
+
+\subsection{Electrode connectivity}
+
+Electrolyte dry out OR electronic connectivity
+(From Tino, Peter can write) Kupper et al.~\cite{kupper_end--life_2018} model what they call `sudden death' by introducing a percolation threshold in the activity-saturation relationship, which is linked to electrolyte dry-out.
+
+Electronic connectivity: Li, Meyer et al
+
+Distinct from LAM causing plating, as this can cause a knee in its own right
+
+No experimental validation, but plausible
+
+Create figure
 
 \subsection{Mechanical degradation}
 
@@ -198,6 +203,44 @@ Clamping pressure by hose clamp Bach et al. \cite{bach_nonlinear_2016}
 Pressure with ball Fuchs et al.
 Unusual forms and pressure Liu et al. 2018
 Seperator clogging Liu et al. 2020
+
+\section{Other considerations}
+
+\subsection{Ambiguous experimental effects}
+
+\subsubsection{Discharging rate}
+
+Unlike charging rate, the effect of discharging rate on the knee point is mixed.
+
+Keil et al.\cite{keil_charging_2016} illustrated how discharging current had no effect on LMO+NMC/graphite and LCO+NCM/graphite cylindrical cells, but a lower discharging current (3A, 2.7C) lead to faster degradation than a higher discharging current (5A, 4.5C) for an LFP/graphite cylindrical cell when charged at 4.5C; they did not identify a mechanism. 
+Similarly, Keil et al.\cite{keil_linear_2019} found that increasing discharging current from 1C to 2C lead to the elimination of the knee in graphite/NMC cylidrical cells.
+
+Atalay et al.\cite{atalay_theory_2020}
+Omar et al.
+
+Diao et al.\cite{diao_accelerated_2019} showed no effect of discharge rate except at 60°C, where the cells discharged at 2C degraded almost twice as quickly than the cells discharged at 0.7C or 1C. 
+
+Discharging can lead to worse cycle life due to higher temperature; other mechanisms?
+
+\subsubsection{Rests}
+
+The effect of rests during cycling is unclear.
+
+Keil et al.\cite{keil_linear_2019} found that decreasing rest time at both TOC and BOD from 900s to 10s delayed the knee point in graphite/NMC cylidrical cells.
+
+Ma et al.\cite{ma_editors_2019} found an identical result: removing the 30 min rests at both TOC and BOD delayed the knee, but only with an upper cutoff voltage of 4.3 V. No effect at 4.1 V.
+
+Rationalized by less time at high potential when plotted as a function of cycle number
+
+In contrast, Epding et al.\cite{epding_investigation_2019} found that rests helped, linked to plating.
+
+Depends on if cycling typically or with plating.
+
+\subsection{Sampling variability}
+
+Nominally identical cells cycled identically often show differences in knee behavior. This sampling variability includes both intrinsic variability from manufacturing (component-level variation, cell assembly, etc) and extrinsic variability from testing (cycler calibration, temperature control, etc). These sources of variability cannot be distinguished.
+
+The magnitude of sampling variability is a function of the cell design, manufacturing variability, and testing conditions. Sampling variability may increase with more aggressive cell designs, more manual cell assembly processes, and more aggressive testing conditions (particularly for test setups with no or poor temperature control). The magnitude of sampling variability can be estimated using studies with fairly large sample sizes (i.e., at least ~10 cells). Baumhöfer et al.\cite{baumhofer_production_2014} identified . Harris et al.\cite{harris_failure_2017}. Note that these studies did not identify a correlation between cells...
 
 \section{Conclusions and future work}
 

@@ -10,6 +10,7 @@
 % \usepackage{multirow}
 
 \usepackage{pdflscape}
+\usepackage{textcomp}
 \usepackage{gensymb}
 
 \usepackage{subcaption} % For subfigures?
@@ -33,7 +34,11 @@
 \newcommand{\fbp}[1]{\todo[inline,color=orange!40]{Ferran: #1}}
 \newcommand{\summary}[1]{\todo[inline,caption={},color=yellow!40]{Summary: \\ #1}}
 
-\newcommand{\ssr}[1]{{\textbf{\textcolor{blue}{Shashank: #1}}}}
+\newcommand{\ssri}[1]{{
+\fbox{
+\parbox{0.8\textwidth}{  \fbox{$\triangleright$\textcolor{blue}{\textbf{Shashank}:}} 
+#1
+}}}}
 
 \newcommand{\gbox}[1]{{
 \fbox{
@@ -47,7 +52,7 @@
 #1
 }}}}
 
-\newcommand{\readyeditbox}[1]{{
+\newcommand{\editreadybox}[1]{{
 \fbox{
 \parbox{0.8\textwidth}{  \fbox{$\triangleright$\textcolor{green}{\textbf{READY TO EDIT}:}} 
 #1
@@ -89,6 +94,7 @@ Lithium ion batteries often exhibit one of three degradation patterns: linear, s
 In this review, we survey the literature and critically examine both experimental and modeling work on the subject of knees. We first review methods to define the knee point. We then classify experimental observations of knees in the literature; broadly, all cells with differences in knee behavior can be attributed to either differences in design, differences in usage conditions, or cell-to-cell/testing variation. Finally, we briefly discuss physics-driven and data-driven approaches to knee prediction, practical guidelines for avoiding knees, and suggested future work on this topic. This review can serve both academic and industrial efforts to understand and improve battery lifetime.
 
 \section{Defining the knee point}
+% \editreadybox{}
 
 \pbox{
 Key messages in my mind:
@@ -117,6 +123,13 @@ Noise and erroneous data collection can also cause issues with identifying a kne
 Mathematically, the knee would be described as the point at which degradation rate is changing fastest, i.e.\ the second derivative reaches some maximal value. However that point appeared slightly after where we put the knee, and figure \ref{fig:knee_definition} demonstrated how even very small amounts of noise ($\sigma=0.05\%$ capacity) cause significant issues. Consequently, we concluded that health metric profiles should be smoothed prior to knee identification.
 
 Several knee point identification methods have been applied in literature. IEEE Standard 485\texttrademark-2010 defines a knee as a change to a stage of rapid decrease in capacity \cite{noauthor_ieee_2011}. However that definition is qualitative and thus hard to apply practically.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{images/knee_identification_methods.pdf}
+\caption{Different knee identification methods.}
+\label{fig:knee_identification_methods}
+\end{figure}
 
 Kneedle is an example of a quantiative approach. It calculates the knee as the point of maximum curvature of the capacity curve \cite{satopaa_finding_2011}. The knee can be calculated using a Bacon-Watts method for estimating the transition between two intersecting lines fitted to a capacity fade curve, a method which can also provide an estimate of "knee-onset" \cite{fermin-cueto_identification_2020}. Other methods use tangential lines to define the knee based on characteristic points of the capacity curve \cite{diao_algorithm_2019} and linear extrapolations of early and late life, the latter is shown in figure \ref{fig:knee_definition} as an example of robustness to noise CITE.
 
@@ -199,7 +212,7 @@ In nonlinear systems, such as the battery degradation models, there are tools fo
 Figure 3 (need to modify)
 {
 \centering
-\includegraphics[scale=0.5]{figures/snowball_vs_hidden_mechanism.eps}
+\includegraphics[scale=0.75]{figures/snowball_vs_hidden_mechanism.eps}
 }
 
 Also include schematic on all pathways
@@ -215,20 +228,22 @@ Plating to do's:
 \end{itemize}
 }
 
-\subsubsection{Direct Thermodynamic Lithium Plating}
-Li inventory loss due to thermodynamic Li plating may occur whenever there is not enough negative electrode capacity to store all of the available lithium during charging.  This well-known plating mode has been used intentionally by several researchers.  Martin et al [1] used deposited Li metal as a mechanism to store extra capacity, enabling the cell to occasionally discharge extra energy without requiring a larger anode,effectively increasing the specific volumetric energy density of the cell. Single crystal NMC pouch cell with n:p value of 0.6 was used as a hybrid anode (conventional graphite and graphite/ lithium metal). Three different electrolytes (2F1L, 2VC and LDBF) were utilized for cycling evaluation. High upper cutoff voltage cycling showcased the plating effect on the different electrolytes and was the primary failure mechanism with over 50\% capacity loss of lithium metal in 2F1L and 2VC.  
+Intro to plating
+\begin{itemize}
+    \item What is Li Plating?
+    \item Why does plating occur generally (V<Li)
+    equilibrium potential of the Li$\mathrm{^0}$/Li$\mathrm{^+}$ > everything else
+    \item Brief introduction to and definition of each plating pathway
+    \subitem Thermodynamic "non-current-induced"
+    \subitem Kinetic "current induced"
+\end{itemize}
 
-Researchers at Sandia National Lab also created cells with limited negative electrode capacity (N:P ratios of 0.75 and 0.5) to intentionally deposit Li metal to study the failure behavior of cells after Li plating has occurred [2]. Deichmann et al [2] experiments for coin and pouch cells indicated a relationship between decreased n:p and capacity fade at high cycle number during cell cycling. Loss of Lithium inventory is attributed the leading cause for capacity fade. Differential capacity plots in Figure 3b present a comparison between the 0.75 n:p and 0.5 n:p coin and pouch cells, with charge and discharge amplitudes decreasing at high cycle number indicating reduced cell capacity caused due to loss of lithium inventory during deposition of Lithium. Morphological changes were observed in SEM analysis with the 0.75 n:p anode imaging demonstrating an increase in amount of Li deposition on graphite surface, while 0.5 n:p anode imaging shows intertwined dendrites spanning entire graphite electrode. 
-\subsubsection{Direct Kinetic Lithium Plating}
-Li plating may also occur heterogeneously, when the local Li+ potential exceeds the nucleation barrier, leading to direct plating even in cases where the average graphite to Li potential would not lead to plating. Direct heterogeneous Li plating can be driven by a wide range of design and usage conditions; the prototypical usage case leading to Li plating is high charging rates at low temperature \cite{waldmann_temperature_2014, petzl_lithium_2015}. Waldmann et al showed utilization of Arrhenius plot for ageing mechanisms at lower temperature ranges (below \SI{25}{\celsius}). At low temperatures, lithium ions have less energy to cross the potential barrier on SEI and in graphite electrodes. This low temperature plating was validated by experiments on 18650 pouch cells of LNMC and LMO blends and graphite anode. Note that there are no consistent quantitative values for ‘high’ charging rate or ‘low’ temperature, as plating will occur whenever the local potential exceeds the energy barrier for Li nucleation. Thus, plating may be observed even at fairly normal test conditions, such as 1C CC charging near room temperature \cite{waldmann_optimization_2015,burns_-situ_2015}. Increasing temperature and cell design may allow for much more rapid charging before Li plating and knee-over is observed; Lewerenz et al cycled cells at rates up to 8C, observing no obvious knee-over up to 4C, though microstructural evidence of Li plating was found even at 1C \cite{lewerenz_systematic_2017}. The onset of direct lithium plating is also very sensitive to the charging protocol, with many studies demonstrating that informed design of charge protocols can substantially extend cell lifetime by preventing direct lithium plating \cite{waldmann_optimization_2015,schindler_fast_2018}.
-
-Mechanical stress on the cell pouch or cell casing may also lead to direct kinetic lithium plating, as applied stress can compress the electrode. This reduces the porosity of the electrodes in a small region, reducing the diffusivity of electrolyte and thus increasing the local polarization and potentially causing lithium plating. A direct test of this cause was conducted by Liu and Arnold \cite{liu_effects_2020}, who demonstrated that localized lithium plating could be controlled by densifying regions of the separator, which decreases the local lithium diffusivity and led to localized lithium plating. Many examples exist mechanical stress leading to lithium plating, as well. For example, Bach et al applied a hose clamp around the circumference of an 18650 cell, and a post-test tear down clearly showed lithium plating localized to regions of the electrodes that were under compressive stress \cite{bach_nonlinear_2016}. Pouch format cells also show similar results. Fuchs et al \cite{fuchs_post-mortem_2019} applied pressure using a metal bearing. Liu et applied pressure to electrodes in a coin cell setup using various shapes, producing legible shapes and letters using localized lithium plating \cite{liu_size_2018}.
-Check also Okasinki https://pubs.rsc.org/en/content/articlepdf/2020/cp/d0cp04436a
-
-Design conditions - anode porosity, electrode channels, particle sizes / distribution….? Experimental evidence? Lots of modeling work on micro-structure being done at NREL.
+\subsection{Thermodynamic Lithium Plating}
+- x>0
+- heterogeneous temperature
+- LAM_deNE
 
 \subsubsection{$\textbf{LAM}_{deNE}$}
-
 Loss of active material of NE for lithium insertion is caused mainly due to particle cracking and electrical contact loss/blockage of active sites by resistive surfaces. Lithium trapped inside isolated graphite particles can contribute to cell capacity decrease due to unavailability to cycle. 
 
 K.Jalkanen et al \cite{jalkanen_cycle_2015} showcased cyclic aging at different cycling temperatures (\SI{25}{\celsius}, \SI{45}{\celsius} charge and \SI{65}{\celsius} discharge) through capacity fade. At temperatures above \SI{60}{\celsius}, aging at NE (graphite electrodes) is different compared to low temperature aging. Elevated temperatures contribute to excess Li plating during  cycling apart from the SEI-layer increase on anode surface which occurs during normal charging and discharging cycles at room temperature. Increase in SEI-layer thickness enhances graphite electrode polarization leading to additional plating. SEI-growth also leads to electrolyte consumption due to prolonged cycling at high temperatures. Irreversible lithium plating reduces graphite electrical contact, when lost, results in isolated dead lithium and capacity degradation \cite{petzl_lithium_2015}.  
@@ -250,30 +265,47 @@ Surface layer growth on the negative electrode may impede Li transport into the 
 
 Delamination may also lead to inaccessible negative electrode material, which can potentially cause lithium plating and knee-onset. Willenberg et al conclusively observed delamination induced knee-onset in cylindrical cells; delamination was caused due to mechanical stresses and deformation after the formation of a surface layer on the negative electrode \cite{willenberg_high-precision_2020}. Cannarella et. al. also observed surface layer growth and delamination as a function of stack pressure in multi-layer pouch cells \cite{cannarella_stress_2014}. Pfrang et al observed delamination in cylindrical cells, though sometimes without observing knee-onset \cite{pfrang_long-term_2018}.
 
+\subsection{Kinetic Plating}
+- this is when transient effects cause plating
+    - Low T -> Low D -> High Surface x -> η_s<0
+    - Low OCV + High η_op -> \eta_n<Li
+    - High σ -> Low ρ -> High Surface x -> η_s<0
+    - SEI -> Low ρ -> High Surface x ->η_s<0
+
+
+\subsubsection{Direct Thermodynamic Lithium Plating}
+Li inventory loss due to thermodynamic Li plating may occur whenever there is not enough negative electrode capacity to store all of the available lithium during charging.  This well-known plating mode has been used intentionally by several researchers.  Martin et al [1] used deposited Li metal as a mechanism to store extra capacity, enabling the cell to occasionally discharge extra energy without requiring a larger anode,effectively increasing the specific volumetric energy density of the cell. Single crystal NMC pouch cell with n:p value of 0.6 was used as a hybrid anode (conventional graphite and graphite/ lithium metal). Three different electrolytes (2F1L, 2VC and LDBF) were utilized for cycling evaluation. High upper cutoff voltage cycling showcased the plating effect on the different electrolytes and was the primary failure mechanism with over 50\% capacity loss of lithium metal in 2F1L and 2VC.  
+\begin{figure}
+\centering
+\includegraphics[scale = 0.4]{images/Differential Capacity vs Voltage.jpg}
+\caption{Differential Capacity vs Voltage for 0.75 n:p and 0.5 n:p.}
+\label{fig:knee_definition}
+\end{figure}
+Researchers at Sandia National Lab also created cells with limited negative electrode capacity (N:P ratios of 0.75 and 0.5) to intentionally deposit Li metal to study the failure behavior of cells after Li plating has occurred [2]. Deichmann et al [2] experiments for coin and pouch cells indicated a relationship between decreased n:p and capacity fade at high cycle number during cell cycling. Loss of Lithium inventory is attributed the leading cause for capacity fade. Differential capacity plots in Figure 3b present a comparison between the 0.75 n:p and 0.5 n:p coin and pouch cells, with charge and discharge amplitudes decreasing at high cycle number indicating reduced cell capacity caused due to loss of lithium inventory during deposition of Lithium. Morphological changes were observed in SEM analysis with the 0.75 n:p anode imaging demonstrating an increase in amount of Li deposition on graphite surface, while 0.5 n:p anode imaging shows intertwined dendrites spanning entire graphite electrode. 
+
+\subsubsection{Direct Kinetic Lithium Plating}
+Li plating may also occur when the local Li+ potential exceeds the nucleation barrier leading to direct plating, this could occur at electrodes potentials greater than zero (vs. Li/Li$\mathrm{^+}$). Direct heterogeneous Li plating can be driven by a wide range of design and usage conditions; the typical usage case leading to Li plating is high charging rates at low temperature \cite{waldmann_temperature_2014, petzl_lithium_2015}. Waldmann et al.,\cite{waldmann_temperature_2014} observed an increase in the rate of ageing with a decrease in temperature below 25$\circ$C and attributed the increasing in rate of ageing to lithium plating. At low temperatures, lithium ions have less energy to cross the potential barrier on SEI and in graphite electrodes. This low temperature plating was validated by experiments on 18650 pouch cells of LNMC and LMO blends and graphite anode. Note that there are no consistent quantitative values for ‘high’ charging rate or ‘low’ temperature, as plating will occur whenever the local potential exceeds the energy barrier for Li nucleation. Thus, plating may be observed even at fairly normal test conditions, such as 1C CC charging near room temperature \cite{waldmann_optimization_2015,burns_-situ_2015}. Increasing temperature and cell design may allow for much more rapid charging before Li plating and knee-over is observed; Lewerenz et al cycled cells at rates up to 8C, observing no obvious knee-over up to 4C, though microstructural evidence of Li plating was found even at 1C \cite{lewerenz_systematic_2017}. The onset of direct lithium plating is also very sensitive to the charging protocol, with many studies demonstrating that informed design of charge protocols can substantially extend cell lifetime by preventing direct lithium plating \cite{waldmann_optimization_2015,schindler_fast_2018}.
+
+Mechanical stress on the cell pouch or cell casing may also lead to direct kinetic lithium plating, as applied stress can compress the electrode. This reduces the porosity of the electrodes in a small region, reducing the diffusivity of electrolyte and thus increasing the local polarization and potentially causing lithium plating. A direct test of this cause was conducted by Liu and Arnold \cite{liu_effects_2020}, who demonstrated that localized lithium plating could be controlled by densifying regions of the separator, which decreases the local lithium diffusivity and led to localized lithium plating. Many examples exist mechanical stress leading to lithium plating, as well. For example, Bach et al applied a hose clamp around the circumference of an 18650 cell, and a post-test tear down clearly showed lithium plating localized to regions of the electrodes that were under compressive stress \cite{bach_nonlinear_2016}. Pouch format cells also show similar results. Fuchs et al \cite{fuchs_post-mortem_2019} applied pressure using a metal bearing. Liu et applied pressure to electrodes in a coin cell setup using various shapes, producing legible shapes and letters using localized lithium plating \cite{liu_size_2018}.
+Check also Okasinki https://pubs.rsc.org/en/content/articlepdf/2020/cp/d0cp04436a
+
+Design conditions - anode porosity, electrode channels, particle sizes / distribution….? Experimental evidence? Lots of modeling work on micro-structure being done at NREL.
+
+
+
 \subsubsection{Pore clogging}
 As SEI forms, it precipitates mainly in the pores of the anode, causing reductions in the volume fraction of the electrolyte in the anode (Sikha, 2004). The decreased volume fraction causes increased over-potential, ultimately leading to increased plating. The plating also helps to reduce the volume fraction, thus creating a positive feedback loop which accelerates aging(cite Yang 2017). This phenomenon also causes a voltage undershoot, particularly noticeable at high discharge rates (3C) (cite Yang 2017). Several authors have noted that a critical porosity exists around 0.05, and pore clogging beyond that induces the period of accelerated aging (cite Yang 2017, Muller, 2019). Additionally, some authors model the same effect by changing the diffusion coefficient as a function of cycle number (Keil, 2020). One possible mitigation for this issue is to use a graded or stepped porosity profile. Since most pore clogging occurs near the separator, having a higher porosity near the separator and a lower porosity near the current collector helps to slow the onset of the accelerated aging caused by pore clogging (Muller, 2019).
 \subsubsection{Others}
-Apart from the main mechanisms causing knees due to plating, few other causes are based on substantial and mild temporally thermal transient conditions lead to a rapid capacity fade in cells when compared with cells at a fixed equilibrium temperature. Temporal transient thermal gradients (40 \degree C to 0 \degree C) contribute to Li ions being plated as Li instead of intercalating, which accelerates capacity fade over subsequent cycles causing knees and ultimately resulting in jellyroll collapse. Equilibrium cells at 40 \degree C, 20 \degree C, 0\degree C and transient cells (40\degree C to 0 \degree C and 10 \degree C to 0 \degree C) are tested for understanding of the thermo-electrochemical coupling across different temperature (Carter 2019).Differential voltage from charging gives route to plating detection and discharging cycle showcases the degradation modes. Equilibrium cells at 40 \degree C and 20 \degree C show minimal degradation while equilibrium cell at 0 \degree C has initial minimal degradation, then a gradual decay midway. On the contrary, transient 10 \degree C to 0 \degree C cell and 40 \degree C to 0 \degree C cell show degradation at earlier cycles (8 and 5 respectively) (Carta, 2019). 
-Transient 40 \degree C to 0 \degree C cell demonstrates high lithium stripping during initial discharge cycles due to thermal transient induced plating causing increase in anode thickness, pressure buildup in jelly role and capacity loss. The decrease in differential voltage for transient cells immediately with the start of the cycle shows the degradation evidence by lithium plating.  
-
-\pbox{
-Can we combine figures 4 and 5 into one?
-}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale = 0.9]{figures/Capacity vs Cycle Number.png}
-\caption{Capacity vs Cycle number.}
+\includegraphics[scale = 0.7]{images/Capacity & Diff Voltage.png}
+\caption{Capacity and Differential Capacity vs Cycle number.}
 \label{fig:knee_definition}
 \end{figure}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[scale = 0.9]{figures/Differential Voltage vs Cycle Number.png}
-\caption{Differential Voltage vs Cycle number.}
-\label{fig:knee_definition2}
-\end{figure}
-Figure 5A and 5B highlight the difference between the 0 \degree C and Transient 40 \degree C to 0 \degree C jellyroll collapsing behaviors. Primary reason for degradation is jellyroll collapse for 0 \degree C cell while the rapid lithium plating followed by jellyroll collapse causes capacity fade knee point in Transient 40 \degree C to 0 \degree C cell.  
+Apart from the main mechanisms causing knees due to plating, few other causes are based on substantial and mild temporally thermal transient conditions lead to a rapid capacity fade in cells when compared with cells at a fixed equilibrium temperature. Temporal transient thermal gradients (40 \degree C to 0 \degree C) contribute to Li ions being plated as Li instead of intercalating, which accelerates capacity fade over subsequent cycles causing knees and ultimately resulting in jellyroll collapse.
+Equilibrium cells at 40 \degree C, 20 \degree C, 0\degree C and transient cells (40\degree C to 0 \degree C and 10 \degree C to 0 \degree C) are tested for understanding of the thermo-electrochemical coupling across different temperature (Carter 2019).Differential voltage from charging gives route to plating detection and discharging cycle showcases the degradation modes. Equilibrium cells at 40 \degree C and 20 \degree C show minimal degradation while equilibrium cell at 0 \degree C has initial minimal degradation, then a gradual decay midway. On the contrary, transient 10 \degree C to 0 \degree C cell and 40 \degree C to 0 \degree C cell show degradation at earlier cycles (8 and 5 respectively) (Carta, 2019). Transient 40 \degree C to 0 \degree C cell demonstrates high lithium stripping during initial discharge cycles due to thermal transient induced plating causing increase in anode thickness, pressure buildup in jelly role and capacity loss. The decrease in differential voltage for transient cells immediately with the start of the cycle shows the degradation evidence by lithium plating.  Figure 5 highlights the difference between the 0 \degree C and Transient 40 \degree C to 0 \degree C jellyroll collapsing behaviors. Primary reason for degradation is jellyroll collapse for 0 \degree C cell while the rapid lithium plating followed by jellyroll collapse causes capacity fade knee point in Transient 40 \degree C to 0 \degree C cell. 
 
 
 \subsection{DCR growth}
@@ -288,6 +320,7 @@ One way to organize this section would be:
     \item Cell design factors that exacerbate DCR growth: uncoated cathodes, methyl acetate, low salt concentration (all from Ma et al.). Cathode chemistries like LFP have a flatter voltage curve and thus will severely experience this effect
     \item Cell usage factors that exacerbate DCR growth: High upper cutoff voltage / time at high SOC, high temp
     \item Secondary effects (feedback loop between high DCR -> high temperature -> lower DCR). Not sure if this is worth discussing
+    \item Table summarizing each paper - table variables: capacity at knee onset, resistance at elbow onset, EOL capacity, EOL resistance
     \end{itemize}
 }
 
@@ -295,28 +328,7 @@ Summary: DCR resistance affects when you hit your cutoff voltage during charging
 
 Increasing DC resistance during cycling may also lead to the onset of not only a knee in cell power but also in the accessible capacity. This is intuitive at high currents, when the cell may hit a voltage limit before the majority of lithium has been shuttled across the separator, leading to a lower measured capacity. However, during aging, this rate limitation may occur at much lower than expected C-rates, and appear as a knee in the plots of power and capacity versus cycles. This behavior was thoroughly studied by Ma et al \cite{ma_editors_2019} using lab-made 230mAh NMC532/graphite pouch cells, varying electrolyte composition as well as the type of graphite. Careful study using impedance measurements, both of the full cells as well as symmetric coin cells of the positive and negative electrodes, was used to isolate the loss of performance to a dramatic increase of the cathode impedance during aging. This DC resistance growth was attributed to electrolyte oxidation at the positive electrode, which varied according to the upper cutoff potential as well as the electrolyte composition. Similar onset of a capacity knee due to the selection of the electrolyte composition was previously observed by Li et al as well (Li et al 2018 Methyl acetate.. In Zotero but not here). 
 
-Many other researchers have observed substantial DC resistance growth correlated with knee onset. A detailed aging study by Ecker et al \cite{ecker_calendar_2014} observed capacity knee onset correlated with dramatically increased DC pulse resistance (100-300 percent increase from beginning of life) when cycling 2 Ah NMC/Gr 18650 cells at 1C constant current at 30C, as well as when calendar aging at 100 percent SOC and 50C. Rahe et al \cite{rahe_nanoscale_2019} observed a 3.6x increase in DC pulse resistance before reaching 80 percent remaining capacity when cycling 40 Ah NMC111/Gr pouch cells at 2C constant current, observing substantial cathode particle cracking and cathode current collector oxidation. Willenberg et al \cite{willenberg_development_2020} observed an approx. 100 percent increase in DC pulse resistance correlated with the capacity knee onset and a near total loss of available capacity after cycling 3.35 Ah NCA/Gr+Si Samsung SDI 35E cells at only 10 percent average state-of-charge and 20 percent depth of discharge under 0.5C constant current. Broussely et al \cite{broussely_main_2005} observed 100-400 percent increase of 5s DC pulse resistance correlated to a knee onset at about 70 percent remaining capacity in 1.3 Ah LCO/Gr pouch cells cycling at 100 percent depth-of-discharge with 1C and C/2 constant current charging and discharging, respectively. Schuster et al \cite{schuster_nonlinear_2015} observed a 200 percent increase in cell impedance at 50 percent state-of-charge after knee onset at about 80 percent remaining capacity when aging 1.95 Ah NMC/Gr 18650 cells from Molicel at 25 C using 1C and 2C constant current charging and discharging, respectively. Schuster et al used impedance analysis to separate the overall impedance increase into a 40 percent increase to Ohmic resistance and a 400-500 percent increase to charge transfer resistance. Post-mortem characterization revealed the existence of the formation of a resistive surface film at the anode/separator interface in cells which experienced a capacity knee. Lewerenz et al \cite{lewerenz_systematic_2017, lewerenz_post-mortem_2017} observed high correlation of capacity knee onset to the appearance of the onset of rapid growth of the DC pulse resistance when aging cylindrical 8 Ah LFP/Gr cells at 40 C and at various C-rates and depths-of-discharge. In this study, many cells were aged, and capacity knees were only observed in cases where accelerated resistance growth was also observed; several cells experienced substantial capacity loss (40-50 percent loss) and resistance growth (30-50 percent), but without any dramatic increase in the capacity loss or resistance growth rates during aging. The appearance of a knee was correlated to the presence of a resistive covering layer at the anode/separator interface, which covered approximately the center third of the anode \cite{lewerenz_post-mortem_2017}. Martinez-Laserna et al \cite{martinez-laserna_technical_2018} observed a few examples of a capacity knee onset at about 80 percent remaining capacity associated with accelerated an resistance growth with between 100-400 percent increased resistance when aging 20 Ah NMC/Gr through both a first life and a second life, with various aging conditions and cell states at the end of first life as well as the end of second life. This work also demonstrated a counterexample to some of the prior works, however, with several cells experiencing a acceleration of their resistance growth resulting in about 100-200 percent resistance growth without an observable capacity knee. Braco et al \cite{braco_experimental_2020} observed a correlation between the accelerated resistance growth and capacity knee onset in Nissan Leaf EV LMO/Gr cells
-
-DCR resources:
-\begin{itemize}
-    \item \cite{willenberg_high-precision_2020}
-    \item \cite{broussely_main_2005}
-    \item \cite{ecker_calendar_2014}***
-    \item \cite{schuster_nonlinear_2015}
-    \item \cite{lewerenz_systematic_2017}
-    \item \cite{lewerenz_post-mortem_2017}
-    \item \cite{martinez-laserna_technical_2018}
-    \item \cite{ma_editors_2019}***
-    \item \cite{braco_experimental_2020}
-    \item \cite{frisco_understanding_2016}
-    \item \cite{klett_non-uniform_2014}
-    \item \cite{pfrang_long-term_2018}
-    \item \cite{keil_linear_2019}
-    \item \cite{keil_charging_2016}
-    \item \cite{rahe_nanoscale_2019}
-    \item \cite{mandli_analysis_2019}
-    \item \cite{wunsch_investigation_2019}
-\end{itemize}
+Many other researchers have observed substantial DC resistance growth correlated with knee onset. A detailed aging study by Ecker et al \cite{ecker_calendar_2014} observed capacity knee onset correlated with dramatically increased DC pulse resistance (100-300 percent increase from beginning of life) when cycling 2 Ah NMC/Gr 18650 cells at 1C constant current at 30C, as well as when calendar aging at 100 percent SOC and 50C. Rahe et al \cite{rahe_nanoscale_2019} observed a 3.6x increase in DC pulse resistance before reaching 80 percent remaining capacity when cycling 40 Ah NMC111/Gr pouch cells at 2C constant current, observing substantial cathode particle cracking and cathode current collector oxidation. Willenberg et al \cite{willenberg_development_2020} observed an approx. 100 percent increase in DC pulse resistance correlated with the capacity knee onset and a near total loss of available capacity after cycling 3.35 Ah NCA/Gr+Si Samsung SDI 35E cells at only 10 percent average state-of-charge and 20 percent depth of discharge under 0.5C constant current. Broussely et al \cite{broussely_main_2005} observed 100-400 percent increase of 5s DC pulse resistance correlated to a knee onset at about 70 percent remaining capacity in 1.3 Ah LCO/Gr pouch cells cycling at 100 percent depth-of-discharge with 1C and C/2 constant current charging and discharging, respectively. Schuster et al \cite{schuster_nonlinear_2015} observed a 200 percent increase in cell impedance at 50 percent state-of-charge after knee onset at about 80 percent remaining capacity when aging 1.95 Ah NMC/Gr 18650 cells from Molicel at 25 C using 1C and 2C constant current charging and discharging, respectively. Schuster et al used impedance analysis to separate the overall impedance increase into a 40 percent increase to Ohmic resistance and a 400-500 percent increase to charge transfer resistance. Post-mortem characterization revealed the existence of the formation of a resistive surface film at the anode/separator interface in cells which experienced a capacity knee. Lewerenz et al \cite{lewerenz_systematic_2017, lewerenz_post-mortem_2017} observed high correlation of capacity knee onset to the appearance of the onset of rapid growth of the DC pulse resistance when aging cylindrical 8 Ah LFP/Gr cells at 40 C and at various C-rates and depths-of-discharge. In this study, many cells were aged, and capacity knees were only observed in cases where accelerated resistance growth was also observed; several cells experienced substantial capacity loss (40-50 percent loss) and resistance growth (30-50 percent), but without any dramatic increase in the capacity loss or resistance growth rates during aging. The appearance of a knee was correlated to the presence of a resistive covering layer at the anode/separator interface, which covered approximately the center third of the anode \cite{lewerenz_post-mortem_2017}. Martinez-Laserna et al \cite{martinez-laserna_technical_2018} observed a few examples of a capacity knee onset at about 80 percent remaining capacity associated with accelerated an resistance growth with between 100-400 percent increased resistance when aging 20 Ah NMC/Gr through both a first life and a second life, with various aging conditions and cell states at the end of first life as well as the end of second life. This work also demonstrated a counterexample to some of the prior works, however, with several cells experiencing a acceleration of their resistance growth resulting in about 100-200 percent resistance growth without an observable capacity knee. Braco et al \cite{braco_experimental_2020} observed a correlation between the accelerated resistance growth and capacity knee onset in Nissan Leaf EV LMO/Gr cells aging under 1C constant current at 25 C, measuring 300-400 percent resistance growth starting at approx. 65 percent remaining capacity. Frisco et al \cite{frisco_understanding_2016} observed capacity knee onset at about 80 percent remaining capacity correlated with 400 percent increased DC resistance when aging Samsung NCA/Gr cells when cycling at approx. C/3 constant current charge and discharge at room temperature.  Klett et al \cite{klett_non-uniform_2014} observed the onset of a capacity knee at about 80 percent remaining capacity correlated with onset of accelerated resistance growth, leading to about 100 percent resistance increase and a capacity loss from 80 percent to 30 percent when aging 2.3 Ah LFP/Gr 26650 cylindrical cells using dynamic drive cycles at room temperature. Pfrang et al \cite{pfrang_long-term_2018} observed a capacity knee at about 75 percent remaining capacity correlated to accelerated resistance growth onset at about 40 percent increased resistance when aging Sanyo UR18650E NMC/Gr cells at 33 C using 1C constant current cycling at various average states-of-charge and depths-of-discharge. Wunsch et al \cite{wunsch_investigation_2019} observed capacity knee onsets at relative capacities as high as 97 percent, correlated to the onset of accelerated resistance growth onset even before any resistance growth has occurred, while also observing substantial capacity loss and resistance growth without any acceleration effects.
 
 \pbox{
 PNG is there, create EPS too
@@ -325,7 +337,7 @@ PNG is there, create EPS too
 \centering
 \includegraphics[scale=0.9]{figures/dcr_growth_knee_2.eps}
 }
-Caption: Inspired by Ma et al.\cite{ma_editors_2019}
+Caption: Inspired by Ma et al.\cite{ma_editors_2019}. Also, similar to analysis done by Mandli et al \cite{mandli_analysis_2019}.
 
 \pbox{
 Dahn figure is covered, what about ecker?
@@ -398,13 +410,13 @@ High stack pressure can cause knee. High mechanical stress is not evenly distrib
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale = 0.9]{figures/MechanicalKneepoints.pdf}
-\caption{Differential Voltage vs Cycle number.}
+\includegraphics[scale = 0.7]{figures/MechanicalKneepoints.pdf}
+\caption{Kneepoint occurrence linked mechanical effects.}
 \label{fig:knee_mechanical}
 \end{figure}
 
 \pbox{
-Looks good! I think we had discussed making this schematic more linear with the delamination arrow as dotted?
+Looks good! I think we had discussed making this schematic more linear with the delamination arrow as dotted? - Philipp: Added it and changed the font to match the others
 }
 
 Pressure evolution different for different kinds of bracing (Wünsch et al.) Thickness increase for unbraced cells correlated with knee point. Lifetime can be increased from 500 to 3200 cycles with the right bracing. (Wünsch et al.)
@@ -461,9 +473,9 @@ Electrolyte: FEC, MA, salt
 \subsection{Testing conditions (will shorten these sections)}
 
 \subsubsection{Charging rate}
-Increased charging rate has been shown to accelerate onset of the knee-point across a range of batteries. \cite{lewerenz_systematic_2017,lewerenz_post-mortem_2017, petzl_lithium_2015, burns_-situ_2015, waldmann_optimization_2015, schuster_nonlinear_2015, severson_data-driven_2019, schindler_fast_2018, keil_linear_2019}. However, the critical charging rate leading to knee-onset varies substantially across the different studies, with knee-onset being driven with C-rates as low as 1C \cite{waldmann_optimization_2015} or up to 8C \cite{lewerenz_systematic_2017}. No rule-of-thumb for a 'safe' charging rate can be defined without testing each unique Li-ion battery system of interest.
+Increasing the charging rate has accelerated the onset of the knee-point across a range of batteries. \cite{lewerenz_systematic_2017,lewerenz_post-mortem_2017, petzl_lithium_2015, burns_-situ_2015, waldmann_optimization_2015, schuster_nonlinear_2015, severson_data-driven_2019, schindler_fast_2018, keil_linear_2019}. However, the critical charging rate leading to knee-onset varies substantially, with knees appearing at C-rates as low as 1C \cite{waldmann_optimization_2015} and as high as 8C \cite{lewerenz_systematic_2017}. 
 
-The impact of charging rate on knee point acceleration is ascribed to two main mechanisms: (i) Li plating and (ii) accelerated SEI growth. Either Li plating and SEI growth may directly cause knee onset, but knee onset is also attributed to pore clogging caused by either or both of these mechanisms, so it is difficult to separate these, even in cases with detailed post-mortem characterization. Key evidence for both Li plating and accelerated SEI growth driven by increased charging rate is found in a series of papers by Lewerenz et. al., studying the aging of cyclindrical 8 Ah LFP/Gr cells \cite{lewerenz_systematic_2017,lewerenz_post-mortem_2017}. They present evidence demonstrating that knees reliably occur across a set of test replicates at 8C charging rate, while knees may occur with less reliability at charging rates down to 2C.  Evidence of Li plating after knee onset driven by increased charging rate was also confirmed in several other sources, such as Petzl et. al. \cite{petzl_lithium_2015} and Burns et. al. \cite{burns_-situ_2015}. 
+Higher charging rates advance the knee point via Li plating and accelerated SEI growth. Either Li plating or SEI growth may directly cause knee onset, but knee onset is also attributed to pore clogging caused by either or both of these mechanisms \cite{yang_modeling_2017}. It is difficult to distinguish these causes, even in cases with detailed post-mortem characterization. Key evidence for both Li plating and accelerated SEI growth driven by increased charging rate is found in a series of papers by Lewerenz et. al., examining the aging of cylindrical 8 Ah LFP/Gr cells \cite{lewerenz_systematic_2017,lewerenz_post-mortem_2017}. They present evidence demonstrating that knees reliably occur across a set of test replicates at 8C charging rate, while knees may occur with less reliability at charging rates as low as 2C. Evidence of Li plating after knee onset driven by increased charging rate was also confirmed by Petzl et. al. \cite{petzl_lithium_2015} and Burns et. al. \cite{burns_-situ_2015}. 
 
 
 
@@ -482,11 +494,9 @@ Diao et al.\cite{diao_accelerated_2019} showed no effect of discharge rate excep
 Discharging can lead to worse cycle life due to higher temperature; other mechanisms? Most of the studies have found little impact or that slower discharge rate is worse. This may be a calendar aging effect? Faster discharge = less time spent cycling = less calendar aging. 
 
 \subsubsection{Voltage limits} 
-Studies have generally shown that a wider voltage window accelerates the emergence of the knee point \cite{ecker_calendar_2014, pfrang_long-term_2018, klett_non-uniform_2014, ma_novel_2019, petzl_lithium_2015, schuster_nonlinear_2015}. In one of the broadest studies, Ecker et al. \cite{ecker_calendar_2014} considered six depths of discharge (100, 80, 50, 20, 10, and 0.5 percent) with up to six voltage windows in each of those categories. They found that the EFC systematically decreased with increased cycle depth. By 1000 EFC, all cells with DODs greater than 25-75 percent had a capacity below 80 percent and showed a knee point. When varying the voltage window at the same cycling depth (10 percent), the authors observed the highest degradation in cells cycled in the low and high SOC ranges; the lowest degradation is observed for a midpoint SOC of 50 percent. This accelerated degradation at extreme SOCs is consistent with other studies \cite{aiken_accelerated_2020,ma_novel_2019, zhu_investigation_2021}.
+A wider voltage window generally accelerates the onset of the knee point \cite{ecker_calendar_2014, pfrang_long-term_2018, klett_non-uniform_2014, ma_novel_2019, petzl_lithium_2015, schuster_nonlinear_2015}. In one of the broadest studies, Ecker et al. \cite{ecker_calendar_2014} considered six DODs (100, 80, 50, 20, 10, and 0.5 \%) with up to six voltage windows per DOD. They found that the EFC systematically decreased with increased DOD. By 1000 EFC, all cells with DODs greater than 25-75 \% had a capacity below 80 \% and showed a knee point. When varying the voltage window at the same DOD, the authors observed the highest degradation in cells cycled at low and high SOCs; the lowest degradation was observed for a midpoint SOC of 50 \%. Accelerated degradation at extreme SOCs was also observed in other studies \cite{aiken_accelerated_2020,ma_novel_2019, zhu_investigation_2021}.
 
-The impact of the voltage window on knee point acceleration is primarily attributed to higher DCR growth. In several studies, the occurrence of capacity fade aligns perfectly with resistance knees \cite{ecker_calendar_2014, klett_non-uniform_2014, schuster_nonlinear_2015, zhu_investigation_2021}. High voltages may also drive electrolyte oxidation at the cathode \cite{aiken_accelerated_2020}, even with a difference as small as 4.3V vs. 4.4V, and for some cathodes, Mn dissolution \cite{ma_novel_2019}. 
-
- **Weave in the following into 2nd paragraph: This was initially attributed to resistance increase with no characterization to confirm the precise cause. When nine of the cells were revisited in a later publication \cite{pfrang_long-term_2018}, CT showed that there was large mechanical deformation.  They concluded that deformation leads to capacity loss by losing active cathode material and anode coating. However, they did not identify a root cause of the mechanical deformation. One hypothesis was increased anode expansion during Li intercalation. 
+The impact of the voltage window on knee point onset is typically attributed to DCR growth stemming from enhanced expansion and cracking of the electrode during intercalation. In several studies, capacity knees have aligned perfectly with resistance knees \cite{ecker_calendar_2014, klett_non-uniform_2014, schuster_nonlinear_2015, zhu_investigation_2021}. High voltages may also drive electrolyte oxidation at the cathode \cite{aiken_accelerated_2020} and for some cathodes, active material loss via Mn dissolution \cite{ma_novel_2019}. 
 
 
 
@@ -501,17 +511,19 @@ In contrast, Epding et al.\cite{epding_investigation_2019} found that longer res
 
 Depends on if cycling typically or with plating.
 
-\subsubsection{Temperature} not done with this section
-Studies of temperature dependence have found that there is a 'sweet spot' that varies with the cell chemistry. For example, some studies have found that the appearance of the knee point is accelerated at temperatures above or below 25 degrees Celsius \cite{zhang_accelerated_2019, waldmann_temperature_2014, waldmann_optimization_2015} or 35 degrees Celsius \cite{schuster_nonlinear_2015}. In general, the 'sweet spot' temperature is lower for LFP cells than NMC cells. **discuss value of studying broader temperature range so that you can better observe transition between mechanisms
+This paper (not in overleaf yet) could support why increased rests are good:
 
-Different mechanisms dominate in different temperature ranges. At lower temperatures, the acceleration of the knee point is attributed to Li plating \cite {zhang_accelerated_2019,schuster_nonlinear_2015,waldmann_temperature_2014,waldmann_optimization_2015}. At elevated temperatures, the knee point is driven by SEI growth \cite{}. 
+https://web.iitd.ac.in/~agupta/Papers/Rashid_Gupta_JECS2015.pdf 
+
+\subsubsection{Temperature}
+The effect of temperature on knee onset depends on the test conditions. For example, some studies have found that knee onset is accelerated at temperatures above or below 25 degrees Celsius \cite{zhang_accelerated_2019, waldmann_temperature_2014, waldmann_optimization_2015} or 35 degrees Celsius \cite{schuster_nonlinear_2015}. In general, the temperature of minimal degradation is lower for LFP cells than NMC cells \cite{SNL long-term cycling paper}. 
+
+There is no straightforward dependence on temperature because different mechanisms dominate in different temperature ranges (Figure Waldmann temperature V). At lower temperatures, the acceleration of the knee point is attributed to Li plating. At elevated temperatures, knee point onset is driven by SEI growth \cite {zhang_accelerated_2019,schuster_nonlinear_2015,waldmann_temperature_2014,waldmann_optimization_2015}.
 
 \subsubsection{Pressure}
-Studies of pressure in pouch and prismatic cells have demonstrated that there is a 'sweet spot' for optimal performance \cite{cannarella_stress_2014, wunsch_investigation_2019}. The knee point can be accelerated by either lack of applied pressure or excess pressure. For example, Wünsch et al. found that lifetime can be increased from 500 to 3200 cycles with the right bracing \cite{wunsch_investigation_2019}. Additionally, heterogeneous compression across a single cell can accelerate the knee point \cite{bach_nonlinear_2016}. 
+Studies of pressure dependence in pouch and prismatic cells have demonstrated 'sweet spots' for optimal performance. The knee point can be accelerated by either an absence of pressure or excess pressure. For example, Wünsch et al. increased the cycle life of 37 Ah commercial NMC pouch cells from 500 (no bracing) to 3200 (optimal spring compression) while investigating various methods of bracing \cite{wunsch_investigation_2019}. Figure xyz shows another example from Cannarella et al. for an LCO pouch cell \cite{cannarella_stress_2014}. Even in a cylindrical cell, heterogeneous compression in the test fixture can accelerate the knee point \cite{bach_nonlinear_2016}. 
 
-In terms of finding a sweet spot, some applied pressure is needed to enhance conductivity and particle contact. When too much pressure is applied, high mechanical stress is not always evenly distributed throughout the cell. This causes heterogeneous delamination, surface film formation, and uneven Li distribution (Li plating) \cite{bach_nonlinear_2016}. 
-
-**LAM attributed to anode from half-cell data, no change in LAM PE (which specific study)
+For pouch and prismatic cells, some applied pressure is needed to enhance conductivity and particle contact. When too much pressure is applied, high mechanical stress is not always evenly distributed throughout the cell. This causes heterogeneous delamination, surface film formation, and uneven Li distribution (Li plating). Li plating was also reported in cylindrical cells that experienced heterogeneous compression from test fixtures \cite{bach_nonlinear_2016}. 
 
 
 
@@ -526,6 +538,8 @@ The magnitude of sampling variability is a function of the cell design, manufact
 \section{Implications for prediction}
 
 \pbox{Anyone interested? I think a key message here is which pathways/types of pathways can be predicted theoretically and with measurements}
+\newline
+\ssri{I think this would be really valuable because predicting knees is really the economic value addition from all the knee point analysis. We spoke a little bit about how ML could predict knees -- given how much we've talked about pathways (also as mentioned by Peter above), I think there is a point to be made about physics-inspired/physics informed ML i.e., an ML framework coupled with an electrochem model which is one of the few ways in which something about the pathways can also be said in addition to the ML predicted knee. Goes a long way in making falsifiable ML models wrt knees.}
 
 \subsection{Relationship between knees and end-of-life}
 

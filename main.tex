@@ -80,18 +80,18 @@
 
 Lithium-ion batteries will continue to play a critical role in decarbonization via their use in electric vehicle and stationary energy storage applications. One of the most challenging requirements for these demanding use cases is long lifetime, with typical warranties of X years for electric vehicles and X years for grid storage[lit values?]. Battery lifetime requirements will only become more demanding as “million-mile batteries” become the expectation for next-generation electric vehicles. Furthermore, as concerns around battery mining, manufacturing, and disposal increase, improving battery lifetime is a straightforward way to reduce the environmental impact of the lithium-ion battery lifecycle. Thus, understanding and improving the lifetime of lithium-ion batteries is a critical research direction.
 
-Lithium ion batteries often exhibit one of three degradation patterns: linear, sublinear, or superlinear aging (Figure 1). In laboratory settings (i.e., single-cell testing using battery cyclers), degradation is typically presented as capacity or energy vs. cycle number. Cells often degrade linearly[] or sublinearly[]. Sublinear degradation is often attributed to side reactions such as the solid-electrolyte interphase (SEI) growth, which grows approximately[] (but not exactly[]) with the square root of time or cycle number due to its self-passivsting nature. While this type of degradation is largely unavoidable, the decelerating degradation rate is a fortunate property for long-lifetime applications. However, superlinear battery degradation is also often observed (Figure 1c). This type of degradation goes by many names in the battery literature, including “knee”, “rollover failure”, “sudden death”, “accelerated aging”, “nonlinear aging”, "saturation", etc; we use the term “knee” in the remainder of this work. Avoiding this type of degradation is critical to ensure long lifetimes in the field. However, despite many experimental and modeling reports on this topic, a comprehensive understanding of knees is lacking, likely due to the variety and complexity of proposed mechanisms.
+Lithium ion batteries often exhibit one of three degradation patterns: linear, sublinear, or superlinear aging (Figure \ref{fig:degradation_shapes}). In laboratory settings (i.e., single-cell testing using battery cyclers), degradation is typically presented as capacity, energy, or power vs. cycle number. Cells often degrade linearly[] or sublinearly[]. Sublinear degradation is often attributed to side reactions such as the solid-electrolyte interphase (SEI) growth, which grows approximately[] (but not exactly[]) with the square root of time or cycle number due to its self-passivsting nature. While this type of degradation is largely unavoidable, the decelerating degradation rate is a fortunate property for long-lifetime applications. However, superlinear battery degradation is also observed (Figure \ref{fig:degradation_shapes}c). This type of degradation goes by many names in the battery literature, including ``knee'', ``rollover failure'', ``sudden death'', ``accelerated aging'', ``nonlinear aging'', ``saturation'', etc; we use the term ``knee'' in the remainder of this work. Avoiding knees is critical to ensure long lifetimes. However, despite many experimental and modeling reports on this topic, a comprehensive understanding of knees is lacking due to the variety and complexity of the proposed mechanisms.
 
 
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=1]{figures/degradation_rates.eps}
-\caption{The three principle degradation profiles.}
+\caption{The three lithium-ion battery aging trends observed in the literature: sublinear, linear, and superlinear degradation (``knees''). Knees are incompatible with long battery lifetimes. Here, the x axis is labeled ``cycle number'', although it could also represent equivalent cycles or similar; similarly, the y axis is labeled ``capacity'', although it could also represent energy or power. We use this convention (``capacity vs. cycle number'') in conceptual figures throughout this work.}
 \label{fig:degradation_shapes}
 \end{figure}
 
 
-In this review, we survey the literature and critically examine both experimental and modeling work on the subject of knees. We first review methods to define the knee point. We then classify experimental observations of knees in the literature; broadly, all cells with differences in knee behavior can be attributed to either differences in design, differences in usage conditions, or cell-to-cell/testing variation. Finally, we briefly discuss physics-driven and data-driven approaches to knee prediction, practical guidelines for avoiding knees, and suggested future work on this topic. This review can serve both academic and industrial efforts to understand and improve battery lifetime.
+In this review, we survey the literature and critically examine both experimental and modeling work on the subject of knees. We first review methods to define the knee point. We then identify (five/six) knee ``pathways'' from the literature, including lithium plating, resistance growth, additive depletion, percolation-limited connectivity, and mechanical deformation. We also classify differences in experimentally observed knee behavior as either differences in design, differences in usage conditions, or cell-to-cell/testing variation. Finally, we discuss the implications of our review to both predicting and avoiding knees, and we suggest future work on this topic. This review can serve both academic and industrial efforts to understand and improve battery lifetime.
 
 \section{Defining the knee point}
 % \editreadybox{}
@@ -107,38 +107,35 @@ Key messages in my mind:
 \end{itemize}
 }
 
-Locating a knee is easy by eye for a single, smooth and ideal health profile (e.g.\ around 400 cycles in figure 1). However this becomes trickier in cases where one has many cells with distinct lineshapes caused by intrinsic and extrinsic variability. 
-
-Li-ion cells can exhibit a two-phase capacity fade behaviour: the capacity initially degrades at a low rate and then, starting at a certain onset point, the capacity goes through an accelerated degradation, displaying a so-called knee pattern, until the cell’s End-of-Life (EoL). 
-
-Noise and erroneous data collection can also cause issues with identifying a knee.
+While the \textit{presence} of a knee is generally straightforward to identify, the \textit{location} of a knee is less so.
+Mathematically, the knee is described as the point at which the degradation rate is changing fastest, i.e., the second derivative reaches some maximal value.
+Furthermore, locating a knee by eye is seemingly straightforward for a single, smooth and ideal health profile (e.g.\, around 400 cycles in Figure \ref{fig:degradation_shapes}).
+However, both of these approaches are challenging when the aging profiles exhibit noise (often due to thermal fluctuations). Figure \ref{fig:knee_definition3} displays...(Sam to complete using text below)
+However, that point appeared slightly after where we put the knee, and Figure \ref{fig:knee_definition3} demonstrated how even small amounts of noise ($\sigma=0.05\%$ capacity) cause significant issues. Consequently, we concluded that health metric profiles should be smoothed prior to knee identification.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=\textwidth]{images/knee_definition.pdf}
-\caption{Definition of a knee point.}
+\caption{Definition of a knee point. (Sam to complete caption). Also please label the panels with a and b, and replace "cycles" with "Cycle number")}
 \label{fig:knee_definition3}
 \end{figure}
 
-Mathematically, the knee would be described as the point at which degradation rate is changing fastest, i.e.\ the second derivative reaches some maximal value. However that point appeared slightly after where we put the knee, and figure \ref{fig:knee_definition} demonstrated how even very small amounts of noise ($\sigma=0.05\%$ capacity) cause significant issues. Consequently, we concluded that health metric profiles should be smoothed prior to knee identification.
-
-Several knee point identification methods have been applied in literature. IEEE Standard 485\texttrademark-2010 defines a knee as a change to a stage of rapid decrease in capacity \cite{noauthor_ieee_2011}. However that definition is qualitative and thus hard to apply practically.
+Several knee point identification methods have been proposed in the literature. IEEE Standard 485\texttrademark-2010  \cite{noauthor_ieee_2011} defines a knee as a change to a stage of rapid decrease in capacity. However, this definition is qualitative and thus hard to practically apply.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=\textwidth]{images/knee_identification_methods.pdf}
-\caption{Different knee identification methods.}
+\caption{Different knee identification methods. (Nice work! Sam to add caption and panel labels. Also include the second derivative here?)}
 \label{fig:knee_identification_methods}
 \end{figure}
 
-Kneedle is an example of a quantiative approach. It calculates the knee as the point of maximum curvature of the capacity curve \cite{satopaa_finding_2011}. The knee can be calculated using a Bacon-Watts method for estimating the transition between two intersecting lines fitted to a capacity fade curve, a method which can also provide an estimate of "knee-onset" \cite{fermin-cueto_identification_2020}. Other methods use tangential lines to define the knee based on characteristic points of the capacity curve \cite{diao_algorithm_2019} and linear extrapolations of early and late life, the latter is shown in figure \ref{fig:knee_definition} as an example of robustness to noise CITE.
+
+(Sam -- looking good, but please add a brief in-text discussion of the figure).
+Kneedle is an example of a quantitative approach. It calculates the knee as the point of maximum curvature of the capacity curve \cite{satopaa_finding_2011}. The knee can be calculated using a Bacon-Watts method for estimating the transition between two intersecting lines fitted to a capacity fade curve, a method which can also provide an estimate of "knee-onset" \cite{fermin-cueto_identification_2020}. Other methods use tangential lines to define the knee based on characteristic points of the capacity curve \cite{diao_algorithm_2019} and linear extrapolations of early and late life, the latter is shown in figure \ref{fig:knee_definition} as an example of robustness to noise CITE.
 
 Finding the knee online, i.e.\ during use, is difficult because there is no knowledge of the end of life capacity profile. One method found was to approximate early life with a linear regression then define a cell to have met the knee when the capacity leaves a defined region about that regression \cite{zhang_accelerated_2019}.
 
 These methods were implemented and tested in database of \cite{severson_data-driven_2019} to assess consistency. Kneedle consistently identified a knee point prior to that of Bacon-Watts, but in general they all achieved a similar performance even if that performance could only be defined relative to one another without any known ground-truth.
-
-
-
 
 \begin{figure}[ht]
 \centering
@@ -148,7 +145,8 @@ These methods were implemented and tested in database of \cite{severson_data-dri
 %   \caption{Linear regression of knee-point to EOL point}
   \label{fig:kneepoint2EOL}
 % \end{subfigure}%
-\caption{Total of 306 cells across 15 datasets. The knee identification algorithm employed is the Bacon-Watts one. Linear relation between knee-point and EOL (defined as 80\% capacity).}
+\caption{Total of 306 cells across 15 datasets. The knee identification algorithm employed is the Bacon-Watts one. Linear relation between knee-point and EOL (defined as 80\% capacity).
+\pbox{Propose moving this to later section}}
 \label{fig:knees2EOL}
 \end{figure}
 
@@ -193,30 +191,21 @@ Plan for the section (identify the references):
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Peter: Does EOL have a consistent definition here? \cmark 
-\gbox{80\% capacity}
-
 
 \section{Pathways for knee points}
 
-\pbox{
-Two topics:
-\begin{itemize}
-    \item Types of pathways
-    \item Specific pathways identified so far
-\end{itemize}
-}
+We surveyed the literature and identified six pathways for knees to occur. These pathways are schematically illustrated in Figure \ref{fig:snowball_vs_hidden_vs_threshold}. Some of these pathways (e.g., lithium plating) have been extensively characterized and modeled, while others (e.g., percolation-limited knees) are merely hypotheses. Here, we critically examine the evidence for each pathway. For more extensively studied pathways such as lithium plating, we consider both \textit{modes}, defined as high-level changes in cell state, and \textit{mechanisms}, defined as the specific failure that leads to a change in cell state. For instance, active material loss is a degradation mode that can be caused by electrode delamination, a failure mechanism. While failure mechanisms are often challenging to pinpoint exactly, failure modes can be considered to conceptually validate a proposed pathway.
 
-In nonlinear systems, such as the battery degradation models, there are tools for analyzing the input-to-state behavior (reachability regions and threshold influence) that can help us map the initiation of fast exponential growth or percolation-limited charge transfer to a range and a combination of external stressors (C-rate, temperature, etc). Control theory could also provide tools to systematically explore state-to-output behavior (observability or hidden mechanisms).
+We also consider the relationship between the observable state variables (i.e., capacity, energy, and power) and the mechanisms underlying their knee points. Figure \ref{fig:snowball_vs_hidden_vs_threshold} illustrates three underlying mechanisms that can lead to a knee. ``Snowball'' mechanisms (Figure \ref{fig:snowball_vs_hidden_vs_threshold}a \& d) occur when the underlying state variable has a direct relationship with the observable state variable, but the underlying state variable is exponentially increasing. ``Hidden'' mechanisms (Figure \ref{fig:snowball_vs_hidden_vs_threshold}b \& e) occur when the observable state variable, originally controlled by a slowly-increasing state variable, becomes dominated by a second rapidly-increasing state variable. Finally, ``threshold'' mechanisms (Figure \ref{fig:snowball_vs_hidden_vs_threshold}c \& f) occur when the observable state variable changes when the underlying state variable reaches a threshold. Each of these underlying mechanisms has unique implications for detectability and prediction, a point we return to throughout this work.
 
-Figure 3 (need to modify)
-{
-\centering
-\includegraphics[scale=0.75]{figures/snowball_vs_hidden_mechanism.eps}
-}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{figures/snowball_vs_hidden_mechanism.eps}
+    \caption{Different types of underlying mechanisms leading to a knee. In each case, the retention curve looks the same (a-c), but the underlying mechanism has a different functional form. (d) ``Snowball'' mechanism, in which the state variable is exponentially increasing. (e) ``Hidden'' mechanism, in which a slowly-increasing state variable is dominated by a rapidly-increasing state variable. (f) ``Threshold'' mechanism, in which a dramatic change in observable state is triggered by a state variable reaching a threshold.}
+    \label{fig:snowball_vs_hidden_vs_threshold}
+\end{figure}
 
-Also include schematic on all pathways
-\subsection{Lithium Plating}
+\subsection{Lithium plating}
 
 \pbox{
 Plating to do's:
@@ -227,6 +216,18 @@ Plating to do's:
     \item Editing (Peter)
 \end{itemize}
 }
+
+Lithium plating occurs when lithium ions form metallic lithium on the surface of the electrode rather than intercalating into it. The plating reaction becomes favorable when the potential of the anode, given in equation \ref{plate}, drops below the Li/Li+ potential, generally defined to be zero. Many pathways for plating exist, and they can be broken into two categories. Thermodynamic plating can be defined as plating which is not heavily influenced by current. These pathways occur when the $V_{neg}$ term in equation \ref{plate} approaches zero against Li/Li+ as a result of thermal effects or as a result of the electrode approaching its lithium capacity. Kinetic plating occurs when current-induced conditions cause $\eta_{pl}$ to drop below zero. Typically, this means $\eta_{neg}$ is very low, however, large concentration gradients caused by high current in conditions which lower the diffusion coefficient (such as fast charging under cold ambient temperature) can cause $V_{neg}$ to drop locally. The remainder of this section enumerates the pathways by which plating can lead to a kneepoint. 
+
+\begin{equation}
+    \eta_{pl} = V_{neg}+\eta_{neg}-V_{pl}+R_{sei}I
+    \label{plate}
+\end{equation}
+
+
+
+
+
 
 Intro to plating
 \begin{itemize}
@@ -239,31 +240,21 @@ Intro to plating
 \end{itemize}
 
 \subsection{Thermodynamic Lithium Plating}
-- x>0
+- x$>0$
 - heterogeneous temperature
-- LAM_deNE
+- {LAM}_{de}$NE
 
-\subsubsection{$\textbf{LAM}_{deNE}$}
-Loss of active material of NE for lithium insertion is caused mainly due to particle cracking and electrical contact loss/blockage of active sites by resistive surfaces. Lithium trapped inside isolated graphite particles can contribute to cell capacity decrease due to unavailability to cycle. 
-
-K.Jalkanen et al \cite{jalkanen_cycle_2015} showcased cyclic aging at different cycling temperatures (\SI{25}{\celsius}, \SI{45}{\celsius} charge and \SI{65}{\celsius} discharge) through capacity fade. At temperatures above \SI{60}{\celsius}, aging at NE (graphite electrodes) is different compared to low temperature aging. Elevated temperatures contribute to excess Li plating during  cycling apart from the SEI-layer increase on anode surface which occurs during normal charging and discharging cycles at room temperature. Increase in SEI-layer thickness enhances graphite electrode polarization leading to additional plating. SEI-growth also leads to electrolyte consumption due to prolonged cycling at high temperatures. Irreversible lithium plating reduces graphite electrical contact, when lost, results in isolated dead lithium and capacity degradation \cite{petzl_lithium_2015}.  
+\subsubsection{$\textbf{LAM}_{de}$NE}
+Loss of active material of NE for lithium insertion is caused mainly due to particle cracking and electrical contact loss/blockage of active sites by resistive surfaces. Lithium trapped inside isolated graphite particles can contribute to cell capacity decrease due to unavailability to cycle. K.Jalkanen et al \cite{jalkanen_cycle_2015} showcased cyclic aging at different cycling temperatures (\SI{25}{\celsius}, \SI{45}{\celsius} charge and \SI{65}{\celsius} discharge) through capacity fade. At temperatures above \SI{60}{\celsius}, aging at NE (graphite electrodes) is different compared to low temperature aging. Elevated temperatures contribute to excess Li plating during  cycling apart from the SEI-layer increase on anode surface which occurs during normal charging and discharging cycles at room temperature. Increase in SEI-layer thickness enhances graphite electrode polarization leading to additional plating. SEI-growth also leads to electrolyte consumption due to prolonged cycling at high temperatures. Irreversible lithium plating reduces graphite electrical contact, when lost, results in isolated dead lithium and capacity degradation \cite{petzl_lithium_2015}.  
 Dubarry et al \cite{dubarry_durability_2018} modeled LAM and LLI and showed that a knee occurs if LAM NE is faster than LLI, with faster knee onset for higher LAMne:LLI ratios.
 
 
-Jalkanen et al. found significant Li plating resulted from cycling at high temperature - 1 C charge/discharge at \SI{45/65}{\celsius} respectively \cite{jalkanen_cycle_2015}. 
-
-Electrode sites may become inaccessible due to electrolyte dry-out. Electrolyte dry-out occurs in electrolyte lean cells due to decomposition of the electrolyte into gas and eventual de-wetting, causing some of the electrode to become inaccessible; cell gassing and dry-out often occurs in parallel with other degradation modes, and is thus difficult to deconvolute from other degradation modes during cycle aging. However, several calendar aging experiments have been conducted to investigate gassing and electrolyte dry-out impacts on cell performance. Mao et al clearly demonstrated the impact of dry-out during calendar aging at high temperatures, connecting accelerated capacity fade to gassing and electrolyte dry-out \cite{mao_calendar_2017}. They also determined that a small stack pressure of about 4 PSI mitigates the occurrence of dry-out within the porous electrodes due to gas formation by displacing gasses to the edges of the cell pouch. Xiong et al studied the impact of storage potential, temperature, and electrolyte composition on the volume and composition of gasses generated by electrolyte decomposition, finding that not only does electrolyte composition play a major role, but also that interactions between species generated separately at the anode and cathode is responsible for the decomposition of the electrolyte \cite{xiong_studies_2017}.
 The impact of gassing and dry-out has been modeled by Kupper et al \cite{kupper_end--life_2018}.
 
-Surface layer growth ...
-Delamination ...
-Dry out...
+Localized loss of negative electrode active material sites can cause heterogeneous Li plating by impeding the transport of Li, locally increasing the over-potential and eventually causing plating. There are several mechanisms that may lead to LAMdeNE: surface layer growth, delamination, and electrolyte dry-out. 
+Electrode sites may become inaccessible due to electrolyte dry-out. Electrolyte dry-out occurs in electrolyte lean cells due to decomposition of the electrolyte into gas and eventual de-wetting, causing some of the electrode to become inaccessible; cell gassing and dry-out often occurs in parallel with other degradation modes, and is thus difficult to deconvolute from other degradation modes during cycle aging. However, several calendar aging experiments have been conducted to investigate gassing and electrolyte dry-out impacts on cell performance. Mao et al clearly demonstrated the impact of dry-out during calendar aging at high temperatures, connecting accelerated capacity fade to gassing and electrolyte dry-out \cite{mao_calendar_2017}. They also determined that a small stack pressure of about 4 PSI mitigates the occurrence of dry-out within the porous electrodes due to gas formation by displacing gasses to the edges of the cell pouch. Xiong et al studied the impact of storage potential, temperature, and electrolyte composition on the volume and composition of gasses generated by electrolyte decomposition, finding that not only does electrolyte composition play a major role, but also that interactions between species generated separately at the anode and cathode is responsible for the decomposition of the electrolyte \cite{xiong_studies_2017}.
 
-Localized loss of negative electrode active material sites can cause heterogeneous Li plating by impeding the transport of Li, locally increasing the over-potential and eventually causing plating. There are several mechanisms that may lead to LAMdeNE: surface layer growth, delamination, and electrolyte dry-out.
-
-Surface layer growth on the negative electrode may impede Li transport into the negative electrode during charging. This surface layer has been often observed during accelerated aging of LIBs, and is most commonly attributed to Mn or Fe dissolution from the cathode and electrolyte salt decomposition \cite{lewerenz_post-mortem_2017,lewerenz_systematic_2017,zhu_investigation_2021,stiaszny_electrochemical_2014,rahe_nanoscale_2019,keil_linear_2019,sarasketa-zabala_understanding_2015, willenberg_high-precision_2020}. Lewerenz et al documented surface layer growth very thoroughly, finding that increasing C-rate and larger depth-of-discharge could lead to earlier onset of a knee, which was correlated with the presence of a thick surface layer on cells that contained knees; cells without knees also contained obvious surface layers, but with lower surface coverage and less thickness \cite{lewerenz_post-mortem_2017,lewerenz_systematic_2017}. These surface layers sometimes seem to lead directly to localized lithium plating, with lithium observed on top of the layer \cite{zhu_investigation_2021}.
-
-Delamination may also lead to inaccessible negative electrode material, which can potentially cause lithium plating and knee-onset. Willenberg et al conclusively observed delamination induced knee-onset in cylindrical cells; delamination was caused due to mechanical stresses and deformation after the formation of a surface layer on the negative electrode \cite{willenberg_high-precision_2020}. Cannarella et. al. also observed surface layer growth and delamination as a function of stack pressure in multi-layer pouch cells \cite{cannarella_stress_2014}. Pfrang et al observed delamination in cylindrical cells, though sometimes without observing knee-onset \cite{pfrang_long-term_2018}.
+Surface layer growth on the negative electrode may impede Li transport into the negative electrode during charging. This surface layer has been often observed during accelerated aging of LIBs, and is most commonly attributed to Mn or Fe dissolution from the cathode and electrolyte salt decomposition \cite{lewerenz_post-mortem_2017,lewerenz_systematic_2017,zhu_investigation_2021,stiaszny_electrochemical_2014,rahe_nanoscale_2019,keil_linear_2019,sarasketa-zabala_understanding_2015, willenberg_high-precision_2020}. Lewerenz et al documented surface layer growth very thoroughly, finding that increasing C-rate and larger depth-of-discharge could lead to earlier onset of a knee, which was correlated with the presence of a thick surface layer on cells that contained knees; cells without knees also contained obvious surface layers, but with lower surface coverage and less thickness \cite{lewerenz_post-mortem_2017,lewerenz_systematic_2017}. These surface layers sometimes seem to lead directly to localized lithium plating, with lithium observed on top of the layer \cite{zhu_investigation_2021}. Delamination may also lead to inaccessible negative electrode material, which can potentially cause lithium plating and knee-onset. Willenberg et al conclusively observed delamination induced knee-onset in cylindrical cells; delamination was caused due to mechanical stresses and deformation after the formation of a surface layer on the negative electrode \cite{willenberg_high-precision_2020}. Cannarella et. al. also observed surface layer growth and delamination as a function of stack pressure in multi-layer pouch cells \cite{cannarella_stress_2014}. Pfrang et al observed delamination in cylindrical cells, though sometimes without observing knee-onset \cite{pfrang_long-term_2018}.
 
 \subsection{Kinetic Plating}
 - this is when transient effects cause plating
@@ -362,11 +353,14 @@ Earlier studies of the use of FEC in high-Si cells (cite Choi 2006, Etacheri 201
 Other electrolyte components (namely, linear carbonates) are consumed only after the knee, since FEC can no longer be preferentially consumed\cite{petibon_studies_2016}; the cell polarization increases substantially after the knee\cite{petibon_studies_2016, jung_consumption_2016, wetjen_differentiating_2017}, possibly due to high reaction overpotential from reactions of silicon with these nonpreferred electrolyte components.
 Note that this mechanism is exacerbated by high upper cutoff voltages \cite{petibon_studies_2016}, higher cycling rates (presumably due to more mechanical damage to the SEI layer) \cite{petibon_studies_2016}, and (presumably) high temperatures (due to higher SEI growth rates).
 
-{
+\begin{figure}[ht]
 \centering
-\includegraphics[scale=0.9]{figures/fec_depletion.eps}
-}
-Adapted from Figure 8 of Petibon et al.\cite{petibon_studies_2016} and Figure 1 of Jung et al.\cite{jung_consumption_2016}
+\includegraphics[scale = 0.7]{figures/fec_depletion.eps}
+\caption{Additive depletion knees.
+(a) The capacity retention of a cell with 1000\% Si in the negative electrode exhibits a knee at around 250 cycles, the same point at which the FEC is depleted from the electrolyte (from destructive measurements of ABCDEFG). Adapted from Figure 8 of Petibon et al.\cite{petibon_studies_2016}
+(b) In cells with 1000\% Si in the negative electrode, the cycle number of the knee increases with the FEC concentration in the electrolyte. Adapted from Figure 1 of Jung et al.al.\cite{jung_consumption_2016}}
+\label{fig:knee_definition}
+\end{figure}
 
 This knee pathway has a number of interesting implications.
 First, since laboratory-built cells are often filled with high electrolyte volumes, knee mechanisms that are not present in lab testing may manifest in more commercially representative form factors.
@@ -414,10 +408,6 @@ High stack pressure can cause knee. High mechanical stress is not evenly distrib
 \caption{Kneepoint occurrence linked mechanical effects.}
 \label{fig:knee_mechanical}
 \end{figure}
-
-\pbox{
-Looks good! I think we had discussed making this schematic more linear with the delamination arrow as dotted? - Philipp: Added it and changed the font to match the others
-}
 
 Pressure evolution different for different kinds of bracing (Wünsch et al.) Thickness increase for unbraced cells correlated with knee point. Lifetime can be increased from 500 to 3200 cycles with the right bracing. (Wünsch et al.)
 
@@ -470,7 +460,7 @@ If the electrode is too thick, kinetic plating can occur.
 Electrolyte: FEC, MA, salt
 
 
-\subsection{Testing conditions (will shorten these sections)}
+\subsection{Testing conditions}
 
 \subsubsection{Charging rate}
 Increasing the charging rate has accelerated the onset of the knee-point across a range of batteries. \cite{lewerenz_systematic_2017,lewerenz_post-mortem_2017, petzl_lithium_2015, burns_-situ_2015, waldmann_optimization_2015, schuster_nonlinear_2015, severson_data-driven_2019, schindler_fast_2018, keil_linear_2019}. However, the critical charging rate leading to knee-onset varies substantially, with knees appearing at C-rates as low as 1C \cite{waldmann_optimization_2015} and as high as 8C \cite{lewerenz_systematic_2017}. 
@@ -533,8 +523,6 @@ Nominally identical cells cycled identically often show differences in knee beha
 
 The magnitude of sampling variability is a function of the cell design, manufacturing variability, and testing conditions. Sampling variability may increase with more aggressive cell designs, more manual cell assembly processes, and more aggressive testing conditions (particularly for test setups with no or poor temperature control). The magnitude of sampling variability can be estimated using studies with fairly large sample sizes (i.e., at least ~10 cells). Baumhöfer et al.\cite{baumhofer_production_2014} examined such variation in 48 cells and Harris et al.\cite{harris_failure_2017} in 24 cells. Note that these studies did not identify a correlation between cells...
 
-\pbox{Other sections to add?}
-
 \section{Implications for prediction}
 
 \pbox{Anyone interested? I think a key message here is which pathways/types of pathways can be predicted theoretically and with measurements}
@@ -544,6 +532,8 @@ The magnitude of sampling variability is a function of the cell design, manufact
 \subsection{Relationship between knees and end-of-life}
 
 \section{Conclusions and future work}
+
+Knees are a major challenge to developing long-lasting lithium-ion batteries. In this work, we first evaluated definitions of knees. We then investigated six knee pathways, including lithium plating, DCR growth, additive depletion, X, Y, and Z. 
 
 \section{Supporting Information}
 

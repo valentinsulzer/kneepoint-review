@@ -74,7 +74,7 @@
 \setlength{\oddsidemargin}{0in}
 \setlength{\textwidth}{6.5in}
 
-\title{Knees in lithium-ion battery aging trajectories}
+\title{``Knees'' in lithium-ion battery aging trajectories}
 \author{To do}
 \date{}
 
@@ -118,7 +118,7 @@ Key messages in my mind:
 
 While the \textit{presence} of a knee is generally straightforward to identify, the \textit{location} of a knee is less so.
 Mathematically, the knee is described as the point at which the degradation rate is changing fastest, i.e., the second derivative reaches some maximal value.
-Furthermore, locating a knee by eye is seemingly straightforward for a single, smooth and ideal health profile (e.g.\, around 400 cycles in Figure \ref{fig:degradation_shapes}) \gbox{is this the correct fig? not Fig \ref{fig:knee_definition3} (left)}.
+Furthermore, locating a knee by eye is seemingly straightforward for a single, smooth and ideal aging profile (e.g.\, the superlinear aging trend in Figure \ref{fig:degradation_shapes}).
 However, both of these approaches are challenging when the aging profiles exhibit noise (often due to thermal fluctuations). Figure \ref{fig:knee_definition3} displays...(Sam to complete using text below)
 However, that point appeared slightly after where we put the knee, and Figure \ref{fig:knee_definition3} demonstrated how even small amounts of noise ($\sigma=0.05\%$ capacity) cause significant issues. Consequently, we concluded that health metric profiles should be smoothed prior to knee identification.
 
@@ -151,26 +151,6 @@ Finding the knee online, i.e.\ during use, is difficult because there is no know
 
 These methods were implemented and tested in database of \cite{severson_data-driven_2019} to assess consistency. Kneedle consistently identified a knee point prior to that of Bacon-Watts, but in general they all achieved a similar performance even if that performance could only be defined relative to one another without any known ground-truth.
 \gbox{do we add the linear regressions to supplementary material?}
-
-\begin{figure}[ht]
-\centering
-% \begin{subfigure}{.5\textwidth}
-%   \centering
-\includegraphics[width=0.8\linewidth]{figures/AcrossDatasetsknee-to-EOL}
-%   \caption{Linear regression of knee-point to EOL point}
-  \label{fig:kneepoint2EOL}
-% \end{subfigure}%
-\caption{Total of 306 cells across 15 datasets. The knee identification algorithm employed is the Bacon-Watts one. Linear relation between knee-point and EOL (defined as 80\% capacity).
-\pbox{Propose moving this to later section} \cmark \gbox{please do}}
-\label{fig:knees2EOL}
-\end{figure}
-
-
-
-
-
-
-
 
 
 \gbox{
@@ -207,7 +187,7 @@ Plan for the section (identify the references):
 
 \section{Pathways for knee points}
 
-We surveyed the literature and identified six pathways for knees to occur. These pathways are schematically illustrated in Figure \ref{fig:snowball_vs_hidden_vs_threshold}. Some of these pathways (e.g., lithium plating) have been extensively characterized and modeled, while others (e.g., percolation-limited knees) are merely hypotheses. Here, we critically examine the evidence for each pathway. For more extensively studied pathways such as lithium plating, we consider both \textit{modes}, defined as high-level changes in cell state, and \textit{mechanisms}, defined as the specific failure that leads to a change in cell state. For instance, active material loss is a degradation mode that can be caused by electrode delamination, a failure mechanism. While failure mechanisms are often challenging to pinpoint exactly, failure modes can be considered to conceptually validate a proposed pathway.
+We surveyed the literature and identified six pathways for knees to occur. These pathways are schematically illustrated in Figure X. Some of these pathways (e.g., lithium plating) have been extensively characterized and modeled, while others (e.g., percolation-limited knees) are merely hypotheses. Here, we critically examine the evidence for each pathway. For more extensively studied pathways such as lithium plating, we consider both \textit{modes}, defined as high-level changes in cell state, and \textit{mechanisms}, defined as the specific failure that leads to a change in cell state. For instance, active material loss is a degradation mode that can be caused by electrode delamination, a failure mechanism. While failure mechanisms are often challenging to pinpoint exactly, failure modes can be considered to conceptually validate a proposed pathway.
 
 We also consider the relationship between the observable state variables (i.e., capacity, energy, and power) and the mechanisms underlying their knee points. Figure \ref{fig:snowball_vs_hidden_vs_threshold} illustrates three underlying mechanisms that can lead to a knee. ``Snowball'' mechanisms (Figure \ref{fig:snowball_vs_hidden_vs_threshold}a \& d) occur when the underlying state variable has a direct relationship with the observable state variable, but the underlying state variable is exponentially increasing. ``Hidden'' mechanisms (Figure \ref{fig:snowball_vs_hidden_vs_threshold}b \& e) occur when the observable state variable, originally controlled by a slowly-increasing state variable, becomes dominated by a second rapidly-increasing state variable. Finally, ``threshold'' mechanisms (Figure \ref{fig:snowball_vs_hidden_vs_threshold}c \& f) occur when the observable state variable changes when the underlying state variable reaches a threshold. Each of these underlying mechanisms has unique implications for detectability and prediction, a point we return to throughout this work.
 
@@ -412,6 +392,13 @@ which correspond to Relationships 3 and 4 respectively in Figure~\ref{fig:activi
 [Edwin: We can reuse (after asking for permission) Fig. 5 in Kupper et al.'s paper and Fig. 10 in Ferguson's paper here to illustrate the percolation threshold.]
 
 \begin{figure}[ht]
+\centering
+\includegraphics[scale=1.0]{figures/percolation.eps}
+\caption{Activity-saturation relationships adapted from Figure 5 of Kupper et al.\cite{kupper_end--life_2018} Relationships 3 and 4 model percolation of the liquid electrolyte.}
+\label{fig:percolation}
+\end{figure}
+
+\begin{figure}[ht]
     \centering
     \includegraphics[scale=0.75]{figures/A3468fig5.jpeg}
     \caption{Activity-saturation relationships taken from Figure 5 of~\cite{kupper_end--life_2018}. Relationships 3 and 4 are nonlinear and model percolation of the liquid electrolyte.}
@@ -473,14 +460,14 @@ We surveyed the literature to identify empirical case studies in which the knee 
 
 \subsection{Cell design}
 
-While the dependence of knees on cell usage conditions has been the focus of much previous work, less attention has been focused on the dependence of knees on cell design---likely due to the challenges of lab-scale cell fabrication. Perhaps the most comprehensive references on this topic come from the Dahn lab. Specifically, Ma et al.\cite{ma_editors_2019} studied the impact of various electrodes and electrolytes on the location of the knee, finding that cathode particle coatings and low cathode loadings delayed the onset of the knee. These knees were DCR ``pseudo-knees'' due to increased electrolyte oxidation on the cathode, as evidenced by the strong dependence of the knee on discharge rate as well as cathode impedance measurements. Ma et al. al.\cite{ma_editors_2019} and Glazier et al.)\cite{glazier_analysis_2017} also found that the graphite type (i.e., natural or artificial) substantially impacts the knee location, though the root cause of the knee in this case is unclear(PETER TO EXPLORE FURTHER).
+While the dependence of knees on cell usage conditions has been the focus of much previous work, less attention has been focused on the dependence of knees on cell design---likely due to the challenges of lab-scale cell fabrication. Perhaps the most comprehensive references on this topic come from the Dahn lab. Specifically, Ma et al.\cite{ma_editors_2019} studied the impact of various electrodes and electrolytes on the location of the knee, finding that cathode particle coatings and low cathode loadings delayed the knee location. These knees were classified as DCR ``pseudo-knees'' due to increased electrolyte oxidation on the cathode, as evidenced by the strong dependence of the knee severity on discharge rate as well as cathode impedance measurements. Ma et al. al.\cite{ma_editors_2019} and Glazier et al.\cite{glazier_analysis_2017} also found that the graphite type (i.e., natural or artificial) substantially impacts the knee location, though the root cause of the knee in this case is unclear(PETER TO EXPLORE FURTHER).
 
 Electrode loadings---specifically, anode loadings---can also lead to knees via the lithium plating pathway.
 If the electrode is too thin/capacity is too low, thermodynamic plating can occur; however, kinetic plating can occur if the electrode is too thick. (LI PLATING TEAM--WHAT ARE GOOD REFERENCES FOR THESE?)
 
-Additionally, small changes in the electrolyte can play an outsized role on the lifetime performance. Ma et al.\cite{ma_editors_2019} demonstrated the sensitivity of the knee location to the electrolyte additive package; specifically, high methyl acetate (MA) concentrations (MA is used to increase electrolyte transport capability) and low LiPF$_6$ concentrations consistently lead to earlier knees. These knees were attributed to increased electrolyte oxidation on the cathode. Additionally, as previously discussed, additive depletion (e.g., FEC depletion in cells with high silicon content in the anode) can be a direct cause of knees for some cell designs.
+Additionally, small changes in the electrolyte can play an outsized role on the lifetime performance. Ma et al.\cite{ma_editors_2019} demonstrated the sensitivity of the knee location to the electrolyte additive package; specifically, high methyl acetate (MA) concentrations (MA is used to increase electrolyte transport capability) and low LiPF$_6$ concentrations consistently lead to earlier knees. These knees were attributed to increased electrolyte oxidation on the cathode. Ma et al.\cite{ma_editors_2019} also identified other electrolyte systems with a strong knee sensitivity. Additionally, as previously discussed, additive depletion (e.g., FEC depletion in cells with high silicon content in the anode) can be a direct cause of knees for some cell designs.
 
-Lastly, mechanical deformation knees are naturally highly sensitive to the cell design. For instance, deformation of the core(PHILIPP -- WHAT PAPERS TO CITE?) can only occur in cells with cores, namely cylindrical cells.
+Lastly, mechanical deformation knees are naturally highly sensitive to the cell form factor. For instance, deformation of the core(PHILIPP -- WHAT PAPERS TO CITE?) can only occur in cells with cores, namely cylindrical cells.
 
 \subsection{Testing conditions}
 
@@ -496,16 +483,16 @@ Higher charging rates advance the knee point via Li plating and accelerated SEI 
 Unlike charging rate, the effect of discharging rate on the knee point is mixed (Figure X).
 In some systems, an increased discharging rate
 accelerates the knee onset.
-Omar et al. \cite{omar_lithium_2014} found that a higher discharging rate (1C to 15C) accelerated the knee for cylindrical LFP/graphite cells.
+Omar et al.\cite{omar_lithium_2014} found that a higher discharging rate (1C to 15C) accelerated the knee for cylindrical LFP/graphite cells.
 Diao et al.\cite{diao_accelerated_2019} showed no effect of discharge rate except at 60°C, where the cells discharged at 2C degraded almost twice as quickly than the cells discharged at 0.7C or 1C.
-High discharging rates can lead to worse cycle life due to higher temperature, which accelerates electrolyte reduction (i.e., SEI growth) and electrolyte oxidation (i.e., cathode resistance growth). Additionally, high discharging rates can lead to ``pseudo-knees'' when the resistance growth is high.
+High discharging rates can lead to worse cycle life due to higher temperature, which accelerates electrolyte reduction (i.e., SEI growth) and electrolyte oxidation (i.e., cathode resistance growth). Additionally, high discharging rates can lead to ``pseudo-knees'' when the resistance growth or lower cutoff voltage is high.
 
 In other systems, an increased discharging rate can delay the onset of the knee.
 Atalay et al.\cite{atalay_theory_2020} found that reducing the discharge rate from 4C to 1C accelerated the knee for 18650 NCA/graphite cells.
 Keil et al.\cite{keil_charging_2016} illustrated how discharging current had no effect on LMO+NMC/graphite and LCO+NCM/graphite cylindrical cells, but a lower discharging current (3A, 2.7C) lead to faster degradation than a higher discharging current (5A, 4.5C) for an LFP/graphite cylindrical cell when charged at 4.5C; they did not identify a mechanism. 
 Similarly, Keil et al.\cite{keil_linear_2019} found that increasing discharging current from 1C to 2C lead to the elimination of the knee in NMC/graphite cylindrical cells.
-While more work is needed here, one hypothesis for this observation is increased calendar aging for cells with faster discharge rates.
-In other words, cells with less time spent cycling simply have less calendar aging. This hypothesis does suggest a sensitivity of the x axis to the apparent severity of the knee; for instance, plotting retention vs. time instead of cycle number may decrease the apparant severity of the knee.
+While more work is needed to understand these results, one hypothesis for these observations is increased calendar aging for cells with faster discharge rates.
+In other words, cells with less time spent cycling simply have less calendar aging. This hypothesis does suggest a sensitivity of the x axis to the apparent severity of the knee; for instance, plotting retention vs. time instead of cycle number may decrease the apparent severity of the knee.
 
 \subsubsection{Voltage limits} 
 A wider voltage window generally accelerates the onset of the knee point \cite{ecker_calendar_2014, pfrang_long-term_2018, klett_non-uniform_2014, ma_novel_2019, petzl_lithium_2015, schuster_nonlinear_2015}. In one of the broadest studies, Ecker et al. \cite{ecker_calendar_2014} considered six DODs (100, 80, 50, 20, 10, and 0.5 \%) with up to six voltage windows per DOD. They found that the EFC systematically decreased with increased DOD. By 1000 EFC, all cells with DODs greater than 25-75 \% had a capacity below 80 \% and showed a knee point. When varying the voltage window at the same DOD, the authors observed the highest degradation in cells cycled at low and high SOCs; the lowest degradation was observed for a midpoint SOC of 50 \%. Accelerated degradation at extreme SOCs was also observed in other studies \cite{aiken_accelerated_2020,ma_novel_2019, zhu_investigation_2021}.
@@ -545,7 +532,7 @@ For pouch and prismatic cells, some applied pressure is needed to enhance conduc
 
 Nominally identical cells cycled identically often show differences in knee behavior. This sampling variability includes both intrinsic variability from manufacturing (component-level variation, cell assembly, etc) and extrinsic variability from testing (cycler calibration, temperature control, etc). These sources of variability cannot be distinguished.
 
-The magnitude of sampling variability is a function of the cell design, manufacturing variability, and testing conditions. Sampling variability may increase with more aggressive cell designs, more manual cell assembly processes, and more aggressive testing conditions (particularly for test setups with no or poor temperature control). The magnitude of sampling variability can be estimated using studies with fairly large sample sizes (i.e., at least ~10 cells). Baumhöfer et al.\cite{baumhofer_production_2014} examined such variation in 48 cells and Harris et al.\cite{harris_failure_2017} in 24 cells. Note that these studies did not identify a correlation between cells...
+The magnitude of sampling variability is a function of the cell design, manufacturing variability, and testing conditions. Sampling variability may increase with more aggressive cell designs, more manual cell assembly processes, and more aggressive testing conditions (particularly for test setups with no or poor temperature control). The magnitude of sampling variability can be estimated using studies with fairly large sample sizes (i.e., at least $\sim$10 cells). Baumhöfer et al.\cite{baumhofer_production_2014} and Harris et al.\cite{harris_failure_2017} studied this type of variation in 48 cells and 24 cells, respectively, finding widely varying knee locations across their datasets. Note that these studies did not identify a correlation between beginning-of-life capacity and end-of-life capacity, suggesting that the underlying state variables controlling the knee location did not manifest in the initial capacity measurements. In general, sampling and testing variation also poses challenges for accurate knee prediction; we recommend identifying the manufacturing and testing variation of the state variable of interest in evaluating the accuracy of knee prediction methods. Beck et al.[CITE] provide a detailed review of cell-to-cell variation.
 
 \section{Predicting knees}
 
@@ -556,7 +543,18 @@ The magnitude of sampling variability is a function of the cell design, manufact
 \subsection{Relationship between knees and end-of-life}
 
 While predicting knees is important, predicting end-of-life is more directly relevant for product performance and estimating warranty costs. Thus, we explored the relationship between knee locations and end-of-life.
-\pbox{Move content here from section 2}
+
+\begin{figure}[ht]
+\centering
+% \begin{subfigure}{.5\textwidth}
+%   \centering
+\includegraphics[width=0.8\linewidth]{figures/AcrossDatasetsknee-to-EOL}
+%   \caption{Linear regression of knee-point to EOL point}
+  \label{fig:kneepoint2EOL}
+% \end{subfigure}%
+\caption{Total of 306 cells across 15 datasets. The knee identification algorithm employed is the Bacon-Watts one. Linear relation between knee-point and EOL (defined as 80\% capacity).}
+\label{fig:knees2EOL}
+\end{figure}
 
 \subsection{Prediction outlook}
 

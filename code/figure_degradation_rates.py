@@ -20,10 +20,6 @@ superlinear_degradation = 100.5 - 0.5 * np.exp(cycle_numbers / 160)
 # Generate figure handles
 fig, ax = plt.subplots(figsize=(config.FIG_WIDTH, config.FIG_HEIGHT), nrows=1, ncols=1)
 
-# Remove axis tick labels
-ax.get_xaxis().set_ticklabels([])
-ax.get_yaxis().set_ticklabels([])
-
 # Plot
 ax.plot(
     cycle_numbers,
@@ -41,7 +37,11 @@ ax.plot(
 
 # Set axes labels
 ax.set_xlabel("Cycle number")
-ax.set_ylabel("Capacity")
+ax.set_ylabel("Retention (%)")
+
+# Set axes limits
+ax.set_xlim([-5, 605])
+ax.set_ylim([77, 100.5])
 
 # Add legend
 ax.legend()

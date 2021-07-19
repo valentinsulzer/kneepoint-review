@@ -3,11 +3,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
-# GPs
-from sklearn.gaussian_process import GaussianProcessRegressor
-from sklearn.gaussian_process.kernels import RBF, ConstantKernel as C
-
+import GPy
 import config
 
 # colours
@@ -22,9 +18,6 @@ gold = np.array([1, .67, .14]) # Staffordshire hoard
 claret = np.array([.429, .073, .238]) # claret
 grey = np.array([.585, .612, .675]) # library grey
 black = np.array([0,0,0]) # this is a black
-## FONTS
-fontname = 'Times New Roman'
-fontsize = 12
 
 # maths functions
 from numpy import matmul as mm  # matrix multiplication
@@ -171,22 +164,32 @@ def kneedle_identification(ax,time,capacity,colour):
     time = time.reshape((time.shape[0],1))
     capacity = capacity.reshape((capacity.shape[0],1))
     
-    kernel = RBF(1e2, (9e1, 1e4))
-    gp = GaussianProcessRegressor(kernel=kernel)
-    gp.fit(time, capacity)
-    t_gpm = np.linspace(time.min(),time.max(),1000).reshape((1000,1))
-    q_gpm = gp.predict(t_gpm, return_std=False)
+    # smooth capacity
+    kernel = GPy.kern.RBF(1,ARD=True,lengthscale=50)
+    lik = GPy.likelihoods.Gaussian(variance=.5)
+    gpm = GPy.core.GP(X=time,Y=capacity,kernel=kernel,likelihood=lik)
+    gpm.optimize()
+    t = np.linspace( time.min(), time.max(), 1000 ).reshape((1000,1))
+    q,_ = gpm.predict(t) 
     
-    # find second derivative of smoothed function
-    d2q = d2qdt2(t_gpm,q_gpm)
-    knee_indx = np.argmin(d2q[500:])
-    t_knee = t_gpm[knee_indx+500]
-    q_knee = q_gpm[knee_indx+500]
+    # plot the curve
+    d2q = d2qdt2(t,q)
+    
+    time = t; capacity = q;
+    
+    # smooth that result
+    kernel = GPy.kern.RBF(1,ARD=True,lengthscale=50)
+    lik = GPy.likelihoods.Gaussian(variance=.001)
+    gpm = GPy.core.GP(X=time[2:],Y=d2q,kernel=kernel,likelihood=lik)
+    d2q_p,_ = gpm.predict(time[2:]) 
     
     # plot smoothed second differential
-    ax.plot(t_gpm[100:t_gpm.shape[0]-2],d2q[100:]*5*10**3+94,':',color=grey)
+    ax.plot(time[100:time.shape[0]-2],d2q_p[100:]*5*10**3+93,'--',color=grey)
     
-    spl_cap = spline(t_gpm,q_gpm,k=5)
+    indx = np.argmin(d2q[500:])+502
+    t_knee = time[indx-2]
+    
+    spl_cap = spline(time,capacity,k=5)
     q_knee = spl_cap(t_knee)
     
     # mark the knee point
@@ -223,11 +226,14 @@ def diao_knee(ax,time,capacity,colour):
     t_late = time[n-5:,:].reshape((5,1))
     q_late = capacity[n-5:,:].reshape((5,1))
     
-    kernel = RBF(1e2, (8e1, 1e4))
-    gp = GaussianProcessRegressor(kernel=kernel)
-    gp.fit(time, capacity)
+    # late life model
+    # smooth capacity
+    kernel = GPy.kern.RBF(1,ARD=True,lengthscale=50)
+    lik = GPy.likelihoods.Gaussian(variance=.001)
+    gpm = GPy.core.GP(X=time,Y=capacity,kernel=kernel,likelihood=lik)
+    gpm.optimize()
     t_gpm = np.linspace(time.min(),time.max(),1000).reshape((1000,1))
-    q_gpm = gp.predict(t_gpm, return_std=False)
+    q_gpm,_ = gpm.predict(t_gpm) 
     
     d2q = d2qdt2(t_gpm,q_gpm)
     knee_indx = np.argmin(d2q[500:])
@@ -253,25 +259,19 @@ def diao_knee(ax,time,capacity,colour):
     
     return t_knee, q_knee
 
-def zhang_knee(ax,time,ic_curve,q,colour):
-    ax.plot(time,q,color=colour)
+def zhang_knee(ax,time,capacity,colour):
+    ax.plot(time,capacity,color=colour)
     ax.set_ylim(75,100)
-    
-    # new axes
-    ax_in = ax.inset_axes([80,80.5,300,10], transform=ax.transData)
-    ax_in.set_ylabel('IC peak height ($Ah.V^{-1}$)')
-    
-    ax_in.plot(time,ic_curve,color=colour)
     
     # guarantee the inputs are column vectors
     time = time.reshape((time.shape[0],1))
-    ic_curve = ic_curve.reshape((ic_curve.shape[0],1))
+    capacity = capacity.reshape((capacity.shape[0],1))
     
     # ============== EARLY LIFE LINEAR MODEL ================= #
     # find early life data (assumed first half of points)
     n = np.floor(time.shape[0]*2/3).astype(int)
     t_early = time[:n,:].reshape((n,1))
-    q_early = ic_curve[:n,:].reshape((n,1))
+    q_early = capacity[:n,:].reshape((n,1))
     
     # early life model
     w = ols(t_early,q_early)
@@ -279,31 +279,25 @@ def zhang_knee(ax,time,ic_curve,q,colour):
     t = np.linspace(time.min(),time.max(),1000)
     q_early_mod = w[0] + w[1]*t
     
-    ax_in.plot(t,q_early_mod,'--',color=grey)
+    ax.plot(t,q_early_mod,'--',color=grey)
     
-    q_low = q_early_mod - .2
-    q_high = q_early_mod + .2
+    q_low = q_early_mod - 1.5
+    q_high = q_early_mod + 1.5
     
-    ax_in.fill_between(t,q_low,q_high,color=grey,alpha=.2)
+    ax.fill_between(t,q_low,q_high,color=grey,alpha=.2)
     
-    spl_ic = spline(time,ic_curve,k=5)
+    spl_cap = spline(time,capacity,k=5)
     t_late = t[500:]
-    q_late = spl_ic(t_late)
+    q_late = spl_cap(t_late)
     
     t_late = t_late[ q_late<q_low[500:] ]
     
     t_knee = t_late.min()
-    ic_knee = spl_ic(t_knee)
-    
-    ax_in.scatter(t_knee,ic_knee,color="black",marker='s')
-    ax_in.plot(np.array([t_knee,t_knee]),np.array([3,7]),
-               '--',color=grey)
-    
-    # plot knee on main axis
-    spl_cap = spline(time,q,k=5)
     q_knee = spl_cap(t_knee)
     
     ax.scatter(t_knee,q_knee,color="black",marker='s')
+    ax.plot(np.array([t_knee,t_knee]),np.array([80,98]),
+            '--',color=grey)
     
     return t_knee,q_knee
 
@@ -314,7 +308,7 @@ def dq2dt2(ax,t,q,colour):
     d2qdt2 = np.diff(dqdt,axis=0) / np.diff(t[1:],axis=0)
     ax.plot(t[4:],d2qdt2[2:]*1000,color=colour)
 
-m = pd.read_csv('data\severson2019_cell_58_capacity.csv')
+m = pd.read_csv('data\severson2019_cell_50_capacity.csv')
 
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
@@ -323,37 +317,39 @@ q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
 qσ = q + (np.random.randn(q.shape[0],1)*σ)
 
 # KNEE DEFINITION ============================
-fig, ax = plt.subplots(1,2,figsize=(config.FIG_WIDTH*2,config.FIG_HEIGHT*1))
+fig, ax = plt.subplots(2,1,figsize=(config.FIG_WIDTH*1,config.FIG_HEIGHT*2))
 
 # profile
 ax[0].plot(t,qσ,color=jade)
 ax[0].plot(t,q,color=blue)
-ax[0].set_ylabel('capacity (%)')
-ax[0].scatter(388,92.29,color="black")
-ax[0].text(380,92.1,'visual knee',color="black",
+ax[0].set_ylabel('Capacity retention (%)')
+ax[0].scatter(365,91.85,color="black")
+ax[0].text(365,91.5,'Visual knee point',color="black",
           horizontalalignment='right',verticalalignment='top')
-n_knee = 38
-ax[0].scatter(m['cycs'][n_knee-2],m['q'][n_knee-2],color=gold)
-ax[0].text(m['cycs'][n_knee-2],m['q'][n_knee-2]*.99,'mathematical knee',
+ax[0].scatter(m['cycs'][35],m['q'][35],color=gold)
+ax[0].text(m['cycs'][35],m['q'][35]*.99,'Mathematical knee point',
            color=gold,
            horizontalalignment='right',verticalalignment='top')
+ax[0].set_ylim([75, 100])
 
 # profile with noise and using second derivative
 dq2dt2(ax[1],t,q,blue)
-ax[1].set_ylabel('second derivative (/1000)')
+ax[1].set_ylabel('Second derivative of retention/1000 (%))')
 
 dq2dt2(ax[1],t,qσ,jade)
-ax[1].text(10,-3.0,'added noise, σ=0.05%',color=jade)
-ax[1].plot([380, 380],[-3.5, 2.5],'--',color="black")
-ax[1].plot([420, 420],[-3.5, 2.5],'--',color=gold)
+ax[1].text(10,-3.0,'Added noise, σ=0.05%',color=jade)
+ax[1].plot([365, 365],[-3.5, 2.5],'--',color="black")
+ax[1].plot([425, 425],[-3.5, 2.5],'--',color=gold)
 ax[1].set_ylim([-4, 3])
 
 for j in range(len(ax)):
-    ax[j].set_xlabel('cycle number')
+    ax[j].set_xlabel('Cycle number')
     ax[j].set_xlim([-5, 505])
     ax[j].set_title(chr(97 + j), loc="left", weight="bold")
 
-fig.savefig('../images/knee_definition.pdf')
+# Save figure as both .PNG and .EPS
+fig.savefig(config.FIG_PATH / "knee_definition.png", format="png", dpi=300)
+fig.savefig(config.FIG_PATH / "knee_definition.eps", format="eps")
 
 
 
@@ -362,7 +358,6 @@ fig.savefig('../images/knee_definition.pdf')
 fig, ax = plt.subplots(2,3,figsize=(config.FIG_WIDTH*3,config.FIG_HEIGHT*2.2))
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
-IC = np.array(m['dqdv']).reshape((m['cycs'].shape[0],1))
 
 colours = [blue, jade, gold, red, black, grey]
 
@@ -377,14 +372,10 @@ n = 0;
 for j in range(ax.shape[0]):
     for jj in range(ax.shape[1]):
         ax[j,jj].set_title(chr(97 + n), loc="left", weight="bold")
-        if n<5:
-            ax[j,jj].text(0,76,methods[n]+' ['+ref_nums[n]+']',color=colours[n])
-        ax[j,jj].set_xlabel('cycle number')
-        ax[j,jj].set_ylabel('capacity (%)')
-        ax[j,jj].set_ylim([75, 100])
+        ax[j,jj].text(0,80,methods[n]+' ['+ref_nums[j]+']',color=colours[n])
+        ax[j,jj].set_xlabel('Cycle number')
+        ax[j,jj].set_ylabel('Capacity retention (%)')
         n = n+1
-
-
 
 # Below are the actual calculations
 TK = np.zeros((5,2))
@@ -395,7 +386,7 @@ TK[1,0],TK[1,1] = kneedle_identification(ax[0,1],t,q,colours[1])
 # Diao et al.
 TK[2,0],TK[2,1] = diao_knee(ax[0,2],t,q,colours[2])
 # Zhang et al.
-TK[3,0],TK[3,1] = zhang_knee(ax[1,0],t,IC,q,colours[3])
+TK[3,0],TK[3,1] = zhang_knee(ax[1,0],t,q,colours[3])
 # Bisector
 TK[4,0],TK[4,1] = knee_point_identification(ax[1,1],t,q,colours[4]);
 
@@ -419,8 +410,8 @@ for j in range(5):
     ax_in.plot(np.array([TK[j,0],TK[j,0]]),np.array([80,98]),
                 '--',color=colours[j])
 ax_in.set_yticks([])
-ax_in.set_xlim([365, 450])
-ax_in.set_ylim([86, 94])
+ax_in.set_xlim([330, 410])
+ax_in.set_ylim([88, 94])
     
 # completely unnecessary if you are the kind of wizard who doesn't sanity 
 # check your results
@@ -432,4 +423,8 @@ TK = pd.DataFrame(data=D)
 
 print(TK)
 
-fig.savefig('../images/knee_identification_methods.pdf')
+fig.tight_layout() # adds nice whitespace
+
+# Save figure as both .PNG and .EPS
+fig.savefig(config.FIG_PATH / "knee_identification_methods.png", format="png", dpi=300)
+fig.savefig(config.FIG_PATH / "knee_identification_methods.eps", format="eps")

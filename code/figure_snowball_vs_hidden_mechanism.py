@@ -36,10 +36,6 @@ fig, ax = plt.subplots(
 )
 ax = ax.ravel()
 
-for axis in ax:
-    axis.get_xaxis().set_ticklabels([])
-    axis.get_yaxis().set_ticklabels([])
-
 # Plot
 ax[0].plot(cycle_numbers, knee_retention, color="tab:blue")
 ax[1].plot(cycle_numbers, knee_retention, color="tab:purple")

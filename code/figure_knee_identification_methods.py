@@ -298,7 +298,7 @@ def dq2dt2(ax,t,q,colour):
     d2qdt2 = np.diff(dqdt,axis=0) / np.diff(t[1:],axis=0)
     ax.plot(t[4:],d2qdt2[2:]*1000,color=colour)
 
-m = pd.read_csv('data\severson2019_cell_50_capacity.csv')
+m = pd.read_csv('data\severson2019_cell_58_capacity.csv')
 
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))

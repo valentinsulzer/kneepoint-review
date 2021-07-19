@@ -18,9 +18,6 @@ gold = np.array([1, .67, .14]) # Staffordshire hoard
 claret = np.array([.429, .073, .238]) # claret
 grey = np.array([.585, .612, .675]) # library grey
 black = np.array([0,0,0]) # this is a black
-## FONTS
-fontname = 'Times New Roman'
-fontsize = 12
 
 # maths functions
 from numpy import matmul as mm  # matrix multiplication
@@ -373,8 +370,8 @@ for j in range(ax.shape[0]):
     for jj in range(ax.shape[1]):
         ax[j,jj].set_title(chr(97 + n), loc="left", weight="bold")
         ax[j,jj].text(0,80,methods[n]+' ['+ref_nums[j]+']',color=colours[n])
-        ax[j,jj].set_xlabel('cycle number')
-        ax[j,jj].set_ylabel('capacity (%)')
+        ax[j,jj].set_xlabel('Cycle number')
+        ax[j,jj].set_ylabel('Retention (%)')
         n = n+1
 
 # Below are the actual calculations
@@ -423,4 +420,8 @@ TK = pd.DataFrame(data=D)
 
 print(TK)
 
-fig.savefig('../images/knee_identification_methods.pdf')
+fig.tight_layout() # adds nice whitespace
+
+# Save figure as both .PNG and .EPS
+fig.savefig(config.FIG_PATH / "knee_identification_methods.png", format="png", dpi=300)
+fig.savefig(config.FIG_PATH / "knee_identification_methods.eps", format="eps")

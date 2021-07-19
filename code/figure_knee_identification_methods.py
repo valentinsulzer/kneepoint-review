@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 # GPs
 from sklearn.gaussian_process import GaussianProcessRegressor
-from sklearn.gaussian_process.kernels import RBF, ConstantKernel as C
+from sklearn.gaussian_process.kernels import RBF
 
 import config
 # colours
@@ -348,6 +348,7 @@ fig.savefig(config.FIG_PATH / "knee_definition.eps", format="eps")
 fig, ax = plt.subplots(2,3,figsize=(config.FIG_WIDTH*3,config.FIG_HEIGHT*2.2))
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
+IC = np.array(m['dqdv']).reshape((m['cycs'].shape[0],1))
 
 colours = [blue, jade, gold, red, black, grey]
 
@@ -362,7 +363,8 @@ n = 0;
 for j in range(ax.shape[0]):
     for jj in range(ax.shape[1]):
         ax[j,jj].set_title(chr(97 + n), loc="left", weight="bold")
-        ax[j,jj].text(0,80,methods[n]+' ['+ref_nums[j]+']',color=colours[n])
+        if n<5:
+            ax[j,jj].text(0,76,methods[n]+' ['+ref_nums[n]+']',color=colours[n])
         ax[j,jj].set_xlabel('Cycle number')
         ax[j,jj].set_ylabel('Capacity retention (%)')
         n = n+1
@@ -376,7 +378,7 @@ TK[1,0],TK[1,1] = kneedle_identification(ax[0,1],t,q,colours[1])
 # Diao et al.
 TK[2,0],TK[2,1] = diao_knee(ax[0,2],t,q,colours[2])
 # Zhang et al.
-TK[3,0],TK[3,1] = zhang_knee(ax[1,0],t,q,colours[3])
+TK[3,0],TK[3,1] = zhang_knee(ax[1,0],t,IC,q,colours[3])
 # Bisector
 TK[4,0],TK[4,1] = knee_point_identification(ax[1,1],t,q,colours[4]);
 

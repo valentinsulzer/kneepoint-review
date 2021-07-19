@@ -3,9 +3,12 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import GPy
-import config
 
+# GPs
+from sklearn.gaussian_process import GaussianProcessRegressor
+from sklearn.gaussian_process.kernels import RBF, ConstantKernel as C
+
+import config
 # colours
 yellow = np.array([1, .67, .14])
 lgrey = np.array([.7, .7, .7])
@@ -164,32 +167,22 @@ def kneedle_identification(ax,time,capacity,colour):
     time = time.reshape((time.shape[0],1))
     capacity = capacity.reshape((capacity.shape[0],1))
     
-    # smooth capacity
-    kernel = GPy.kern.RBF(1,ARD=True,lengthscale=50)
-    lik = GPy.likelihoods.Gaussian(variance=.5)
-    gpm = GPy.core.GP(X=time,Y=capacity,kernel=kernel,likelihood=lik)
-    gpm.optimize()
-    t = np.linspace( time.min(), time.max(), 1000 ).reshape((1000,1))
-    q,_ = gpm.predict(t) 
+    kernel = RBF(1e2, (9e1, 1e4))
+    gp = GaussianProcessRegressor(kernel=kernel)
+    gp.fit(time, capacity)
+    t_gpm = np.linspace(time.min(),time.max(),1000).reshape((1000,1))
+    q_gpm = gp.predict(t_gpm, return_std=False)
     
-    # plot the curve
-    d2q = d2qdt2(t,q)
-    
-    time = t; capacity = q;
-    
-    # smooth that result
-    kernel = GPy.kern.RBF(1,ARD=True,lengthscale=50)
-    lik = GPy.likelihoods.Gaussian(variance=.001)
-    gpm = GPy.core.GP(X=time[2:],Y=d2q,kernel=kernel,likelihood=lik)
-    d2q_p,_ = gpm.predict(time[2:]) 
+    # find second derivative of smoothed function
+    d2q = d2qdt2(t_gpm,q_gpm)
+    knee_indx = np.argmin(d2q[500:])
+    t_knee = t_gpm[knee_indx+500]
+    q_knee = q_gpm[knee_indx+500]
     
     # plot smoothed second differential
-    ax.plot(time[100:time.shape[0]-2],d2q_p[100:]*5*10**3+93,'--',color=grey)
+    ax.plot(t_gpm[100:t_gpm.shape[0]-2],d2q[100:]*5*10**3+94,':',color=grey)
     
-    indx = np.argmin(d2q[500:])+502
-    t_knee = time[indx-2]
-    
-    spl_cap = spline(time,capacity,k=5)
+    spl_cap = spline(t_gpm,q_gpm,k=5)
     q_knee = spl_cap(t_knee)
     
     # mark the knee point
@@ -226,14 +219,11 @@ def diao_knee(ax,time,capacity,colour):
     t_late = time[n-5:,:].reshape((5,1))
     q_late = capacity[n-5:,:].reshape((5,1))
     
-    # late life model
-    # smooth capacity
-    kernel = GPy.kern.RBF(1,ARD=True,lengthscale=50)
-    lik = GPy.likelihoods.Gaussian(variance=.001)
-    gpm = GPy.core.GP(X=time,Y=capacity,kernel=kernel,likelihood=lik)
-    gpm.optimize()
+    kernel = RBF(1e2, (8e1, 1e4))
+    gp = GaussianProcessRegressor(kernel=kernel)
+    gp.fit(time, capacity)
     t_gpm = np.linspace(time.min(),time.max(),1000).reshape((1000,1))
-    q_gpm,_ = gpm.predict(t_gpm) 
+    q_gpm = gp.predict(t_gpm, return_std=False)
     
     d2q = d2qdt2(t_gpm,q_gpm)
     knee_indx = np.argmin(d2q[500:])

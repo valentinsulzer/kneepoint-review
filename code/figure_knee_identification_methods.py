@@ -317,36 +317,39 @@ q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
 qσ = q + (np.random.randn(q.shape[0],1)*σ)
 
 # KNEE DEFINITION ============================
-fig, ax = plt.subplots(1,2,figsize=(config.FIG_WIDTH*2,config.FIG_HEIGHT*1))
+fig, ax = plt.subplots(2,1,figsize=(config.FIG_WIDTH*1,config.FIG_HEIGHT*2))
 
 # profile
 ax[0].plot(t,qσ,color=jade)
 ax[0].plot(t,q,color=blue)
-ax[0].set_ylabel('capacity (%)')
+ax[0].set_ylabel('Capacity retention (%)')
 ax[0].scatter(365,91.85,color="black")
-ax[0].text(365,91.5,'visual knee',color="black",
+ax[0].text(365,91.5,'Visual knee point',color="black",
           horizontalalignment='right',verticalalignment='top')
 ax[0].scatter(m['cycs'][35],m['q'][35],color=gold)
-ax[0].text(m['cycs'][35],m['q'][35]*.99,'mathematical knee',
+ax[0].text(m['cycs'][35],m['q'][35]*.99,'Mathematical knee point',
            color=gold,
            horizontalalignment='right',verticalalignment='top')
+ax[0].set_ylim([75, 100])
 
 # profile with noise and using second derivative
 dq2dt2(ax[1],t,q,blue)
-ax[1].set_ylabel('second derivative (/1000)')
+ax[1].set_ylabel('Second derivative of retention/1000 (%))')
 
 dq2dt2(ax[1],t,qσ,jade)
-ax[1].text(10,-3.0,'added noise, σ=0.05%',color=jade)
+ax[1].text(10,-3.0,'Added noise, σ=0.05%',color=jade)
 ax[1].plot([365, 365],[-3.5, 2.5],'--',color="black")
 ax[1].plot([425, 425],[-3.5, 2.5],'--',color=gold)
 ax[1].set_ylim([-4, 3])
 
 for j in range(len(ax)):
-    ax[j].set_xlabel('cycle number')
+    ax[j].set_xlabel('Cycle number')
     ax[j].set_xlim([-5, 505])
     ax[j].set_title(chr(97 + j), loc="left", weight="bold")
 
-fig.savefig('../images/knee_definition.pdf')
+# Save figure as both .PNG and .EPS
+fig.savefig(config.FIG_PATH / "knee_definition.png", format="png", dpi=300)
+fig.savefig(config.FIG_PATH / "knee_definition.eps", format="eps")
 
 
 
@@ -371,7 +374,7 @@ for j in range(ax.shape[0]):
         ax[j,jj].set_title(chr(97 + n), loc="left", weight="bold")
         ax[j,jj].text(0,80,methods[n]+' ['+ref_nums[j]+']',color=colours[n])
         ax[j,jj].set_xlabel('Cycle number')
-        ax[j,jj].set_ylabel('Retention (%)')
+        ax[j,jj].set_ylabel('Capacity retention (%)')
         n = n+1
 
 # Below are the actual calculations

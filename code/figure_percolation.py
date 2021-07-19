@@ -16,8 +16,10 @@ def relationship3(s):
     return 0.5 * np.tanh(10 * (s - 0.5)) + 0.5
 
 def relationship4(s):
+    # a = (0.5·s +0.5)·(0.5·tanh(15·(s −0.5))+0.5)
+    # Note a typo in Kupper Figure 5, which has the below relationship:
     # a = (0.5·s +0.5)·(0.5·tanh(15·(s −0.4))+0.5)
-    return (0.5 * s + 0.5) * (0.5 * np.tanh(15 * (s - 0.4)) + 0.5)
+    return (0.5 * s + 0.5) * (0.5 * np.tanh(15 * (s - 0.5)) + 0.5)
 
 # Generate fake data
 saturation = np.arange(0, 1, 0.01)
@@ -49,7 +51,7 @@ ax.plot(
     activity4,
     color="tab:purple",
     label="Relationship 4 (nonlinear, asymmetric):\n" + \
-        r"$a = (0.5s + 0.5)\cdot(0.5\cdot\tanh(15(s - 0.4)) + 0.5)$",
+        r"$a = (0.5s + 0.5)\cdot(0.5\cdot\tanh(15(s - 0.5)) + 0.5)$",
 )
 
 # Set axes labels

@@ -12,6 +12,7 @@
 \usepackage{pdflscape}
 \usepackage{textcomp}
 \usepackage{gensymb}
+\usepackage[natbib=true,style=authoryear,backend=bibtex8]{biblatex}
 
 \usepackage{subcaption} % For subfigures?
 
@@ -191,7 +192,7 @@ We also consider the relationship between the observable state variables (i.e., 
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{figures/snowball_vs_hidden_mechanism.eps}
-    \caption{Schematic of the three types of underlying mechanisms leading to a knee. In each case, the retention curve looks the same (a-c), but the underlying mechanism has a different functional form. (d) ``Snowball'' mechanism, in which the state variable is exponentially increasing. (e) ``Hidden'' mechanism, in which a slowly-increasing state variable is dominated by a rapidly-increasing state variable. (f) ``Threshold'' mechanism, in which a dramatic change in observable state is triggered by a state variable reaching a threshold.}
+    \caption{Three types of underlying mechanisms leading to a knee. In each case, the retention curve looks the same (a-c), but the underlying mechanism has a different functional form. (d) ``Snowball'' mechanism, in which the state variable is exponentially increasing. (e) ``Hidden'' mechanism, in which a slowly-increasing state variable is dominated by a rapidly-increasing state variable. (f) ``Threshold'' mechanism, in which a dramatic change in observable state is triggered by a state variable reaching a threshold.}
     \label{fig:snowball_vs_hidden_vs_threshold}
 \end{figure}
 
@@ -205,9 +206,7 @@ Plating to do's:
 \end{itemize}
 }
 
-Lithium plating occurs when lithium ions form metallic lithium on the surface of the electrode rather than intercalating into it. The plating reaction is favorable when the reaction potential of Li/Li$^+$ is greater than the equilibrium potential for other alternative reaction pathways for Li+.(cite gao-interplay-2021)\ref{plate} Plating can occur due to either ``thermodynamic plating'', or plating that occurs independent of the applied current, and ``kinetic plating'', or plating that only occurs if the applied current exceeds some value.  Furthermore, lithium plating can occur either reversibly or irreversibly. Irreversible plating leads to rapid loss of lithium inventory and has historically been considered to be a primary driver for capacity knees.
-
-Here, we discuss the mechanisms by which plating occurs and can lead to a knee. We suggest Waldmann et al.\cite{waldmann_li_2018} and Gao et al.(cite gao-interplay-2021) for comprehensive general overviews of lithium plating.
+Lithium plating occurs when lithium ions form metallic lithium on the surface of the electrode rather than intercalating into it. The plating reaction is favorable when the reaction potential of Li/Li$^+$ is greater than the equilibrium potential for other alternative reaction pathways for Li+.(cite gao-interplay-2021)\ref{plate} Plating can occur due to either ``thermodynamic plating'', or plating that occurs independent of the applied current, and ``kinetic plating'', or plating that only occurs if the applied current exceeds some value.  Furthermore, lithium plating can occur either reversibly or irreversibly. Irreversible plating leads to rapid loss of lithium inventory and has historically been considered to be a primary driver for capacity knees. Here, we discuss the mechanisms by which plating occurs and can lead to a knee. Waldmann et al.\cite{waldmann_li_2018} and Gao et al.(cite gao-interplay-2021) are suggested for 
 
 % Intro to plating
 % \begin{itemize}
@@ -618,7 +617,6 @@ Table S2. Summary of previous knee point modeling efforts
 \label{fig:discharge-rest_time}
 \end{figure}
 
-\bibliographystyle{myIEEEtran}
 \bibliography{refs_zotero}
 
 

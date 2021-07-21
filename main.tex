@@ -87,7 +87,11 @@
 
 **PREVIOUS DRAFT IS NOW IN main\_old\_experiment\_then\_model.tex**
 
-\section{Introduction}
+\section{Abstract}
+
+\pbox{To do}
+
+\newpage
 
 Lithium-ion batteries will continue to play a critical role in decarbonization via their use in electric vehicle and stationary energy storage applications. One of the most challenging requirements for these demanding applications is long lifetime, with typical warranties of 8 years for electric vehicles and 10 years for grid storage\cite{hesse_lithium-ion_2017}[bocca-optimal-2020, beltran-lifetime-2020]. Battery lifetime requirements will only become more demanding as “million-mile batteries”[harlow-wide-2019] become the expectation for next-generation electric vehicles. Furthermore, as concerns around battery materials mining, manufacturing, and disposal increase, improving battery lifetime is a straightforward way to reduce the environmental impact of the lithium-ion battery lifecycle. Thus, understanding and improving the lifetime of lithium-ion batteries is a critical research direction.
 
@@ -124,7 +128,7 @@ Consequently, \textbf{CITE-Strange2021a} concluded that health metric profiles s
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=1\textwidth]{images/knee_definition.pdf}
+\includegraphics[scale=1]{figures/knee_definition.eps}
 \caption{(a) Defining the knee point. The position of knee point as visually identified by an author (black point) differs from the mathematically defined knee point (yellow point). Data from batch 2, channel 12 cell from Severson et al.\cite{severson_data-driven_2019} The capacity is normalized by the nominal capacity of the cell. (b) Vulnerability of knee detection methods to noise.}
 \label{fig:knee_definition3}
 \end{figure}
@@ -133,7 +137,7 @@ Consequently, \textbf{CITE-Strange2021a} concluded that health metric profiles s
 
 \begin{figure}[h!tb]
 \centering
-\includegraphics[width=\textwidth]{images/knee_identification_methods.pdf}
+\includegraphics[scale=1]{figures/knee_identification_methods.eps}
 \caption{Different knee identification methods exemplified on the cell from batch 2, channel 12 of Severson et al.\cite{severson_data-driven_2019}. The capacity is normalized by the nominal capacity of the cell. (a) Bacon-Watts \cite{fermin-cueto_identification_2020}, (b) Kneedle \cite{satopaa_finding_2011} (where the second derivative is also shown as a dotted gray line), (c) tangent-ratio from Diao et al.\cite{diao_algorithm_2019}, (d) Zhang et al.\cite{zhang_identifying_2020}, (e) Bisector from Greenbank and Howey(cite eventually). (f) Comparison of knee points as identified via these methods. 
 (
 WAIT UNTIL END TO ADD CITATIONS IN THE TEXT )}
@@ -141,7 +145,7 @@ WAIT UNTIL END TO ADD CITATIONS IN THE TEXT )}
 \end{figure}
 
 Several ``offline'' knee point identification methods have been proposed in the literature.
-``Kneedle'' calculates the knee as the point of maximum curvature of the capacity curve \cite{satopaa_finding_2011}. The knee has also been calculated using the ``Bacon-Watts'' method for estimating the transition between two intersecting lines fitted to a capacity fade curve, a method which can also provide an estimate of the ``knee-onset'', the point where the aging trajectory is no longer linear \cite{fermin-cueto_identification_2020}. Other methods use tangential lines, such as the ``tangent-ratio'' (which defines the knee based on a tangent ratio at the inflection and maximum slope points of the capacity curve)\cite{diao_algorithm_2019} and the bisector method (which uses linear extrapolations of early and late life then an angle bisector identifies the knee as it intersects the capacity curve)\textbf{CITE-SAM\&David}. Finally, Zhang et al.\cite{zhang_accelerated_2019} proposed approximating early life with a linear regression, then defining a cell to have a knee if the capacity fell below a defined band about that regression line. The region is calculated in relation to fluctuations in voltage taken as input; other methods do not require this input. Of these five methods, the Bacon Watts is (arguably) the easiest to use.
+``Kneedle'' calculates the knee as the point of maximum curvature of the capacity curve \cite{satopaa_finding_2011}. The knee has also been calculated using the ``Bacon-Watts'' method for estimating the transition between two intersecting lines fitted to a capacity fade curve, a method which can also provide an estimate of the ``knee-onset'', the point where the aging trajectory is no longer linear \cite{fermin-cueto_identification_2020}. Other methods use tangential lines, such as the ``tangent-ratio'' (which defines the knee based on a tangent ratio at the inflection and maximum slope points of the capacity curve)\cite{diao_algorithm_2019} and the bisector method (which uses linear extrapolations of early and late life then an angle bisector identifies the knee as it intersects the capacity curve)\textbf{CITE-SAM\&David}. Finally, Zhang et al.\cite{zhang_accelerated_2019} proposed approximating early life with a linear regression, then defining a cell to have a knee if the capacity fell below a defined band about that regression line. The region is calculated using the variation in the height of a voltage peak; other methods do not require the use of voltage data. Of these five methods, the Bacon Watts and bisector methods are (arguably) the easiest to implement since they both avoid the use of derivatives and voltage data.
 
 In Figure \ref{fig:knee_identification_methods}, we implemented and applied these methods to a single cell from Severson et al.\cite{severson_data-driven_2019}. All methods estimate the knee point at cycle numbers within a 20 cycle range (370--390 cycles) except the ``Kneedle'' method (435 cycles). These results held across most cells in the Severson et al.\cite{severson_data-driven_2019} dataset, suggesting that these methods are generally comparable for offline knee point estimation (see Supplementary Discussion 1 for details). We note that the ``Kneedle'' method most consistently estimated larger knee points than the other methods.
 
@@ -186,7 +190,7 @@ We surveyed the literature and identified six ``knee pathways''. These pathways 
 
 We also consider the relationship between the observable state variables (i.e., capacity, energy, and power) and the mechanisms underlying their knee points. Figure \ref{fig:snowball_vs_hidden_vs_threshold} illustrates three underlying mechanisms that can lead to a knee. \textit{Snowball} mechanisms (Figure \ref{fig:snowball_vs_hidden_vs_threshold}a and \ref{fig:snowball_vs_hidden_vs_threshold}d) occur when the underlying state variable has a direct relationship with the observable state variable, but the underlying state variable is exponentially increasing. \textit{Hidden} mechanisms (Figure \ref{fig:snowball_vs_hidden_vs_threshold}b and \ref{fig:snowball_vs_hidden_vs_threshold}e) occur when the observable state variable, originally controlled by a slowly-increasing state variable, becomes dominated by a second rapidly-increasing state variable. Finally, \textit{threshold} mechanisms (Figure \ref{fig:snowball_vs_hidden_vs_threshold}c and \ref{fig:snowball_vs_hidden_vs_threshold}f) occur when the observable state variable changes when the underlying state variable reaches a threshold. Each of these underlying mechanisms has unique implications for detectability and prediction, a point we return to throughout this work.
 
-\begin{figure}[ht]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.7\linewidth]{figures/snowball_vs_hidden_mechanism.eps}
     \caption{Schematic of the three types of underlying mechanisms leading to a knee. In each case, the retention curve looks the same (a-c), but the underlying mechanism has a different functional form. (d) ``Snowball'' mechanism, in which the state variable is exponentially increasing. (e) ``Hidden'' mechanism, in which a slowly-increasing state variable is dominated by a rapidly-increasing state variable. (f) ``Threshold'' mechanism, in which a dramatic change in observable state is triggered by a state variable reaching a threshold.}

@@ -1,4 +1,6 @@
 
+from pathlib import Path
+
 # standard packages
 import numpy as np
 import pandas as pd
@@ -298,7 +300,8 @@ def dq2dt2(ax,t,q,colour):
     d2qdt2 = np.diff(dqdt,axis=0) / np.diff(t[1:],axis=0)
     ax.plot(t[4:],d2qdt2[2:]*1000,color=colour)
 
-m = pd.read_csv('data\severson2019_cell_58_capacity.csv')
+path = Path().cwd() / "data"
+m = pd.read_csv(path / 'severson2019_cell_58_capacity.csv')
 
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
@@ -313,8 +316,8 @@ fig, ax = plt.subplots(2,1,figsize=(config.FIG_WIDTH*1,config.FIG_HEIGHT*2))
 ax[0].plot(t,qσ,color=jade)
 ax[0].plot(t,q,color=blue)
 ax[0].set_ylabel('Capacity retention (%)')
-ax[0].scatter(365,91.85,color="black")
-ax[0].text(365,91.5,'Visual knee point',color="black",
+ax[0].scatter(365,93.5,color="black")
+ax[0].text(365,92.5,'Visual knee point',color="black",
           horizontalalignment='right',verticalalignment='top')
 ax[0].scatter(m['cycs'][35],m['q'][35],color=gold)
 ax[0].text(m['cycs'][35],m['q'][35]*.99,'Mathematical knee point',
@@ -324,7 +327,7 @@ ax[0].set_ylim([75, 100])
 
 # profile with noise and using second derivative
 dq2dt2(ax[1],t,q,blue)
-ax[1].set_ylabel('Second derivative of retention/1000 (%))')
+ax[1].set_ylabel('Second derivative of retention/1000 (%)')
 
 dq2dt2(ax[1],t,qσ,jade)
 ax[1].text(10,-3.0,'Added noise, σ=0.05%',color=jade)
@@ -337,6 +340,8 @@ for j in range(len(ax)):
     ax[j].set_xlim([-5, 505])
     ax[j].set_title(chr(97 + j), loc="left", weight="bold")
 
+fig.tight_layout()
+
 # Save figure as both .PNG and .EPS
 fig.savefig(config.FIG_PATH / "knee_definition.png", format="png", dpi=300)
 fig.savefig(config.FIG_PATH / "knee_definition.eps", format="eps")
@@ -345,7 +350,8 @@ fig.savefig(config.FIG_PATH / "knee_definition.eps", format="eps")
 
 
 # KNEE IDENTIFICATION METHODS ==================
-fig, ax = plt.subplots(2,3,figsize=(config.FIG_WIDTH*3,config.FIG_HEIGHT*2.2))
+fig, ax = plt.subplots(2,3,figsize=(config.FIG_WIDTH*3,config.FIG_HEIGHT*2.2),
+                       sharex=True, sharey=True)
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
 IC = np.array(m['dqdv']).reshape((m['cycs'].shape[0],1))
@@ -365,9 +371,13 @@ for j in range(ax.shape[0]):
         ax[j,jj].set_title(chr(97 + n), loc="left", weight="bold")
         if n<5:
             ax[j,jj].text(0,76,methods[n]+' ['+ref_nums[n]+']',color=colours[n])
-        ax[j,jj].set_xlabel('Cycle number')
-        ax[j,jj].set_ylabel('Capacity retention (%)')
         n = n+1
+        
+        if n > 2:
+            ax[j,jj].set_xlabel('Cycle number')
+        
+        if jj in [0, 3]:
+            ax[j,jj].set_ylabel('Capacity retention (%)')
 
 # Below are the actual calculations
 TK = np.zeros((5,2))
@@ -378,7 +388,7 @@ TK[1,0],TK[1,1] = kneedle_identification(ax[0,1],t,q,colours[1])
 # Diao et al.
 TK[2,0],TK[2,1] = diao_knee(ax[0,2],t,q,colours[2])
 # Zhang et al.
-TK[3,0],TK[3,1] = zhang_knee(ax[1,0],t,IC,q,colours[3])
+TK[3,0],TK[3,1] = zhang_knee(ax[1,0],t,q,colours[3])
 # Bisector
 TK[4,0],TK[4,1] = knee_point_identification(ax[1,1],t,q,colours[4]);
 

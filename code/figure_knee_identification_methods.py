@@ -373,7 +373,7 @@ for j in range(ax.shape[0]):
             ax[j,jj].text(0,76,methods[n]+' ['+ref_nums[n]+']',color=colours[n])
         n = n+1
         
-        if n > 2:
+        if n > 3:
             ax[j,jj].set_xlabel('Cycle number')
         
         if jj in [0, 3]:

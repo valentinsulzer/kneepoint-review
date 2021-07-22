@@ -397,14 +397,14 @@ TK[4,0],TK[4,1] = knee_point_identification(ax[1,1],t,q,colours[4]);
 ax[1,2].plot(t,q,color=colours[5])
 # add in the knee estimates as a coloured scatter with vertical line for those 
 # incapable of zooming a pdf
-for j in range(5):
+for j in range(5):   
     ax[1,2].scatter(TK[j,0],TK[j,1],color=colours[j],marker='x')
     ax[1,2].plot(np.array([TK[j,0],TK[j,0]]),np.array([80,98]),
                 '--',color=colours[j])
     
 # add in a zoomed in version into the bottom right plot
 # new axes
-ax_in = ax[1,2].inset_axes([10,78,310,15], transform=ax[1,2].transData)
+ax_in = ax[1,2].inset_axes([10,80,310,12], transform=ax[1,2].transData)
 # capacity curve
 ax_in.plot(t,q,color=colours[5])
 # add in the knee estimates
@@ -414,7 +414,7 @@ for j in range(5):
                 '--',color=colours[j])
 ax_in.set_yticks([])
 ax_in.set_xlim([330, 410])
-ax_in.set_ylim([88, 94])
+ax_in.set_ylim([90, 96])
     
 # completely unnecessary if you are the kind of wizard who doesn't sanity 
 # check your results

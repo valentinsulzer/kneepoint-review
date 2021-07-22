@@ -28,7 +28,7 @@ knee_retention = 100 - snowball_degradation
 
 # Generate figure handles
 fig, ax = plt.subplots(
-    figsize=(2 * config.FIG_WIDTH, 2 * config.FIG_HEIGHT),
+    figsize=(2 * config.FIG_WIDTH, 1.5 * config.FIG_HEIGHT),
     nrows=2,
     ncols=3,
     sharex=True,

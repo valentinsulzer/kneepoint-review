@@ -91,6 +91,13 @@
 
 \pbox{To do}
 
+Lithium-ion batteries can last many years but can exhibit 
+
+In this work, we review prior work on ``knees'' in lithium-ion battery aging trajectories.
+We first discuss
+We then outline six knee ``pathways'', including 
+Our findings illustrate the complexity and subtleties of lithium-ion battery degradation.
+
 \newpage
 
 Lithium-ion batteries will continue to play a critical role in decarbonization via their use in electric vehicle and stationary energy storage applications. One of the most challenging requirements for these demanding applications is long lifetime, with typical warranties of 8 years for electric vehicles and 10 years for grid storage\cite{hesse_lithium-ion_2017}[bocca-optimal-2020, beltran-lifetime-2020]. Battery lifetime requirements will only become more demanding as “million-mile batteries”[harlow-wide-2019] become the expectation for next-generation electric vehicles. Furthermore, as concerns around battery materials mining, manufacturing, and disposal increase, improving battery lifetime is a straightforward way to reduce the environmental impact of the lithium-ion battery lifecycle. Thus, understanding and improving the lifetime of lithium-ion batteries is a critical research direction.
@@ -101,7 +108,7 @@ Lithium ion batteries often exhibit either linear, sublinear, or superlinear agi
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=1]{figures/degradation_rates.eps}
-\caption{Schematic of the three lithium-ion battery aging trajectories observed in the literature: sublinear, linear, and superlinear degradation (``knees''). Knees are incompatible with long battery lifetimes. Here, the $x$ axis is labeled ``cycle number'', although it could also represent equivalent cycles or similar; similarly, the $y$ axis is labeled ``retention'', although it could also represent absolute capacity, energy, or power. We use this convention (``retention vs. cycle number'') in conceptual figures throughout this work.}
+\caption{Schematic of the three lithium-ion battery aging trajectories observed in the literature: sublinear, linear, and superlinear degradation (``knees''). Knees pose challenges for long battery lifetimes. Here, the $x$ axis is labeled ``cycle number'', although it could also represent equivalent cycles or similar; similarly, the $y$ axis is labeled ``retention'', although it could also represent absolute capacity, energy, or power. We use this convention (``retention vs. cycle number'') in conceptual figures throughout this work.}
 \label{fig:degradation_shapes}
 \end{figure}
 
@@ -254,14 +261,16 @@ Often, several of these mechanisms can occur in parallel, leading to a snowball 
 Electrode sites can lose ionic connection via electrolyte dry-out, which may be driven by gas generation during cycling.\cite{mao_calendar_2017, kupper_end--life_2018}
 Electrode sites can lose electronic connection via delamination\cite{cannarella_stress_2014, willenberg_high-precision_2020}(liu, somerville), particularly for cells with low external pressure\cite{cannarella_stress_2014}. Particle cracking is another mechanism for electronic disconnection of active sites, although cracking is not expected to occur appreciably in graphite particles.(Takahashi-examination)
 
-An additional $\mathrm{LAM_{deNE}}$ mechanism is the growth of thick layers ($1-10 \mathrm{\mu m}$ on the surface of the negative electrode, sometimes termed ``covering layers''\cite{lewerenz_post-mortem_2017, lewerenz_systematic_2017, willenberg_development_2020}.
-Surface layer growth-driven $\mathrm{LAM_{deNE}}$ may impede lithium-ion transport into the negative electrode during charging, effectively isolating portions of the electrode and resulting in an apparent loss of active material. This surface layer is commonly observed in cells with knees and is often attributed to manganese or iron dissolution from the cathode and electrolyte salt decomposition, \cite{lewerenz_post-mortem_2017,lewerenz_systematic_2017,zhu_investigation_2021,stiaszny_electrochemical_2014,rahe_nanoscale_2019,keil_linear_2019,sarasketa-zabala_understanding_2015, willenberg_high-precision_2020} but the root cause has not been definitively identified. Peculiarly, the size of these layers (microns) is much larger than typical reported SEI thicknesses (nanometers)\cite{peled_reviewsei_2017}. Lewerenz et al.\cite{lewerenz_post-mortem_2017,lewerenz_systematic_2017} thoroughly documented surface layer growth, finding that increasing C-rate and larger depth-of-discharge could lead to earlier onset of a knee. Earlier knee onsets was correlated with the presence of a thick surface layer on cells that contained knees; cells without knees also contained obvious surface layers, but with lower surface coverage and less thickness. These surface layers sometimes seem to lead directly to localized lithium plating due to the lack of active sites available for lithium insertion, with lithium observed on top of the layer.\cite{zhu_investigation_2021}
+An additional $\mathrm{LAM_{deNE}}$ mechanism is the growth of thick layers ($1-10 \mathrm{\mu m}$ on the surface of the negative electrode (separator-facing interface), sometimes termed ``covering layers''\cite{lewerenz_post-mortem_2017, lewerenz_systematic_2017, willenberg_development_2020}.
+Surface layer growth-driven $\mathrm{LAM_{deNE}}$ may impede lithium-ion transport into the negative electrode during charging, effectively isolating portions of the electrode and resulting in an apparent loss of active material. This surface layer is commonly observed in cells with knees and is often attributed to manganese or iron dissolution from the cathode and electrolyte salt decomposition \cite{lewerenz_post-mortem_2017,lewerenz_systematic_2017,zhu_investigation_2021,stiaszny_electrochemical_2014,rahe_nanoscale_2019,keil_linear_2019,sarasketa-zabala_understanding_2015, willenberg_high-precision_2020}(li degradation, wang capacity, klett, klett), or possibly dead lithium agglomerates \cite{schindler_fast_2018}, but the root cause has not been definitively identified. Peculiarly, the size of these layers (microns) is much larger than typical reported SEI thicknesses (nanometers)\cite{peled_reviewsei_2017}. Furthermore, this phenomenon is almost exclusively observed in cylindrical cells.
+Lewerenz et al.\cite{lewerenz_post-mortem_2017,lewerenz_systematic_2017} thoroughly documented surface layer growth, finding that increasing C-rate and larger depth-of-discharge could lead to earlier onset of a knee. Earlier knee onsets was correlated with the presence of a thick surface layer on cells that contained knees; cells without knees also contained obvious surface layers, but with lower surface coverage and less thickness. These surface layers sometimes seem to lead directly to localized lithium plating due to the lack of active sites available for lithium insertion, with lithium observed on top of the layer.\cite{zhu_investigation_2021}
 Further investigation of these surface layers is needed to understand this seemingly ubiquitous mechanism for loss of active negative electrode material.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[scale = 0.5]{figures/CoveringLayers.pdf}
-\caption{``Covering layers'' found via post-mortem analysis in cells with knees. a) A covering layer in the middle of the anode of an unwound cylindrical cell, along with laser microscope images of top, middle and bottom sections and SEM images of the middle section with a covering layer. Reproduced with permission from Lewerenz et al. \cite{lewerenz_post-mortem_2017} Copyright 2017, Elsevier. b) Covering layer in the middle of the anode of an unwound cylindrical cell. The red arrow corresponds to a thickness of $10 \mathrm{\mu m}$. CC-By Willenberg et al. \cite{willenberg_development_2020}. c) SEM cross-sections of new and aged electrodes with a visible covering layer. Reproduced with permission from Stiaszny et al. \cite{stiaszny_electrochemical_2014} Copyright 2014, Elsevier.}
+\caption{``Covering layers'' as found via post-mortem analysis in cells with knees. Covering layers are commonly observed in cells with knees but are a poorly understood source of active material loss.
+a) A covering layer in the middle of the anode of an unwound cylindrical cell, along with laser microscope images of top, middle and bottom sections and scanning electron microscopy images of the middle section with a covering layer. Reproduced with permission from Lewerenz et al. \cite{lewerenz_post-mortem_2017} Copyright 2017, Elsevier. b) Covering layer in the middle of the anode of an unwound cylindrical cell. The red arrow corresponds to a thickness of $10 \mathrm{\mu m}$. CC-By Willenberg et al. \cite{willenberg_development_2020}. c) Scanning electron microscopy cross-sections of new and aged electrodes with a visible covering layer. Reproduced with permission from Stiaszny et al. \cite{stiaszny_electrochemical_2014} Copyright 2014, Elsevier.}
 \label{fig:covering_layers}
 \end{figure}
 
@@ -276,39 +285,25 @@ Further investigation of these surface layers is needed to understand this seemi
 In other words, kinetic lithium plating occurs at conditions when the plating could otherwise be mitigated by lithiating the graphite at a sufficiently low current. As Gao et al.\cite{gao_interplay_2021} describe, salt depletion in the electrolyte or surface crowding in the graphite at the graphite surface further favor lithium plating over intercalation. While kinetic lithium plating can occur via similar mechanisms to thermodynamic lithium plating, the dynamic nature of this process introduces additional avenues for lithium plating knees to occur.
 
 \paragraph{Kinetic lithium plating in fresh cells}
-Kinetic lithium plating can be driven by a wide range of cell designs and usage conditions; the prototypical use case leading to lithium plating is high charging rates at low temperature \cite{waldmann_temperature_2014, petzl_lithium_2015}. Waldmann et al.\cite{waldmann_temperature_2014} observed an increase in the rate of aging with a decrease in temperature below 25$^{\circ}$C, attributing the increased aging rate to lithium plating via dissections. Low temperatures increase both the transport overpotentials for lithium ions within the electrolyte and electrode and the reaction overpotential for litihum intercalation. Note that ``high'' charging rate or ``low'' temperature do not have consistent quantitative definitions, as plating will occur whenever the local potential exceeds the energy barrier for lithium nucleation. Thus, plating may be observed even at ``standard'' test conditions, such as 1C constant-current charging near room temperature \cite{waldmann_optimization_2015,burns_-situ_2015}. Increasing temperature and improved cell design (i.e., thinnener electrodes) may allow for much more rapid charging before lithium plating and knees are observed; Lewerenz et al.\cite{lewerenz_systematic_2017} cycled cells at rates up to 8C, observing no knees at rates as high as 4C, though microstructural evidence of plating was found even at 1C. The onset of lithium plating is also sensitive to the charging protocol, with many studies demonstrating that informed design of charging protocols can substantially extend cell lifetime by preventing direct lithium plating.\cite{waldmann_optimization_2015,schindler_fast_2018}. Optimizing electrode architectures to improve electrolyte transport kinetics is a further path forward to increase charging currents without lithium plating \cite{usseglio-viretta_enabling_2020} (nemani design)
+Kinetic lithium plating can be driven by a wide range of cell designs and usage conditions; the prototypical use case leading to lithium plating is high charging rates at low temperature \cite{waldmann_temperature_2014, petzl_lithium_2015}. Waldmann et al.\cite{waldmann_temperature_2014} observed an increase in the rate of aging with a decrease in temperature below 25$^{\circ}$C, attributing the increased aging rate to lithium plating via dissections. Low temperatures increase both the transport overpotentials for lithium ions within the electrolyte and electrode and the reaction overpotential for litihum intercalation. Note that ``high'' charging rate or ``low'' temperature do not have consistent quantitative definitions, as plating will occur whenever the local potential exceeds the energy barrier for lithium nucleation. Thus, plating may be observed even at ``standard'' test conditions, such as 1C constant-current charging near room temperature \cite{waldmann_optimization_2015,burns_-situ_2015}. Increasing temperature and improved cell design (i.e., thinner electrodes) may allow for much more rapid charging before lithium plating and knees are observed; Lewerenz et al.\cite{lewerenz_systematic_2017} cycled cells at rates up to 8C, observing no knees at rates as high as 4C, though microstructural evidence of plating was found even at 1C. The onset of lithium plating is also sensitive to the charging protocol, with many studies demonstrating that informed design of charging protocols can substantially extend cell lifetime by preventing direct lithium plating.\cite{waldmann_optimization_2015,schindler_fast_2018}. Optimizing electrode architectures to improve electrolyte transport kinetics is a further path forward to increase charging currents without lithium plating \cite{usseglio-viretta_enabling_2020} (nemani design)
 
-Exterior mechanical stress may also lead to kinetic lithium plating, as applied stress can compress the electrode or separator. This compression locally decreases the porosity of the electrodes, reducing the diffusivity of electrolyte and thus increasing the local polarization and causing lithium plating. A direct test of this mechanism was conducted by Liu and Arnold\cite{liu_effects_2020}, who demonstrated that localized lithium plating could be induced in densified regions of the separator. Bach et al.\cite{bach_nonlinear_2016} applied a hose clamp around the circumference of an 18650 cell, and a post-test teardown clearly showed lithium plating localized to the regions of the electrodes that were under compressive stress. Coin cell and pouch cells also show similar results.\cite{liu_size_2018, fuchs_post-mortem_2019, okasinski_situ_2020}
+Mechanical stress may also lead to kinetic lithium plating, as applied stress can compress the electrode or separator. This compression locally decreases the porosity of the electrodes, reducing the diffusivity of electrolyte and thus increasing the local polarization and causing lithium plating. Cannarella and Arnold\cite{cannarella_stress_2014} conducted a direct test of this mechanism, finding that high external pressures can induce lithium plating in pouch cells and directly leading to a knee. In a follow-up experiment, Liu and Arnold\cite{liu_effects_2020} demonstrated that localized lithium plating could be induced in densified regions of the separator. Bach et al.\cite{bach_nonlinear_2016} applied a hose clamp around the circumference of an 18650 cylindrical cell, and a post-test teardown clearly showed lithium plating localized to the regions of the electrodes that were under compressive stress. From this test, the authors concluded that internal gradients in pressure induced by the current-collecting tab can also cause lithium plating. Coin cell and pouch cells are also sensitive to localized external pressures.\cite{liu_size_2018, fuchs_post-mortem_2019, okasinski_situ_2020}
 
 \paragraph{Kinetic lithium plating due to loss of active material}
+As previously discussed, a hidden mechanism for thermodynamic lithium plating is loss of delithiated negative electrode active material.\cite{ansean_operando_2017, dubarry_durability_2018}(baure-synthetic-2019, dubarry-big-2020) Mechanisms for loss of active material include delamination, particle cracking, electrolyte dry-out, and covering layer growth. However, $\mathrm{LAM_{deNE}}$ can also drive kinetic lithium plating, even if the negative electrode capacity does not limit the charging capacity. Active material loss without a corresponding loss in lithium flux will lead to an increased local current density on the negative electrode surface; these high local current densities can drive lithium plating.
+
+Continuous active material loss will create increasingly larger local current densities, which will drive increasingly larger lithium plating potentials. Thus, in kinetic plating regimes, linearly increasing active material loss can cause accelerating rates of lithium plating. Furthermore, as previously discussed, the nucleation and growth kinetics of lithium plating also serves as a snowball mechanism, since growth of nucleated phases can occur rapidly. This ``double-snowball'' effect is especially pernicious and is expected to lead to sharp knees. To our knowledge, prior experimental or modeling work has not considered this effect. Overall, this effect highlights the risks from negative electrode active material loss.
 
 \paragraph{Kinetic lithium plating due to pore clogging}
-As SEI grows, it precipitates mainly in the pores of the anode, decreasing the volume fraction of the electrolyte in the anode \cite{sikha_effect_2004}. The decreased volume fraction increases the electrolyte transport overpotentials, which can ultimately lead to lithium plating. The plated lithium, which has a much lower density than intercalated lithium\cite{yang_modeling_2017}, further decreases the porous volume fraction, creating a positive feedback loop for additional lithium plating\cite{yang_modeling_2017}. Several authors have noted that a critical porosity exists around 0.05, beyond which a knee occurs \cite{yang_modeling_2017, muller_model-based_2019}. This effect has also been modeled by simply decreasing the diffusion coefficient as a function of cycle number \cite{keil_electrochemical_2020}. One proposed countermeasure for this issue is to use a graded or stepped porosity profile through the thickness of the negative electrode. Since most pore clogging occurs near the separator, having a higher porosity near the separator and a lower porosity near the current collector can slow the onset of the knee caused by pore clogging \cite{muller_model-based_2019}.
-While this 
+As SEI grows, it precipitates mainly in the pores of the anode, decreasing the available volume fraction for electrolyte in the electrode \cite{sikha_effect_2004}. The decreased volume fraction increases the electrolyte transport overpotentials, which can ultimately lead to lithium plating. The plated lithium, which has a much lower density than intercalated lithium\cite{yang_modeling_2017}, further decreases the porous volume fraction, creating a positive feedback loop for additional lithium plating\cite{yang_modeling_2017}. Modeling studies of this phenomenon have observed that a critical porosity exists around 0.05, beyond which a knee occurs \cite{yang_modeling_2017, muller_model-based_2019}. This effect has also been modeled by simply decreasing the diffusion coefficient as a function of cycle number \cite{keil_electrochemical_2020}. One proposed countermeasure for this issue is to use a graded or stepped porosity profile through the thickness of the negative electrode. Since most pore clogging occurs near the separator, having a higher porosity near the separator and a lower porosity near the current collector can slow the onset of the knee caused by pore clogging \cite{muller_model-based_2019}.
+While this mechanism has not been experimentally validated, decreasing anode porosity with cycling has been observed via X-ray computed tomography of samples of a graphite electrode.\cite{frisco_understanding_2016, rahe_nanoscale_2019} Furthermore, the ``covering layer'' effect discussed previously may be related to this phenomenon, as models of plating induced by pore clogging suggest that the pore clogging occurs primarily at the separator-electrode interface.\cite{yang_modeling_2017}
 
-\begin{figure}[h]
+\begin{figure}
     \centering
-    \includegraphics[scale=0.9]{figures/li_plating_porosity_yang.eps}
+    \includegraphics[scale=0.7]{figures/li_plating_porosity_yang.eps}
     \caption{Kinetic lithium plating due to pore clogging. (a) Lithium inventory loss contributed by SEI growth and lithium plating, respectively. (b) Lithium inventory loss per cycle contributed by SEI growth and lithium plating, respectively. The ``snowballing'' growth of lithium plating occurs due to the accelerating decrease in porosity, which creates high transport overpotentials in the electrolyte and drives additional plating. (c) Schematic illustration of pore clogging driven initially by SEI growth and then by plating. Adapted from Figure 8 of Yang et al.\cite{yang_modeling_2017}}
     \label{fig:pore_clogging}
 \end{figure}
-
-\paragraph{Heterogeneity-based pathways}
-
-\begin{figure}[ht]
-\centering
-\includegraphics[scale = 1]{images/Capacity & Diff Voltage.png}
-\caption{Capacity and differential vapacity vs cycle number.
-\textbf{More info needed here.
-Also is differential voltage needed?}
-Figure obtained from X et al.[]
-}
-\label{fig:CapDiffCapCycle}
-\end{figure}
-
-Apart from the main mechanisms causing knees due to plating, few other causes are based on substantial and mild temporally thermal transient conditions lead to a rapid capacity fade in cells when compared with cells at a fixed equilibrium temperature. Temporal transient thermal gradients (40 \degree C to 0 \degree C), or temperature heterogeneity, can contribute to Li ions being plated as Li instead of intercalating, which accelerates capacity fade over subsequent cycles causing knees and ultimately resulting in jellyroll collapse.
-
-Equilibrium cells at 40 \degree C, 20 \degree C, 0\degree C and transient cells (40\degree C to 0 \degree C and 10 \degree C to 0 \degree C) are tested for understanding of the thermo-electrochemical coupling across different temperature (Carter 2019). Differential voltage from charging shows evidence for plating and discharging cycle showcases the degradation modes. Equilibrium cells at 40 \degree C and 20 \degree C show minimal degradation while equilibrium cell at 0 \degree C has initial minimal degradation, then a gradual decay midway. On the contrary, transient 10 \degree C to 0 \degree C cell and 40 \degree C to 0 \degree C cell show degradation at earlier cycles (8 and 5 respectively) (Carter, 2019). Transient 40 \degree C to 0 \degree C cell demonstrates high lithium stripping during initial discharge cycles due to thermal transient induced plating causing increase in anode thickness, pressure buildup in jelly role and capacity loss. The decrease in differential voltage for transient cells immediately with the start of the cycle shows the degradation evidence by lithium plating.  Figure 7 highlights the difference between the 0 \degree C and Transient 40 \degree C to 0 \degree C jellyroll collapsing behaviors. Primary reason for degradation is jellyroll collapse for 0 \degree C cell while the rapid lithium plating followed by jellyroll collapse causes capacity fade knee point in Transient 40 \degree C to 0 \degree C cell. 
 
 \subsection{Cathode saturation}
 
@@ -318,11 +313,13 @@ Lin et al.~\cite{lin_comprehensive_2013} proposed a different mechanism for knee
 
 \subsection{Resistance growth knees}
 
+\pbox{I haven't edited this yet}
+
 Increasing resistance during cycling intuitively leads to a decrease of cell power, regardless of the thermodynamic capacity of the battery, due to increased overpotential. Additionally, increasing resistance may also lead to the onset of a knee in the accessible capacity. This is intuitive at high currents, when even a high-performing cell may become rate limited and reach a voltage cutoff before the majority of lithium has been shuttled across the separator. However, during aging, this rate limitation may occur at much lower than expected C-rates, and appear as a knee in the plots of both power and capacity versus cycles. This behavior was thoroughly studied by Ma et al \cite{ma_editors_2019} using lab-made 230mAh NMC532/graphite pouch cells, varying the upper cutoff potential, discharging rate, electrolyte composition, and type of graphite. Careful study using impedance measurements, both of the full cells as well as symmetric coin cells of the positive and negative electrodes, was used to isolate the loss of performance to a dramatic increase of the cathode impedance during aging. This DC resistance growth was attributed to electrolyte oxidation at the positive electrode, which occurred more quickly at higher upper cutoff potentials and was also dependent on the electrolyte composition. One practical consideration from the work is that periodic high rate discharge tests exhibit resistance growth induced knee onset earlier than low rate discharge tests, and thus serve as an early indication of future cell knee onset at lower rates. Similar onset of a capacity knee due to the selection of the electrolyte composition was previously observed by Li et al as well \cite{li_methyl_2018}. 
 
 A simple model illustrating knee onset due to ohmic resistance growth during cycling, inspired by Ma et al \cite{ma_editors_2019} and Mandli et al \cite{mandli_analysis_2019}, is shown in detail in Figure \ref{fig:dcr_knee}. The model assumes a constant increase of the resistance of 0.2 milliohms per cycle during cycling of a 3 Ah NMC/Gr lithium-ion battery; the increase of resistance leads to a linear increase in the ohmic overpotential at every cycle (Fig. \ref{fig:dcr_knee}a). This linear increase in ohmic potential then leads to a downshift of the voltage-capacity curve; to demonstrate the impact of increasing resistance on measured capacity, energy, and power retention due to this downshift in a 'real' cell, voltage-capacity and voltage-energy relationships are used from experimental NMC/Gr cell data recorded at beginning-of-life from Preger et al \textbf{[Preger, added to zotero]} (Fig. \ref{fig:dcr_knee}b). Fig. \ref{fig:dcr_knee}c,d show the impacts of this downshift on the voltage-capacity curve at lower voltage cutoffs of 2 V and 2.8 V; for the 1C case (Fig. \ref{fig:dcr_knee}c) both the 2 V and 2.8 V cutoffs occur on the nonlinear portion of the voltage capacity curve at the beginning of life. But as the cell ages and the resistance increases, the voltage curve shifts down, leading to the 2.8 V cutoff being reached by the linear portion of the voltage-capacity relationship, causing more rapid fade in the measured capacity than was initially observed. The impact of the resistance growth on the measured capacity (Fig. \ref{fig:dcr_knee}e), energy (Fig. \ref{fig:dcr_knee}f), and power (Fig. \ref{fig:dcr_knee}g) delivered during the discharge over the cell lifetime varies depending on the C-rate and the lower voltage cutoff. The unexpected power retention trends versus cycle number, C-rate, and lower voltage cutoff illustrate some limitations of such a simplistic model for cell resistance, as other non-linear cell polarization behaviors such as charge transfer polarization and cell heating during increased current should also impact the voltage response of the cell in addition to the ohmic effects modeled here. The shift of the lower voltage cutoff from the high slope portion of the voltage-capacity relationship to a lower slope portion of the voltage-capacity relationship may also occur due to a stoichiometric decrease of lithium available to cycle, as explored by Mandli et al \cite{mandli_analysis_2019}, or a stoichiometric shifting of lithium to one electrode preferentially during aging due to uneven loss of active material across the two electrodes of the cell \cite{lin_comprehensive_2013}. Cell chemistry may have dramatic impacts on the observed trends; the flatter linear portion of the voltage-capacity relationship of an LFP/Gr cell would result in a much sharper knee than the NMC/Gr voltage-capacity relationship used here. All things considered, the combined impacts of resistance growth, lithium loss, and active material losses on the measured voltage response of any lithium-ion battery may explain many observed knee behaviors in cells that are not experiencing sudden failure due to lithium-plating induced shorting, electrode delamination, or other types of readily observable failure.
 
-\begin{figure}[ht]
+\begin{figure}
 \centering
 \includegraphics[scale = 1]{figures/dcr_growth_knee_2.eps}
 \caption{Simple model illustrating ``pseudo-knees'' due to resistance growth; we use the term ``pseudo-knees'' here since the knee location is a function of rate and lower cutoff voltage. Inspired by Figure 16 of Ma et al.\cite{ma_editors_2019} and Mandli et al.\cite{mandli_analysis_2019}. (a) Assumed overpotential growth vs. cycle number for a 1C and 2C discharge. The assumed resistance growth rate is 0.2 m$\Omega$/cycle. (b) Discharge capacity and energy vs. the minimum discharge voltage for an example NMC/graphite cell. Data obtained from Preger et al.\cite{preger_degradation_2020} (c, d) Voltage vs. capacity as a function of cycle number for the (c) 1C discharge and (d) 2C discharge cases. The final discharge capacity for each cycle is denoted by a marker. (e--g) (e) Capacity, (f) energy, and (g) power retention vs. cycle number as a function of discharge current and the minimum voltage.
@@ -357,8 +354,6 @@ This observation is supported by the fact that many aging studies have shown tha
     \caption{Summary of studies reporting both capacity and resistance over cell lifetime with capacity knees and/or resistance elbows. All studies measure resistance using a direct-current pulse except for Schuster et al. \cite{schuster_nonlinear_2015}, which uses EIS. Relative capacity and resistance values at capacity knee/resistance elbow onset are estimated either from a single measurement or roughly averaged from several measurements.}
     \label{tab:dcr_growth_papers}
 \end{table}
-
-
 
 \subsection{Additive depletion knees}
 
@@ -414,37 +409,56 @@ The knee caused by this electrolyte dry-out model is a threshold mechanism (Figu
 
 \subsection{Mechanical degradation knees}
 
-Both microscale mechanical effects occurring at the particle scale and macroscale mechanical effects occurring at the cell scale are pathways for knees. 
-While we have already discussed how mechanical degradation mechanisms can cause knees (e.g., loss of active material from delamination causing lithium plating), here we focus on knees more explicitly linked to mechanical effects.
+Both microscale mechanical effects occurring at the particle scale and macroscale mechanical effects occurring at the cell scale can be pathways for knees.
+Mechanical degradation mechanisms are closely tied to other knee pathways. For instance, Cannarella and Arnold~\cite{cannarella_stress_2014} showed how high external stack pressure can cause a lithium plating knee; Bach et al.\cite{bach_nonlinear_2016} demonstrated a link between heterogeneous pressure and localized lithium plating; and many loss of active material mechanisms are mechanical in nature (e.g., delamination, particle cracking, etc).
+Additionally, the growth of covering layers on the anode surface, often reported on cells with knees (Figure~\ref{fig:covering_layers}), \cite{lewerenz_post-mortem_2017,willenberg_development_2020,stiaszny_electrochemical_2014} may lead to additional mechanical stresses on the macroscale.
+Here, we focus on knees more explicitly linked to mechanical effects.
 
-\begin{figure}[ht]
+\begin{figure}
 \centering
 \includegraphics[scale = 1]{figures/MechanicalKneepoints.pdf}
-\caption{Mechanical effects leading to Knee points: During cycling particles and the SEI expand and crack leading to the formation and regrowth of additional SEI. In addition a covering layer was found forming on the anode surface. Pressure due to volume expansion can also lead to jelly roll deformation in cylindrical wound cells. This can induce delamaniation and loss of active material leading to more SEI and covering layer growth.}
+\caption{Mechanical effects leading to knees: During cycling, particles and the SEI expand and crack, leading to the regrowth of additional SEI. In addition, covering layers may form on the surface of the negative electrode. Pressure due to volume expansion can subsequently lead to jellyroll deformation in cylindrical cells. This deformation can cause loss of active material, leading to more SEI, covering layer growth, and potentially lithium plating.}
 \label{fig:knee_mechanical}
 \end{figure}
 
-\paragraph{Micro scale mechanical effects.}
+At the microscale, repeated (de)intercalation can stress the electrode particles, which can then lead to both loss of active material through particle cracking and accelerated growth of side reaction products (e.g., SEI and CEI).
+Reniers et al.~\cite{reniers_review_2019} illustrated a positive feedback mechanism between the mechanical stress and loss of active material, leading to a (snowballing) knee point. They combine a fatigue model for loss of active material due to stress from Laresgoiti et al.~\cite{laresgoiti_modeling_2015} with a stress model from Dai et al.~\cite{dai_simulation_2014}: higher stress causes higher loss of active material, which in turn increases the current density and hence causes higher stress.
+Other authors have suggested that mechanical effects can accelerate SEI/CEI growth by causing SEI/CEI cracking and revealing new active surface area to grow \cite{kupper_end--life_2018,louli_operando_2019}.(pinson) Since growth of these surface layers is self-limiting, this effect alone is not enough to lead to a knee, but it could accelerate the onset of knees in other mechanisms related to side reactions (i.e., lithium plating induced by pore clogging on the negative electrode or resistance growth driven by side reactions on the positive electrode).
 
-At the micro scale, repeated intercalation/de-intercalation causes stress in the particles that can then lead to loss of active material through particle cracking.
-Reniers et al.~\cite{reniers_review_2019} showed that there can be a positive feedback between the stress and the loss of active material leading to a (snowballing) knee point. They model this using a fatigue model for loss of active material due to stress from Laresgoiti et al.~\cite{laresgoiti_modeling_2015} with a stress model from Dai et al.~\cite{dai_simulation_2014}: higher stress causes higher LAM, which in turn increases the current density and hence causes higher stress.
+On the macroscale (cell level), both the external pressure (for pouch and prismatic cells) and internal jellyroll deformation (for cylindrical cells) can impact cell lifetime. Pouch and prismatic cells either without external pressure\cite{wunsch_investigation_2019} or with high external pressure\cite{cannarella_stress_2014} can show rapid knees, indicating a ``sweet spot'' to avoid a knee and maximize lifetime. Cannarella et al.\cite{cannarella_stress_2014} also found that the surface layer is more pronounced with increasing external pressure.
+For cylindrical cells, ...(philipp to add)
+In addition with CT studies by Pfrang et al.~\cite{pfrang_long-term_2018} revealed jelly roll deformation in 18650s, using cells from Ecker et al. \cite{ecker_calendar_2014}. Threshold mechanism?
 
-Other authors have suggested that mechanical effects can accelerate SEI growth by causing SEI cracking and revealing new active surface area to grow \cite{kupper_end--life_2018,louli_operando_2019}. Since SEI formation is still self-limiting, this effect alone is not enough to lead to a knee point, but it could accelerate the onset of knee points in other mechanisms related to SEI formation.
-In addition to SEI formation, covering layers on the anode surface were reported on cells with knee points as shown in Figure~\ref{fig:covering_layers} \cite{lewerenz_post-mortem_2017,willenberg_development_2020,stiaszny_electrochemical_2014}. These layers were also characterized as passivating or dead lithium agglomerates \cite{schindler_fast_2018}.
-
-
-\paragraph{Macro scale mechanical effects.}
-
-High stack pressure, for example originating from micro scale effects, can cause knee points due to mechanical stress at the macro scale. Shown by Cannarella et al.~\cite{cannarella_stress_2014} high mechanical stress is not evenly distributed throughout the inside of the pouch, causing heterogeneous delamination, surface film formation, and uneven lithium distribution. Furthermore LAM attributed to anode from half-cell data, shows no change postive electrode active material. Similar to temperature there is a sweet spot for stack pressure\cite{cannarella_stress_2014}. 
-
-For pouch cells \cite{wunsch_investigation_2019} and prismatic cells\cite{cannarella_stress_2014} bracing can be added to increase the lifetime, so the pressure over the lifetime evolves differently. Wünsch et al. \cite{wunsch_investigation_2019} reported a thickness increase for unbraced cells correlated with knee points. They also showed with the right bracing, for example deforming elements on both sides of the cells, the lifetime could be increased from 500 to 3200 cycles. For cylindrical cells\cite{willenberg_high-precision_2020} the pressure evolution can only be measured. From post-mortem analysis Bach et al. could show a link between heterogeneous pressure and uneven aging and plating\cite{bach_nonlinear_2016}.
-In addition with CT studies by  Pfrang et al.~\cite{pfrang_long-term_2018} revealed jelly roll deformation in 18650s, using cells from Ecker et al. \cite{ecker_calendar_2014}
+\pbox{Philipp, can you add more citations and discussion here? I was expecting more than 1 sentence on jelly roll deformation :)}
 
 \subsection{Interactions and heterogeneity}
 
 \pbox{This will be a new section discussing how everything's really complicated}
 
+Interactions 
+
+Dizzying array of degradation mechanisms
+
+Many vicious cycles :(
+
+LAM plays a central role
+
+Multi length scale interactions (mechanics, DCR, etc)
+
+Heterogeneity
+
+Commercially-relevant form factors have thermal, mechanical, electrochemical gradients
+
+Cell design (cylindrical cell gradients, tab pressure)
+
+Usage
+Thermal transients \cite{carter_detection_2019}
+
+Hotspots
+
 \section{Factors influencing the knee}
+
+\pbox{I haven't edited this yet}
 
 We surveyed the literature to identify empirical case studies in which the knee point can be controlled via changes to a single variable. Table S1 classifies these case studies into three categories based on the nature of the variable: cell design, testing conditions, and sampling/testing variability (a special case of these two categories). Some testing conditions have a consistent impact on the emergence of the knee; for example, higher charging rates and wider cycling voltage ranges accelerate the appearance of the knee. However, the impact of other variables (e.g., discharging rate and rest times) is less clear and may depend on the specific cell design and operating conditions.
 
@@ -521,7 +535,7 @@ For pouch and prismatic cells, some applied pressure is needed to enhance conduc
 \begin{figure}[ht]
 \centering
 \includegraphics[scale = 1.0]{images/Temperature_and_pressure.png}
-\caption{Transition in degradation mechanism based on (a) temperature and (b) applied pressure, illustrating a ``sweet spot'' for each variable. Adapted from Waldman et al.\cite{waldmann_temperature_2014} and Cannarella et al.\cite{cannarella_stress_2014}, respectively.}
+\caption{Transition in degradation mechanism based on (a) environmental temperature and (b) applied pressure, illustrating a ``sweet spot'' for each variable. Adapted from Waldman et al.\cite{waldmann_temperature_2014} and Cannarella and Arnold\cite{cannarella_stress_2014}, respectively.}
 \label{fig:temperature_and_pressure}
 \end{figure}
 
@@ -560,7 +574,7 @@ While predicting knees is important, predicting end-of-life is more directly rel
 
 \subsection{Modeling approaches}
 
-The effects discussed here are inherently multidimensional (at the macro scale) in nature and hence cannot be captured by standard electrochemical models, which are one-dimensional at the macro scale. Instead, they would require complex three-dimensional models, whose computational complexity is prohibitively high for simulating degradation over hundreds of cycles. We are not aware of any current modeling efforts in this direction [right?]. One reduced-order modeling approach could be to couple one-dimensional electrochemical models with network models for the jellyroll \cite{tranter_probing_2020}. Another possible modeling approach is to use homogenization methods on the jellyroll \cite{psaltis_homogenisation_2020} to elucidate the mechanical behavior (and buckling) of the spirally-wound layers.
+The effects discussed here are inherently multidimensional (at the macroscale) and hence cannot be captured by standard electrochemical models, which are one-dimensional at the macroscale. Instead, accurately capturing macroscale degradation would require complex three-dimensional models, which has prohibitively high computational complexity simulating degradation over hundreds of cycles. We are not aware of any current modeling efforts in this direction [right?]. One reduced-order modeling approach could be to couple one-dimensional electrochemical models with network models for the jellyroll \cite{tranter_probing_2020}. Another possible modeling approach is to use homogenization methods on the jellyroll \cite{psaltis_homogenisation_2020} to elucidate the mechanical behavior (and buckling) of the spirally-wound layers.
 
 \subsection{Prediction outlook}
 
@@ -627,6 +641,7 @@ Table S2. Summary of previous knee point modeling efforts
 
 All data and code are publicly available in the associated Zenodo repository(CITE) and on GitHub (https://github.com/tinosulzer/kneepoint-review).
 
+\newpage
 
 \begin{figure}[ht]
 \centering

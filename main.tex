@@ -108,7 +108,6 @@ Lithium ion batteries often exhibit either linear, sublinear, or superlinear agi
 
 In this review, we survey the literature and critically examine both experimental and modeling work on the subject of knees in lithium-ion battery aging. We first review methods to identify the knee point from an aging trajectory. We then identify six knee ``pathways'' from the literature, including lithium plating, cathode saturation, resistance growth, additive depletion, percolation-limited connectivity, and mechanical deformation. We also classify differences in experimentally observed knee behavior as either differences in design, differences in usage conditions, or cell-to-cell/testing variation. Finally, we discuss the implications of our review to both predicting and avoiding knees, and we suggest future work on this topic. This review can serve both academic and industrial efforts to understand and improve lithium-ion battery lifetime.
 
-\newpage
 \section{Defining the knee point}
 
 % \pbox{
@@ -192,7 +191,7 @@ We also consider the relationship between the observable state variables (i.e., 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\linewidth]{figures/snowball_vs_hidden_mechanism.eps}
+    \includegraphics[scale=1]{figures/snowball_vs_hidden_mechanism.eps}
     \caption{Schematic of the three types of underlying mechanisms leading to a knee. In each case, the retention curve looks the same (a-c), but the underlying mechanism has a different functional form. (d) ``Snowball'' mechanism, in which the state variable is exponentially increasing. (e) ``Hidden'' mechanism, in which a slowly-increasing state variable is dominated by a rapidly-increasing state variable. (f) ``Threshold'' mechanism, in which a dramatic change in observable state is triggered by a state variable reaching a threshold.}
     \label{fig:snowball_vs_hidden_vs_threshold}
 \end{figure}
@@ -239,7 +238,7 @@ Loss of active material --- specifically, loss of active material from the delit
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.7\linewidth]{figures/thermo_plating_dubarry.eps}
+    \includegraphics[scale=1]{figures/thermo_plating_dubarry.eps}
     \caption{Thermodynamic lithium plating driven by loss of active negative electrode material. (a) Evolution of aging parameters with cycling of cell degradation. The left axis shows the experimental normalized cell capacity (triangle markers), and the dashed black line shows the results of cell capacity simulations with the calculated aging modes. The right axis shows the evolution of the degradation induced by the calculated aging modes (markers and dashed lines) with cycling. Note that $\mathrm{LAM_{deNE}}$ increases linearly, and at a rate higher than LLI.
     (b) Capacity vs. cycle number at low rate (C/25), depicting the contributions to the total capacity fade as a function of cycle number.
     Adapted from Figures 7 and 8 of Anse\'an et al.\cite{ansean_operando_2017}}
@@ -282,7 +281,7 @@ As SEI forms, it precipitates mainly in the pores of the anode, causing reductio
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.7\linewidth]{figures/li_plating_porosity_yang.eps}
+    \includegraphics[scale=1]{figures/li_plating_porosity_yang.eps}
     \caption{Kinetic lithium plating due to pore clogging. (a) Lithium inventory loss contributed by SEI growth and lithium plating, respectively. (b) Lithium inventory loss per cycle contributed by SEI growth and lithium plating, respectively. The ``snowballing'' growth of lithium plating occurs due to the accelerating decrease in porosity, which creates high transport overpotentials in the electrolyte and drives additional plating. (c) Schematic illustration of pore clogging driven initially by SEI growth and then by plating. Adapted from Figure 8 of Yang et al.\cite{yang_modeling_2017}}
     \label{fig:pore_clogging}
 \end{figure}
@@ -314,7 +313,7 @@ A simple model illustrating knee onset due to ohmic resistance growth during cyc
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale = 0.9]{figures/dcr_growth_knee_2.eps}
+\includegraphics[scale = 1]{figures/dcr_growth_knee_2.eps}
 \caption{Simple model illustrating ``pseudo-knees'' due to resistance growth. Inspired by Figure 16 of Ma et al.\cite{ma_editors_2019} and Mandli et al.\cite{mandli_analysis_2019}. (a) Assumed overpotential growth vs. cycle number for a 1C and 2C discharge. The assumed resistance growth rate is 0.2 m$\Omega$/cycle. (b) Discharge capacity and energy vs. the minimum discharge voltage. (c, d) Voltage vs. capacity as a function of cycle number for the (c) 1C discharge and (d) 2C discharge cases. The final discharge capacity for each cycle is denoted by a marker. (e--g) (e) Capacity, (f) energy, and (g) power retention vs. cycle number.
 }
 \label{fig:dcr_knee}
@@ -322,7 +321,7 @@ A simple model illustrating knee onset due to ohmic resistance growth during cyc
 
 This observation is supported by the fact that many aging studies have shown that capacity knee onset is nearly always correlated to the onset of rapid resistance growth, across different cell chemistries, architectures, and test protocols. The relative capacity and resistance at the knee onset point from several studies that reported both capacity fade and resistance growth are reported in Table \ref{tab:dcr_growth_papers}. Of all these aging studies, cells with capacity knees always displayed resistance elbows, and with the exception of the work by Martinez-Laserna et al \cite{martinez-laserna_technical_2018}, the reverse is also true. One assumption used in the model shown in Fig. \ref{fig:dcr_knee} but not reflected in these results is that linear resistance growth continues after knee onset; in much of the experimental work, regardless of the remaining capacity or relative resistance growth at knee onset, the previously linear resistance growth suddenly accelerates, leading to a resistance elbow as well. This is likely because many of the resistance growth and capacity fade mechanisms are intertwined. For instance, SEI growth causes both an increase in cell resistance as well as a decrease in available lithium, while loss of electrode active material may cause stoichiometric shifts of lithium while also decreasing available surface area for electrode-electrolyte reactions and thereby increasing cell resistance as well.
 
-\hfil\includegraphics[scale=0.5]{images/Ecker_2014_fig12.jpg}
+\hfil\includegraphics[scale=1]{images/Ecker_2014_fig12.jpg}
 
 \begin{table}[!ht]
     \centering
@@ -370,7 +369,7 @@ Note that this mechanism is exacerbated by high upper cutoff voltages \cite{peti
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale = 0.7]{figures/fec_depletion.eps}
+\includegraphics[scale = 1]{figures/fec_depletion.eps}
 \caption{Additive depletion knees.
 (a) The capacity retention of a full cell with 15\% Si in the negative electrode exhibits a knee at around 250 cycles, the same point at which the FEC is depleted from the electrolyte (from destructive gas chromatography-mass spectrometry measurements of FEC concentration). Adapted from Figure 8 of Petibon et al.\cite{petibon_studies_2016}
 (b) In half cells with 100\% Si negative electrodes, the cycle number of the knee increases with the FEC concentration in the electrolyte. Adapted from Figure 1 of Jung et al.\cite{jung_consumption_2016}}
@@ -409,7 +408,7 @@ While we have already discussed how mechanical degradation mechanisms can cause 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale = 0.7]{figures/MechanicalKneepoints.pdf}
+\includegraphics[scale = 1]{figures/MechanicalKneepoints.pdf}
 \caption{Mechanical effects leading to Knee points: During cycling particles and the SEI expand and crack leading to the formation and regrowth of additional SEI. In addition a covering layer was found forming on the anode surface. Pressure due to volume expansion can also lead to jelly roll deformation in cylindrical wound cells. This can induce delamaniation and loss of active material leading to more SEI and covering layer growth. (Philipp -- looks great, please add caption)}
 \label{fig:knee_mechanical}
 \end{figure}
@@ -492,7 +491,7 @@ In contrast, Epding et al.\cite{epding_investigation_2019} found that longer res
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale = 0.7]{figures/Discharge-rest_cycle.png}
+\includegraphics[scale = 1.0]{figures/Discharge-rest_cycle.png}
 \caption{Discharge rate and rest time have mixed effects on knee point onset depending on the testing conditions. (a) Higher discharge rate accelerates knee onset. Adapted from \cite{omar_lithium_2014} (b) Lower discharge rate accelerates knee onset. Adapted from \cite{keil_linear_2019} (c) Longer rest time accelerates knee onset. Adapted from \cite{keil_linear_2019} (d) Shorter rest time accelerates knee onset. Adapted from \cite{epding_investigation_2019}. To isolate the influence of calendar aging, the above are replotted with a time axis in the Supporting Information.  }
 \label{fig:discharge-rest_cycle}
 \end{figure}
@@ -510,7 +509,7 @@ For pouch and prismatic cells, some applied pressure is needed to enhance conduc
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale = 0.7]{images/Temperature_and_pressure.png}
+\includegraphics[scale = 1.0]{images/Temperature_and_pressure.png}
 \caption{Transition in degradation mechanism based on (a) temperature and (b) applied pressure, illustrating a ``sweet spot'' for each variable. Adapted from Waldman et al.\cite{waldmann_temperature_2014} and Cannarella et al.\cite{cannarella_stress_2014}, respectively.}
 \label{fig:temperature_and_pressure}
 \end{figure}
@@ -540,7 +539,7 @@ While predicting knees is important, predicting end-of-life is more directly rel
 \centering
 % \begin{subfigure}{.5\textwidth}
 %   \centering
-\includegraphics[width=0.8\linewidth]{figures/AcrossDatasetsknee-to-EOL}
+\includegraphics[scale=1.0]{figures/AcrossDatasetsknee-to-EOL}
 %   \caption{Linear regression of knee-point to EOL point}
   \label{fig:kneepoint2EOL}
 % \end{subfigure}%
@@ -620,7 +619,7 @@ All data and code are publicly available in the associated Zenodo repository(CIT
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale = 0.6]{figures/Discharge-rest_time.png}
+\includegraphics[scale = 1.0]{figures/Discharge-rest_time.png}
 \caption{Discharge rate and rest time have mixed effects on knee point onset depending on the testing conditions. Data from Figure \ref{fig:discharge-rest_cycle} replotted with a time-based axis. (a) Higher discharge rate accelerates knee onset. Adapted from \cite{omar_lithium_2014} (b) Lower discharge rate accelerates knee onset. Adapted from \cite{keil_linear_2019} (c) Longer rest time accelerates knee onset. Adapted from \cite{keil_linear_2019} (d) Shorter rest time accelerates knee onset. Adapted from \cite{epding_investigation_2019}.}
 \label{fig:discharge-rest_time}
 \end{figure}

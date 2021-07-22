@@ -22,6 +22,7 @@ red = np.array([.85, .20, 0]) # tikka masala
 gold = np.array([1, .67, .14]) # Staffordshire hoard
 claret = np.array([.429, .073, .238]) # claret
 grey = np.array([.585, .612, .675]) # library grey
+grey2 = np.array([233, 235, 238]) / 255 # library grey with 0.2 transparency
 black = np.array([0,0,0]) # this is a black
 
 # maths functions
@@ -276,7 +277,7 @@ def zhang_knee(ax,time,capacity,colour):
     q_low = q_early_mod - 1.5
     q_high = q_early_mod + 1.5
     
-    ax.fill_between(t,q_low,q_high,color=grey,alpha=.2)
+    ax.fill_between(t,q_low,q_high,color=grey2)#,alpha=.2)
     
     spl_cap = spline(time,capacity,k=5)
     t_late = t[500:]
@@ -350,7 +351,7 @@ fig.savefig(config.FIG_PATH / "knee_definition.eps", format="eps")
 
 
 # KNEE IDENTIFICATION METHODS ==================
-fig, ax = plt.subplots(2,3,figsize=(config.FIG_WIDTH*3,config.FIG_HEIGHT*2.2),
+fig, ax = plt.subplots(2,3,figsize=(config.FIG_WIDTH*2,config.FIG_HEIGHT*1.5),
                        sharex=True, sharey=True)
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))

@@ -14,8 +14,8 @@ import config
 cycle_numbers = np.arange(500)
 
 snowball_degradation = np.exp(cycle_numbers / 150) - 1
-linear_degradation1 = cycle_numbers / 100
-linear_degradation2 = cycle_numbers / 8 - 37
+linear_degradation1 = cycle_numbers ** 0.5 / 1.2
+linear_degradation2 = cycle_numbers / 20
 
 cycle_numbers_subset1 = np.arange(322)
 linear_degradation31 = cycle_numbers_subset1 / 100

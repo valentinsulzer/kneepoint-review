@@ -294,21 +294,9 @@ Loss of active material --- specifically, loss of active material from the delit
 
 Various degradation mechanisms can lead to $\mathrm{LAM_{deNE}}$, which occurs when active sites lose either ionic or electronic connectivity with the electrode.
 Often, several of these mechanisms can occur in parallel, leading to a snowball effect where loss of active material due to one mechanism may result in further stress on the remaining active sites, accelerating degradation via thermodynamic lithium plating.
-Electrode sites can lose ionic connection via electrolyte dry-out, which may be driven by gas generation during cycling.\cite{mao_calendar_2017, kupper_end--life_2018}
 Electrode sites can lose electronic connection via delamination\cite{cannarella_stress_2014, willenberg_high-precision_2020}(liu, somerville), particularly for cells with low external pressure\cite{cannarella_stress_2014}. Particle cracking is another mechanism for electronic disconnection of active sites, although cracking is not expected to occur appreciably in graphite particles.(Takahashi-examination)
-
-An additional $\mathrm{LAM_{deNE}}$ mechanism is the growth of thick layers ($1-10 \mathrm{\mu m}$ on the surface of the negative electrode (separator-facing interface), sometimes termed ``covering layers''\cite{lewerenz_post-mortem_2017, lewerenz_systematic_2017, willenberg_development_2020}.
-Surface layer growth-driven $\mathrm{LAM_{deNE}}$ may impede lithium-ion transport into the negative electrode during charging, effectively isolating portions of the electrode and resulting in an apparent loss of active material. This surface layer is commonly observed in cells with knees and is often attributed to manganese or iron dissolution from the cathode and electrolyte salt decomposition \cite{lewerenz_post-mortem_2017,lewerenz_systematic_2017,zhu_investigation_2021,stiaszny_electrochemical_2014,rahe_nanoscale_2019,keil_linear_2019,sarasketa-zabala_understanding_2015, li_degradation_2016, klett_non-uniform_2014, klett_uneven_2015, willenberg_high-precision_2020}(wang capacity), or possibly dead lithium agglomerates\cite{schindler_fast_2018}, but the root cause has not been definitively identified. Peculiarly, the size of these layers (microns) is much larger than typical reported SEI thicknesses (nanometers)\cite{peled_reviewsei_2017}. Furthermore, this phenomenon is almost exclusively observed in cylindrical cells.
-Lewerenz et al.\cite{lewerenz_post-mortem_2017,lewerenz_systematic_2017} thoroughly documented surface layer growth, finding that increasing C-rate and larger depth-of-discharge could lead to earlier onset of a knee. Earlier knee onsets was correlated with the presence of a thick surface layer on cells that contained knees; cells without knees also contained obvious surface layers, but with lower surface coverage and less thickness. These surface layers sometimes seem to lead directly to localized lithium plating due to the lack of active sites available for lithium insertion, with lithium observed on top of the layer.\cite{zhu_investigation_2021}
-Further investigation of these surface layers is needed to understand this seemingly ubiquitous mechanism for loss of active negative electrode material.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[scale = 0.5]{figures/CoveringLayers.pdf}
-\caption{``Covering layers'' as found via post-mortem analysis in cells with knees. Covering layers are commonly observed in cells with knees but are a poorly understood source of active material loss.
-a) A covering layer in the middle of the anode of an unwound cylindrical cell, along with laser microscope images of top, middle and bottom sections and scanning electron microscopy images of the middle section with a covering layer. Reproduced with permission from Lewerenz et al. \cite{lewerenz_post-mortem_2017} Copyright 2017, Elsevier. b) Covering layer in the middle of the anode of an unwound cylindrical cell. The red arrow corresponds to a thickness of $10 \mathrm{\mu m}$. CC-By Willenberg et al. \cite{willenberg_development_2020}. c) Scanning electron microscopy cross-sections of new and aged electrodes with a visible covering layer. Reproduced with permission from Stiaszny et al. \cite{stiaszny_electrochemical_2014} Copyright 2014, Elsevier.}
-\label{fig:covering_layers}
-\end{figure}
+Electrode sites can lose ionic connection via electrolyte dry-out, which may be driven by gas generation during cycling.\cite{mao_calendar_2017, kupper_end--life_2018}
+Another mechanism causing loss of active material via ionic disconnection is the growth of microns-thick ``covering layers'', a mechanism which we mention now but explore in depth in our discussion on mechanical knees.
 
 \subsubsection{Kinetic lithium plating}
 %- this is when transient effects cause plating
@@ -441,7 +429,20 @@ Here, we focus on knees more explicitly linked to mechanical effects.
 
 At the microscale, repeated (de)intercalation can stress the electrode particles, which can then lead to both loss of active material through particle cracking and accelerated growth of side reaction products (e.g., SEI and CEI).
 Reniers et al.~\cite{reniers_review_2019} illustrated a positive feedback mechanism between the mechanical stress and loss of active material, leading to a (snowballing) knee point. They combine a fatigue model for loss of active material due to stress from Laresgoiti et al.~\cite{laresgoiti_modeling_2015} with a stress model from Dai et al.~\cite{dai_simulation_2014}: higher stress causes higher loss of active material, which in turn increases the current density and hence causes higher stress.
-Other authors have suggested that mechanical effects can accelerate SEI/CEI growth by causing SEI/CEI cracking and revealing new active surface area to grow \cite{kupper_end--life_2018,louli_operando_2019}.(pinson) Since growth of these surface layers is self-limiting, this effect alone is not enough to lead to a knee, but it could accelerate the onset of knees in other mechanisms related to side reactions (i.e., lithium plating induced by pore clogging on the negative electrode or resistance growth driven by side reactions on the positive electrode).
+Other authors have suggested that mechanical effects can accelerate SEI/CEI growth by causing SEI/CEI cracking and revealing new active surface area to grow \cite{kupper_end--life_2018,louli_operando_2019}.(pinson) Since growth of these interphasial layers is self-limiting, this effect alone is not enough to lead to a knee, but it could accelerate the onset of knees in other mechanisms related to side reactions (i.e., lithium plating induced by pore clogging on the negative electrode or resistance growth driven by side reactions on the positive electrode).
+
+At the mesoscale, an additional $\mathrm{LAM_{deNE}}$ mechanism is the growth of thick layers ($1-10 \mathrm{\mu m}$ on the surface of the negative electrode (separator-facing interface), sometimes termed ``covering layers''\cite{lewerenz_post-mortem_2017, lewerenz_systematic_2017, willenberg_development_2020}.
+Surface layer growth-driven $\mathrm{LAM_{deNE}}$ may impede lithium-ion transport into the negative electrode during charging, effectively isolating portions of the electrode and resulting in an apparent loss of active material. This surface layer is commonly observed in cells with knees and is often attributed to manganese or iron dissolution from the cathode and electrolyte salt decomposition \cite{lewerenz_post-mortem_2017,lewerenz_systematic_2017,zhu_investigation_2021,stiaszny_electrochemical_2014,rahe_nanoscale_2019,keil_linear_2019,sarasketa-zabala_understanding_2015, li_degradation_2016, klett_non-uniform_2014, klett_uneven_2015, willenberg_high-precision_2020}(wang capacity), or possibly dead lithium agglomerates\cite{schindler_fast_2018}, but the root cause has not been definitively identified. Peculiarly, the size of these layers (microns) is much larger than typical reported SEI thicknesses (nanometers)\cite{peled_reviewsei_2017}. Furthermore, this phenomenon is almost exclusively observed in cylindrical cells.
+Lewerenz et al.\cite{lewerenz_post-mortem_2017,lewerenz_systematic_2017} thoroughly documented surface layer growth, finding that increasing C-rate and larger depth-of-discharge could lead to earlier onset of a knee. Earlier knee onsets was correlated with the presence of a thick surface layer on cells that contained knees; cells without knees also contained obvious surface layers, but with lower surface coverage and less thickness. These surface layers sometimes seem to lead directly to localized lithium plating due to the lack of active sites available for lithium insertion, with lithium observed on top of the layer.\cite{zhu_investigation_2021}
+Further investigation of these surface layers is needed to understand this seemingly ubiquitous mechanism for loss of active negative electrode material.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale = 0.5]{figures/CoveringLayers.pdf}
+\caption{``Covering layers'' as found via post-mortem analysis in cells with knees. Covering layers are commonly observed in cells with knees but are a poorly understood source of active material loss.
+a) A covering layer in the middle of the anode of an unwound cylindrical cell, along with laser microscope images of top, middle and bottom sections and scanning electron microscopy images of the middle section with a covering layer. Reproduced with permission from Lewerenz et al. \cite{lewerenz_post-mortem_2017} Copyright 2017, Elsevier. b) Covering layer in the middle of the anode of an unwound cylindrical cell. The red arrow corresponds to a thickness of $10 \mathrm{\mu m}$. CC-By Willenberg et al. \cite{willenberg_development_2020}. c) Scanning electron microscopy cross-sections of new and aged electrodes with a visible covering layer. Reproduced with permission from Stiaszny et al. \cite{stiaszny_electrochemical_2014} Copyright 2014, Elsevier.}
+\label{fig:covering_layers}
+\end{figure}
 
 On the macroscale (cell level), both the external pressure (for pouch and prismatic cells) and internal jellyroll deformation (for cylindrical cells) can impact cell lifetime. Pouch and prismatic cells either without external pressure\cite{wunsch_investigation_2019} or with high external pressure\cite{cannarella_stress_2014} can show rapid knees, indicating a ``sweet spot'' to avoid a knee and maximize lifetime. Cannarella et al.\cite{cannarella_stress_2014} also found that the surface layer is more pronounced with increasing external pressure.
 For cylindrical cells, ...(philipp to add)
@@ -466,12 +467,12 @@ Multi length scale interactions (mechanics, DCR, etc)
 Heterogeneity
 
 Commercially-relevant form factors have thermal, mechanical, electrochemical gradients
-
+\cite{jalkanen_cycle_2015}
 Cell design (cylindrical cell gradients, tab pressure)
-
+\cite{bach_nonlinear_2016}
 Usage
 Thermal transients \cite{carter_detection_2019}
-
+Apart from the main mechanisms causing knees due to plating, few other causes are based on substantial and mild temporally thermal transient conditions lead to a rapid capacity fade in cells when compared with cells at a fixed equilibrium temperature. Temporal transient thermal gradients (40 \degree C to 0 \degree C) also contribute to Li ions being plated as Li instead of intercalation, which accelerates capacity fade over subsequent cycles causing knees and ultimately resulting in jellyroll collapse. Carter 2019 tested two sets (equilibrium and transient cells) at different temperatures (at 40 \degree C, 20 \degree C, 0\degree C) to understand thermo-electrochemical coupling. Equilibrium cells at 40 \degree C and 20 \degree C show minimal degradation while equilibrium cell at 0 \degree C has initial minimal degradation, then a gradual decay midway. Transient cells demonstrate high lithium stripping at initial discharge cycles       
 Hotspots
 
 \section{Factors influencing the knee}
@@ -594,14 +595,13 @@ This observation is supported by the fact that many aging studies have shown tha
 
 \begin{figure}[ht]
 \centering
-% \begin{subfigure}{.5\textwidth}
-%   \centering
-\includegraphics[scale=1.0]{figures/AcrossDatasetsknee-to-EOL}
-%   \caption{Linear regression of knee-point to EOL point}
-  \label{fig:kneepoint2EOL}
-% \end{subfigure}%
-\caption{Total of 306 cells across 15 datasets. The knee identification algorithm employed is the Bacon-Watts one. Linear relation between knee-point and EOL (defined as 80\% capacity).}
-\label{fig:knees2EOL}
+\includegraphics[scale=1.0]{figures/ecker_capacity_vs_dcr.eps}
+\caption{Correlation between capacity knees and ``resistance elbows''.
+(a) Normalized capacity and (b) normalized resistance vs. equivalent full cycles for cells cycled at 1 C and 35$^{\circ}$C.
+Different cycle depths around a mean SOC of 50\% are compared. Each trend displays a single cell. The correlation between capacity knees and resistance elbows is evident.
+Adapted from Figure 12 of Ecker et al.\cite{ecker_calendar_2014}
+}
+\label{fig:ecker_capacity_and_resistance}
 \end{figure}
 
 \newgeometry{margin=2.5cm} % modify this if you need even more space

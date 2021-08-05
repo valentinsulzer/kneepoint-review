@@ -252,44 +252,60 @@ def diao_knee(ax,time,capacity,colour):
     
     return t_knee, q_knee
 
-def zhang_knee(ax,time,capacity,colour):
+def zhang_knee(ax,time,capacity,dqdv,colour):
+    ax_in = ax.inset_axes([50,82,310,11], transform=ax.transData)
     ax.plot(time,capacity,color=colour)
     ax.set_ylim(75,100)
     
     # guarantee the inputs are column vectors
     time = time.reshape((time.shape[0],1))
-    capacity = capacity.reshape((capacity.shape[0],1))
+    y = dqdv.reshape((dqdv.shape[0],1))
+    
+    ax_in.plot(time,y,color=colour)
     
     # ============== EARLY LIFE LINEAR MODEL ================= #
     # find early life data (assumed first half of points)
     n = np.floor(time.shape[0]*2/3).astype(int)
     t_early = time[:n,:].reshape((n,1))
-    q_early = capacity[:n,:].reshape((n,1))
+    y_early = y[:n,:].reshape((n,1))
     
     # early life model
-    w = ols(t_early,q_early)
+    w = ols(t_early,y_early)
     
     t = np.linspace(time.min(),time.max(),1000)
-    q_early_mod = w[0] + w[1]*t
+    y_early_mod = w[0] + w[1]*t
     
-    ax.plot(t,q_early_mod,'--',color=grey)
+    ax_in.plot(t,y_early_mod,'--',color=grey)
     
-    q_low = q_early_mod - 1.5
-    q_high = q_early_mod + 1.5
+    y_low = y_early_mod - 0.2
+    y_high = y_early_mod + 0.2
     
-    ax.fill_between(t,q_low,q_high,color=grey2)#,alpha=.2)
+    ax_in.fill_between(t,y_low,y_high,color=grey2)#,alpha=.2)
     
-    spl_cap = spline(time,capacity,k=5)
+    spl_y = spline(time,y,k=5)
     t_late = t[500:]
-    q_late = spl_cap(t_late)
+    y_late = spl_y(t_late)
     
-    t_late = t_late[ q_late<q_low[500:] ]
+    t_late = t_late[ y_late<y_low[500:] ]
     
     t_knee = t_late.min()
+    y_knee = spl_y(t_knee)
+    
+    ax_in.scatter(t_knee,y_knee,color="black",marker='s')
+    ax_in.plot(np.array([t_knee,t_knee]),np.array([3.1,6.3]),
+            '--',color=grey)
+    
+    # plot controls
+    ax_in.set_yticks([])
+    ax_in.set_xticks([])
+    ax_in.set_xlabel('cycle number')
+    ax_in.set_ylabel('dq/dv (%/V)')
+    
+    spl_cap = spline(time,capacity,k=5)
     q_knee = spl_cap(t_knee)
     
     ax.scatter(t_knee,q_knee,color="black",marker='s')
-    ax.plot(np.array([t_knee,t_knee]),np.array([80,98]),
+    ax.plot(np.array([t_knee,t_knee]),np.array([85,95]),
             '--',color=grey)
     
     return t_knee,q_knee
@@ -306,7 +322,8 @@ m = pd.read_csv(path / 'severson2019_cell_58_capacity.csv')
 
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
-    
+dqdv = np.array(m['dqdv']).reshape((m['dqdv'].shape[0],1))
+
 σ = .05
 qσ = q + (np.random.randn(q.shape[0],1)*σ)
 
@@ -389,7 +406,7 @@ TK[1,0],TK[1,1] = kneedle_identification(ax[0,1],t,q,colours[1])
 # Diao et al.
 TK[2,0],TK[2,1] = diao_knee(ax[0,2],t,q,colours[2])
 # Zhang et al.
-TK[3,0],TK[3,1] = zhang_knee(ax[1,0],t,q,colours[3])
+TK[3,0],TK[3,1] = zhang_knee(ax[1,0],t,q,dqdv,colours[3])
 # Bisector
 TK[4,0],TK[4,1] = knee_point_identification(ax[1,1],t,q,colours[4]);
 
@@ -413,8 +430,8 @@ for j in range(5):
     ax_in.plot(np.array([TK[j,0],TK[j,0]]),np.array([80,98]),
                 '--',color=colours[j])
 ax_in.set_yticks([])
-ax_in.set_xlim([330, 410])
-ax_in.set_ylim([90, 96])
+ax_in.set_xlim([365, 445])
+ax_in.set_ylim([85, 95])
     
 # completely unnecessary if you are the kind of wizard who doesn't sanity 
 # check your results

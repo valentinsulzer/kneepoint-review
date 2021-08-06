@@ -1,0 +1,176 @@
+% \documentclass{article}
+\documentclass[journal=jpclcd,manuscript=article]{achemso}
+\usepackage[utf8]{inputenc}
+
+% ALL: See "style guide" here: % https://docs.google.com/document/d/12xwId6RT73miifI1thtLL7c0GoVIXsSfZndO5bgdqag/edit#
+
+% Tables
+% Use Roman numerals for tables
+% https://tex.stackexchange.com/a/226029
+\usepackage[labelsep=period]{caption}
+\captionsetup[table]{name=Table}
+\renewcommand{\thetable}{\Roman{table}}
+% \usepackage{multirow}
+
+\usepackage{pdflscape}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{geometry}
+
+\usepackage{subcaption} % For subfigures?
+
+\usepackage{pifont}
+\newcommand{\cmark}{\textcolor{blue}{\textrm{\ding{52}}}}%
+\newcommand{\xmark}{\textcolor{red}{\textrm{\ding{56}}}}%
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+%usepackage{authblk}
+
+
+% units
+% \SI{X}{\UNIT} will write the value X with units \UNIT. 
+% eg. \SI{30}{\celsius}
+\usepackage{siunitx} 
+
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+\setlength {\marginparwidth }{2cm}
+\usepackage{todonotes}
+\newcommand{\tino}[1]{\todo[inline,color=purple!40]{Tino: #1}}
+\newcommand{\fbp}[1]{\todo[inline,color=orange!40]{Ferran: #1}}
+\newcommand{\summary}[1]{\todo[inline,caption={},color=yellow!40]{Summary: \\ #1}}
+
+\newcommand{\ssri}[1]{{
+\fbox{
+\parbox{0.8\textwidth}{  \fbox{$\triangleright$\textcolor{blue}{\textbf{Shashank}:}} 
+#1
+}}}}
+
+\newcommand{\gbox}[1]{{
+\fbox{
+\parbox{0.8\textwidth}{  \fbox{$\triangleright$\textcolor{blue}{\textbf{Gon}:}} 
+#1
+}}}}
+
+\newcommand{\pbox}[1]{{
+\fbox{
+\parbox{0.8\textwidth}{  \fbox{$\triangleright$\textcolor{blue}{\textbf{From Peter}:}} 
+#1
+}}}}
+
+\newcommand{\pdebox}[1]{{
+\fbox{
+\parbox{0.8\textwidth}{  \fbox{$\triangleright$\textcolor{blue}{\textbf{From Philipp}:}} 
+#1
+}}}}
+
+\newcommand{\editreadybox}[1]{{
+\fbox{
+\parbox{0.8\textwidth}{  \fbox{$\triangleright$\textcolor{green}{\textbf{READY TO EDIT}:}} 
+#1
+}}}}
+
+\usepackage[normalem]{ulem}
+
+\setlength{\textheight}{8.4in}
+\setlength{\topmargin}{0.1in}
+\setlength{\headheight}{0.2in}
+\setlength{\headsep}{0.1in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+
+
+
+\title{{\large{\bfseries{Supplementary Information for}}} \\ \Large\bfseries ``Knees'' in lithium-ion battery aging trajectories}
+
+
+\author{someone et al}
+% \author{Peter M. Attia}
+% \email{peter.m.attia@gmail.com}
+% \affiliation{Department of Materials Science and Engineering, Stanford University, Stanford, California 94305, United States}
+% \author{Alexander Bills} 
+% \affiliation{Department of Mechanical Engineering, Carnegie Mellon University, Pittsburgh, PA, 15213}
+% \author{Ferran Brosa Planella} 
+% \affiliation{WMG, University of Warwick, Coventry, CV4 7AL, United Kingdom, and Faraday Institution, Harwell, United Kingdom}
+% \author{Philipp Dechent} 
+% \affiliation{Institute for Power Electronics and Electrical Drives (ISEA), RWTH Aachen University, 52066 Aachen, Germany}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \author{Gon\c{c}alo dos Reis} 
+% % Goncalo's ORCID: 0000-0002-4993-2672
+% \affiliation{School of Mathematics, University of Edinburgh, The King’s Buildings, Edinburgh, EH9 3FD, UK}
+% \affiliation{Centro de Matem\'atica e Aplica\c c$\tilde{\text{o}}$es (CMA), FCT, UNL, Quinta da Torre, 2829-516 Caparica, Portugal}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \author{Matthieu Dubarry}
+% \affiliation{Hawaii Natural Energy Institute, University of Hawaii, Honolulu, HI 96822}
+% \author{Paul Gasper} 
+% \affiliation{National Renewable Energy Laboratory, 15013 Denver West Pkwy, Golden, CO, 80401, USA}
+% \author{Samuel Greenbank} 
+% \affiliation{Department of Engineering Science, University of Oxford, Parks Road, Oxford, OX1 3PJ, United Kingdom, and Faraday Institution, Harwell, United Kingdom}
+% \author{David Howey} 
+% \affiliation{Department of Engineering Science, University of Oxford, Parks Road, Oxford, OX1 3PJ, United Kingdom, and Faraday Institution, Harwell, United Kingdom}
+% \author{Ouyang Liu} 
+% \affiliation{Institute for Infocomm Research, Agency for Science, Technology, and Research (A*STAR), 1 Fusionopiationolis Way, Connexis, Singapore 138632, Singapore}
+% \author{Edwin Khoo}  
+% \affiliation{Institute for Infocomm Research, Agency for Science, Technology, and Research (A*STAR), 1 Fusionopiationolis Way, Connexis, Singapore 138632, Singapore}
+% \author{Yuliya Preger}  
+% \affiliation{Sandia National Laboratories, 1515 Eubank Blvd SE, Albuquerque, NM, 87185, USA}
+% \author{Abhishek Soni}
+% \affiliation{Please insert affiliation here Abhishek}
+% \author{Shashank Sripad} 
+% \affiliation{Department of Mechanical Engineering, Carnegie Mellon University, Pittsburgh, PA, 15213}
+% \author{Anna G. Stefanopoulou}  
+% \affiliation{University of Michigan, Ann Arbor, MI, US}
+% \author{Valentin Sulzer}
+% \affiliation{University of Michigan, Ann Arbor, MI, US}
+
+
+
+% \date{}
+ \date{\today}
+ 
+ 
+ 
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+
+ %
+ 
+ 
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Section 1...}
+
+\cite{strange_elbows_2021}
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Section 2...}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \bibliographystyle{myIEEEtran}
+\bibliography{refs_zotero}
+
+\end{document}

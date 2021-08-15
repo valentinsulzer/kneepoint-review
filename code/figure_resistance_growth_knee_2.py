@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-This figure illustrates Resistance growth knees.
+This figure illustrates resistance growth knees.
 """
 
 import numpy as np
@@ -125,7 +125,7 @@ for k, cycle_number in enumerate(cycle_numbers):
 
 # Generate figure / axis handles
 fig = plt.figure(figsize=(config.FIG_WIDTH*2, config.FIG_HEIGHT*2.5))
-ax0 = plt.subplot2grid((3,4), (0,0), colspan=2, rowspan=1) # overpotential increase w/ Resistance growth
+ax0 = plt.subplot2grid((3,4), (0,0), colspan=2, rowspan=1) # overpotential increase w/ resistance growth
 ax1 = plt.subplot2grid((3,4), (0,2), colspan=2, rowspan=1) # discharge capacity, energy vs voltage @ BOL
 ax2 = plt.subplot2grid((3,4), (1,0), colspan=2, rowspan=1) # discharge curves vs cycles, 1C
 ax3 = plt.subplot2grid((3,4), (1,2), colspan=2, rowspan=1) # discharge curves vs cycles, 2C

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-This figure illustrates DCR growth knees.
+This figure illustrates resistance growth knees.
 """
 
 import numpy as np

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-This figure illustrates DCR growth knees.
+This figure illustrates Resistance growth knees.
 """
 
 import numpy as np
@@ -19,8 +19,8 @@ url = "https://www.batteryarchive.org/data/SNL_18650_NMC_25C_0-100_0.5-0.5C_b_ti
 # Cell capacity, from https://www.batteryarchive.org/list.html
 capacity_Ah = 3.0
 
-# DCR growth per cycle
-dcr_growth_per_cycle_mohms = 0.2
+# Resistance growth per cycle
+resistance_growth_per_cycle_mohms = 0.2
 
 # Define lower cutoff voltages
 lower_cutoff_voltage1 = 2.0
@@ -48,13 +48,13 @@ current4_A = capacity_Ah * C_rate4
 # Generate fake data
 cycle_numbers = np.arange(1000)
 cycle_numbers_short = np.arange(0, 1000, 100)
-dcr_growth_mohms = dcr_growth_per_cycle_mohms * cycle_numbers
+resistance_growth_mohms = resistance_growth_per_cycle_mohms * cycle_numbers
 
 # Calculate overpotential from Ohm's law
-overpotential_growth1_V = current1_A * dcr_growth_mohms / 1000
-overpotential_growth2_V = current2_A * dcr_growth_mohms / 1000
-overpotential_growth3_V = current3_A * dcr_growth_mohms / 1000
-overpotential_growth4_V = current4_A * dcr_growth_mohms / 1000
+overpotential_growth1_V = current1_A * resistance_growth_mohms / 1000
+overpotential_growth2_V = current2_A * resistance_growth_mohms / 1000
+overpotential_growth3_V = current3_A * resistance_growth_mohms / 1000
+overpotential_growth4_V = current4_A * resistance_growth_mohms / 1000
 
 
 # Read in dataset and get first discharge
@@ -84,10 +84,10 @@ Pd4_endpoints = np.zeros((len(cycle_numbers), ))
 for k, cycle_number in enumerate(cycle_numbers):
     
     # Calculate overpotential
-    overpotential1_V = current1_A * dcr_growth_per_cycle_mohms * cycle_number / 1000
-    overpotential2_V = current2_A * dcr_growth_per_cycle_mohms * cycle_number / 1000
-    overpotential3_V = current3_A * dcr_growth_per_cycle_mohms * cycle_number / 1000
-    overpotential4_V = current4_A * dcr_growth_per_cycle_mohms * cycle_number / 1000
+    overpotential1_V = current1_A * resistance_growth_per_cycle_mohms * cycle_number / 1000
+    overpotential2_V = current2_A * resistance_growth_per_cycle_mohms * cycle_number / 1000
+    overpotential3_V = current3_A * resistance_growth_per_cycle_mohms * cycle_number / 1000
+    overpotential4_V = current4_A * resistance_growth_per_cycle_mohms * cycle_number / 1000
 
     
     # Find index below MinV
@@ -125,7 +125,7 @@ for k, cycle_number in enumerate(cycle_numbers):
 
 # Generate figure / axis handles
 fig = plt.figure(figsize=(config.FIG_WIDTH*2, config.FIG_HEIGHT*2.5))
-ax0 = plt.subplot2grid((3,4), (0,0), colspan=2, rowspan=1) # overpotential increase w/ DCR growth
+ax0 = plt.subplot2grid((3,4), (0,0), colspan=2, rowspan=1) # overpotential increase w/ Resistance growth
 ax1 = plt.subplot2grid((3,4), (0,2), colspan=2, rowspan=1) # discharge capacity, energy vs voltage @ BOL
 ax2 = plt.subplot2grid((3,4), (1,0), colspan=2, rowspan=1) # discharge curves vs cycles, 1C
 ax3 = plt.subplot2grid((3,4), (1,2), colspan=2, rowspan=1) # discharge curves vs cycles, 2C
@@ -141,9 +141,9 @@ ax0.plot(cycle_numbers, overpotential_growth3_V, color=main_colors[2],
            label=f"{C_rate3}C discharge ({current3_A} A)")
 
 ax0.annotate(f"Cell capacity = {capacity_Ah} Ah",
-               (965, 0.02), va="center", ha="right")
-ax0.annotate(f"DCR growth rate = {dcr_growth_per_cycle_mohms} m$\Omega$/cycle",
-               (965, 0.11), va="center", ha='right')
+               (985, 0.02), va="center", ha="right")
+ax0.annotate(f"Resistance growth rate = {resistance_growth_per_cycle_mohms} m$\Omega$/cycle",
+               (985, 0.11), va="center", ha='right')
 
 # Plot V vs Q
 ax1_twin = ax1.twinx()  # instantiate a second axes that shares the same x-axis
@@ -282,5 +282,5 @@ legend_title_dict = {3: f"{C_rate1}C discharge\nMinV = {lower_cutoff_voltage1} V
 
 # Save figure as both .PNG and .EPS
 plt.tight_layout()
-fig.savefig(config.FIG_PATH / "dcr_growth_knee_2.png", format="png", dpi=300)
-fig.savefig(config.FIG_PATH / "dcr_growth_knee_2.eps", format="eps")
+fig.savefig(config.FIG_PATH / "resistance_growth_knee_2.png", format="png", dpi=300)
+fig.savefig(config.FIG_PATH / "resistance_growth_knee_2.eps", format="eps")

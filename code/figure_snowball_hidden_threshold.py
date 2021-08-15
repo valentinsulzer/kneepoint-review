@@ -73,7 +73,7 @@ ax[4].legend(["State 1", "State 2"], loc="upper left")
 ax[5].legend(["State 1", "State 2"], loc="upper left")
 
 # Save figure as both .PNG and .EPS
-fig.savefig(config.FIG_PATH / "snowball_vs_hidden_mechanism.png", format="png", dpi=300)
-fig.savefig(config.FIG_PATH / "snowball_vs_hidden_mechanism.eps", format="eps")
+fig.savefig(config.FIG_PATH / "snowball_hidden_threshold.png", format="png", dpi=300)
+fig.savefig(config.FIG_PATH / "snowball_hidden_threshold.eps", format="eps")
 
 plt.show()

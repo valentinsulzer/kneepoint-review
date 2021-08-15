@@ -57,5 +57,5 @@ ax.set_ylim([0, 100])
 ax.legend()
 
 # Save figure as both .PNG and .EPS
-fig.savefig(config.FIG_PATH / "dubarry_cathode_saturation.png", format="png", dpi=300)
-fig.savefig(config.FIG_PATH / "dubarry_cathode_saturation.eps", format="eps")
+fig.savefig(config.FIG_PATH / "electrode_saturation.png", format="png", dpi=300)
+fig.savefig(config.FIG_PATH / "electrode_saturation.eps", format="eps")

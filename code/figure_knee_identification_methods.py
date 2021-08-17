@@ -318,7 +318,7 @@ def dq2dt2(ax,t,q,colour):
     ax.plot(t[4:],d2qdt2[2:]*1000,color=colour)
 
 path = Path().cwd() / "data"
-m = pd.read_csv(path / 'severson2019_cell_58_capacity.csv')
+m = pd.read_csv(path / 'severson2019_b2c30_health_fig03.csv')
 
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))

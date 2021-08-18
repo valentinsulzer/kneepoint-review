@@ -59,9 +59,9 @@ for k, rel_std_dev in enumerate(all_rsds):
 
 # Generate figure handles
 fig, ax = plt.subplots(
-    figsize=(3 * config.FIG_WIDTH + 0.5, 2 * config.FIG_HEIGHT),
-    nrows=2,
-    ncols=3,
+    figsize=(2 * config.FIG_WIDTH + 0.5, 3 * config.FIG_HEIGHT),
+    nrows=3,
+    ncols=2,
 )
 ax = ax.ravel()
 

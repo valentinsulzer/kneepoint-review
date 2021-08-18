@@ -34,6 +34,9 @@ linreg = LinearRegression()
 reg = linreg.fit(all_xdata, all_ydata)
 r2 = reg.score(all_xdata, all_ydata)
 
+# Define an axis limit value, based on the data plotted. Same for x and y axes.
+ax_lim = int(1.1*max(max(all_xdata), max(all_ydata)))
+
 # Set up the regression line
 x_cont = np.arange(0, ax_lim).reshape((-1,1))
 y_pred = linreg.predict(x_cont)
@@ -51,9 +54,6 @@ for source in data['src'].unique():
     ax.scatter(x_vals, y_vals, label=label, color=color, marker=marker)
 
 # Plot configuration
-
-# Define an axis limit value, based on the data plotted. Same for x and y axes.
-ax_lim = int(1.1*max(max(all_xdata), max(all_ydata)))
 ax.set_xlim([0, ax_lim])
 ax.set_ylim([0, ax_lim])
 ax.set_xlabel("Knee Point (Cycles)")

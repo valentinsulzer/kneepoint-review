@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-This figure illustrates variation due to cell-to-cell variation.
+This figure illustrates knee variation due to cell-to-cell variation via modeling.
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
-from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 import config
 
@@ -141,7 +140,7 @@ ax[5].set_title("f", loc="left", weight="bold")
 
 # Save figure as both .PNG and .EPS
 plt.tight_layout()
-fig.savefig(config.FIG_PATH / "variation.png", format="png", dpi=300)
-fig.savefig(config.FIG_PATH / "variation.eps", format="eps")
+fig.savefig(config.FIG_PATH / "variation_model.png", format="png", dpi=300)
+fig.savefig(config.FIG_PATH / "variation_model.eps", format="eps")
 
 plt.show()

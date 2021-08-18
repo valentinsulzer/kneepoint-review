@@ -49,12 +49,8 @@ ax[5].axhline(threshold, linestyle="--", color="black")
 ax[5].annotate("threshold", (10,3.7))
 
 # Set axes titles
-ax[0].set_title("a", loc="left", weight="bold")
-ax[1].set_title("b", loc="left", weight="bold")
-ax[2].set_title("c", loc="left", weight="bold")
-ax[3].set_title("d", loc="left", weight="bold")
-ax[4].set_title("e", loc="left", weight="bold")
-ax[5].set_title("f", loc="left", weight="bold")
+for k in np.arange(6):
+    ax[k].set_title(chr(97 + k), loc="left", weight="bold")
 
 # Set axes labels
 ax[3].set_xlabel("Cycle number")

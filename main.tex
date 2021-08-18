@@ -186,6 +186,14 @@ In this review, we survey the literature and critically examine both experimenta
 % }
 
 Mathematically, a knee of a one-dimensional smooth monotone (decreasing) curve is described as the point at which the rate is changing fastest, i.e., the second derivative reaches some maximal value. For batteries, IEEE Standard 485\texttrademark-2010 defines a (capacity) knee as a change to a stage of rapid decrease in capacity\cite{noauthor_ieee_2011}. However, this definition is qualitative and thus hard to apply in practice: while the \textit{presence} of a knee is generally straightforward to identify, the \textit{location} of a knee is less so. 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{figures/x_axis_sensitivity.eps}
+\caption{todo}
+\label{fig:x_axis}
+\end{figure}
+
 Locating a knee by eye is a seemingly straightforward task for a single, smooth and ideal aging profile (e.g.,~the superlinear aging trend in Figure \ref{fig:degradation_shapes}). However, Figure \ref{fig:knee_definition3} demonstrates the problem of using a second derivative to identify the knee point with small amounts of noise (standard deviation of 0.05\% capacity, green) or with limited data points (blue) where the knee is artificially shifted later. The data is too discrete in either of these limiting cases. Furthermore, in deployed systems, varying duty cycles can effectively manifest as ``noise'' in estimates of capacity or energy.
 Consequently, Strange et al.\cite{strange_elbows_2021} concluded that aging trajectories should be smoothed prior to knee identification, but aging trajectories with few data points remain problematic.
 
@@ -338,14 +346,15 @@ While this mechanism has not been experimentally validated, decreasing anode por
 
 \pbox{Need to add new figure, Tino's figure, text around Tino's figure}
 
-As previously discussed, lithium plating can occur if the active sites in the negative electrode cannot accommodate the available lithium inventory. More generally, if the rate of active material loss for one electrode outpaces the rate of lithium inventory loss, the electrode can ``saturate'' and reach the cutoff potential well before all lithium has transferred. If this electrode is not limiting, its loss of active material will be hidden from the overall capacity until this electrode becomes limiting; furthermore, if the rate of active material loss is sharper than the initial rate of lithium inventory loss, a knee in capacity will manifest. Dubarry et al.\cite{dubarry_synthesize_2012} and Smith et al.\cite{smith_life_2017} captured this knee pathway by using a more aggressive functional form for active material loss than lithium inventory loss (Figure \ref{fig:cathode_sat_simple}). This mechanism can apply for either electrode, but loss of active material from the negative electrode is more likely to be a hidden mechanism since this electrode is typically oversized relative to the positive electrode; the exception is cells with lithium titanate electrodes, in which the positive electrode is limiting and can cause a ``hidden'' knee(cite baure-battery-2019, baure-battery-2020).
+As previously discussed, lithium plating can occur if the active sites in the negative electrode cannot accommodate the available lithium inventory. More generally, if the rate of active material loss for one electrode outpaces the rate of lithium inventory loss, the electrode can ``saturate'' and reach the cutoff potential well before all lithium has transferred. If this electrode is not limiting, its loss of active material will be hidden from the overall capacity until this electrode becomes limiting; furthermore, if the rate of active material loss is sharper than the initial rate of lithium inventory loss, a knee in capacity will manifest. Dubarry et al.\cite{dubarry_synthesize_2012} and Smith et al.\cite{smith_life_2017} captured this knee pathway by using a more aggressive functional form for active material loss than lithium inventory loss (Figure \ref{fig:electrode_sat_simple}). This mechanism can apply for either electrode, but loss of active material from the negative electrode is more likely to be a hidden mechanism since this electrode is typically oversized relative to the positive electrode; the exception is cells with lithium titanate electrodes, in which the positive electrode is limiting and can cause a ``hidden'' knee(cite baure-battery-2019, baure-battery-2020).
 
 \begin{figure}
 \centering
-\includegraphics[scale = 1]{figures/dubarry_cathode_saturation.eps}
-\caption{An early model of a ``hidden'' knee mechanism due to electrode saturation, in which the exponentially increasing positive electrode loss eventually limits the capacity and causes a knee. Adapted from Figure 17 of Dubarry et al.\cite{dubarry_synthesize_2012}
+\includegraphics[scale = 1]{figures/electrode_saturation.eps}
+\caption{Early models of ``hidden'' knee mechanisms due to electrode saturation. (a) The exponentially increasing positive electrode loss eventually limits the capacity and causes a knee. Adapted from Figure 17 of Dubarry et al.\cite{dubarry_synthesize_2012}
+(b) The linearly decreasing negative electrode capacity eventually overtakes the sublinearly decreasing lithium inventory, causing a knee. Adapted from Figure 1 of Smith et al.\cite{smith_life_2017}
 }
-\label{fig:cathode_sat_simple}
+\label{fig:electrode_sat_simple}
 \end{figure}
 
 A richer picture emerges in models that capture the shifts in electrode stoiciometry with cycling. Lin et al.~\cite{lin_comprehensive_2013} modeled loss of lithium inventory driven by SEI growth and loss of active material driven by mechanical effects in the positive electrode. This loss of active material widens the positive electrode utilization window due to the increased ratio of lithium inventory to positive electrode active sites, which increases the cell voltage for a given amount of transferred lithium. This effect reduces the capacity between the voltage limits. The knee occurs when the positive electrode becomes fully saturated before the entire lithium inventory is transferred.
@@ -439,7 +448,7 @@ Here, we focus on knees more explicitly linked to mechanical effects.
 
 \begin{figure}
 \centering
-\includegraphics[scale = 1]{figures/MechanicalKneepoints.pdf}
+\includegraphics[scale = 1]{figures/mechanical.eps}
 \caption{Mechanical effects leading to knees: During cycling, particles and the SEI expand and crack, leading to the regrowth of additional SEI. In addition, covering layers may form on the surface of the negative electrode. Pressure due to volume expansion can subsequently lead to jellyroll deformation in cylindrical cells. This deformation can cause loss of active material, leading to more SEI, covering layer growth, and potentially lithium plating.}
 \label{fig:knee_mechanical}
 \end{figure}
@@ -453,9 +462,9 @@ Surface layer growth-driven $\mathrm{LAM_{deNE}}$ may impede lithium-ion transpo
 Lewerenz et al.\cite{lewerenz_post-mortem_2017,lewerenz_systematic_2017} thoroughly documented surface layer growth, finding that increasing C-rate and larger depth-of-discharge could lead to earlier onset of a knee. Earlier knee onsets was correlated with the presence of a thick surface layer on cells that contained knees; cells without knees also contained obvious surface layers, but with lower surface coverage and less thickness. These surface layers sometimes seem to lead directly to localized lithium plating due to the lack of active sites available for lithium insertion, with lithium observed on top of the layer.\cite{zhu_investigation_2021}
 Further investigation of these surface layers is needed to understand this seemingly ubiquitous mechanism for loss of active negative electrode material.
 
-\begin{figure}[ht]
+\begin{figure}[ht!]
 \centering
-\includegraphics[scale = 0.5]{figures/CoveringLayers.pdf}
+\includegraphics[scale = 1.0]{figures/CoveringLayers.eps}
 \caption{``Covering layers'' as found via post-mortem analysis in cells with knees. Covering layers are commonly observed in cells with knees but are a poorly understood source of active material loss.
 a) A covering layer in the middle of the anode of an unwound cylindrical cell, along with laser microscope images of top, middle and bottom sections and scanning electron microscopy images of the middle section with a covering layer. The red arrow corresponds to a thickness of 10 $\mathrm{\mu m}$. Reproduced with permission from Lewerenz et al. \cite{lewerenz_post-mortem_2017} Copyright 2017, Elsevier. b) Covering layer in the middle of the anode of an unwound cylindrical cell. CC-By Willenberg et al. \cite{willenberg_development_2020}. c) Scanning electron microscopy cross-sections of new and aged electrodes with a visible covering layer. Reproduced with permission from Stiaszny et al. \cite{stiaszny_electrochemical_2014} Copyright 2014, Elsevier.}
 \label{fig:covering_layers}
@@ -467,7 +476,7 @@ Waldmann mechanical \cite{waldmann_mechanical_2014}
 Kok et al. \cite{kok_virtual_2019} could show the formation of a covering layer through virtually unrollying the jelly roll directly from CT data without post-mortem analysis.
 In addition, CT studies by Pfrang et al.~\cite{pfrang_long-term_2018} revealed jelly roll deformation using cells from Ecker et al. \cite{ecker_calendar_2014}. Threshold mechanism?
 
-\subsection{Interactions and heterogeneity}
+\subsection{Interactions, heterogeneity, and variation}
 
 \pbox{This will be a new section discussing how everything's really complicated}
 
@@ -478,7 +487,21 @@ As an extreme example of coupling between knee mechanisms, consider a hypothetic
 
 Electrochemical, thermal, or mechanical heterogeneity within a cell may also exacerbate these knee pathways....
 
-In short, the impact of interactions and heterogeneity on knee pathways is poorly understood and an opportunity for future work. 
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{figures/variation_exp.eps}
+\caption{todo}
+\label{fig:var_exp}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{figures/variation_model.eps}
+\caption{todo}
+\label{fig:var_model}
+\end{figure}
+
+In short, the impact of interactions, heterogeneity, and variation on knee pathways is poorly understood and an opportunity for future work.
 
 Interactions 
 
@@ -491,6 +514,13 @@ LAM plays a central role
 Multi length scale interactions (mechanics, DCR, etc)
 
 Heterogeneity
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=1]{figures/x_axis_sensitivity.eps}
+\caption{todo}
+\label{fig:x_axis}
+\end{figure}
 
 Commercially-relevant form factors have thermal, mechanical, electrochemical gradients 
 K.Jalkanen et al \cite{jalkanen_cycle_2015} showcased cyclic aging at different cycling temperatures (\SI{25}{\celsius}, \SI{45}{\celsius} charge and \SI{65}{\celsius} discharge) through capacity fade. At temperatures above \SI{60}{\celsius}, aging at NE (graphite electrodes) is different compared to low temperature aging. Elevated temperatures contribute to excess Li plating during  cycling apart from the SEI-layer increase on anode surface which occurs during normal charging and discharging cycles at room temperature. Increase in SEI-layer thickness enhances graphite electrode polarization leading to additional plating. SEI-growth also leads to electrolyte consumption due to prolonged cycling at high temperatures. Irreversible lithium plating reduces graphite electrical contact, when lost, results in isolated dead lithium and capacity degradation \cite{petzl_lithium_2015}.  
@@ -585,9 +615,9 @@ Studies of pressure dependence in pouch and prismatic cells have demonstrated 's
 
 For pouch and prismatic cells, some applied pressure is needed to enhance conductivity and particle contact. When too much pressure is applied, high mechanical stress is not always evenly distributed throughout the cell. This causes heterogeneous delamination, surface film formation, and uneven Li distribution (Li plating). Li plating was also reported in cylindrical cells that experienced heterogeneous compression from test fixtures \cite{bach_nonlinear_2016}. 
 
-\begin{figure}[ht]
+\begin{figure}[ht!]
 \centering
-\includegraphics[scale = 0.6]{images/Temperature_and_pressure.png}
+\includegraphics[scale = 1.0]{figures/temperature_pressure_sweet_spot.eps}
 \caption{Transition in degradation mechanism based on (a) environmental temperature and (b) applied pressure, illustrating a ``sweet spot'' for each variable. Adapted from Waldman et al.\cite{waldmann_temperature_2014} and Cannarella and Arnold\cite{cannarella_stress_2014}, respectively.}
 \label{fig:temperature_and_pressure}
 \end{figure}

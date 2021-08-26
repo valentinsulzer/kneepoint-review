@@ -26,7 +26,7 @@ deg2_cum_capacity = np.cumsum(deg2)
 # Load Wang data
 file = Path().cwd() / "data" / "wang_dod-cycle_count-time.xlsx"
 wang_data = pd.read_excel(file, sheet_name=None)
-wang_labels = ["10% SOC", "20% SOC", "50% SOC", "80% SOC", "90% SOC"]
+wang_labels = ["10% DOD", "20% DOD", "50% DOD", "80% DOD", "90% DOD"]
 
 # Generate figure handles
 fig, ax = plt.subplots(figsize=(2 * config.FIG_WIDTH, 2 * config.FIG_HEIGHT),

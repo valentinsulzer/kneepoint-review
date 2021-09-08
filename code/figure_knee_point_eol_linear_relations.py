@@ -76,11 +76,13 @@ intercept = linreg.intercept_[0]
 if intercept < 0:
     # Omit the "plus" sign if the intercept sign is -ve
     plot_intercept = np.abs(intercept)
+    # Place the equation on the plot
+    ax.annotate(f'y = {slope:.3f}x - {plot_intercept:.3f}', xy=(3,1), xytext=(0.05, 0.9), textcoords='axes fraction')
 else:
     plot_intercept = intercept
+    # Place the equation on the plot
+    ax.annotate(f'y = {slope:.3f}x + {plot_intercept:.3f}', xy=(3,1), xytext=(0.05, 0.9), textcoords='axes fraction')
 
-# Place the equation on the plot
-ax.annotate(f'y = {slope:.3f}x - {plot_intercept:.3f}', xy=(3,1), xytext=(0.05, 0.9), textcoords='axes fraction')
 # Add the R2 value
 ax.annotate(f'$R^2$ = {r2:.3f}', xy=(3,1), xytext=(0.05, 0.85), textcoords='axes fraction')
 

@@ -77,8 +77,8 @@ def linear_regression_with_plot(point_arr, eol_arr, x_cont, ax=None, unicode_tit
     ax.plot(x_cont, x_cont, linestyle='dashed', color='gray')
     
     # Plot configuration
-    ax.set_xlabel("Knee Point (Cycles)")
-    ax.set_ylabel("End of Life (Cycles)")
+    ax.set_xlabel("Cycles to knee point")
+    ax.set_ylabel("Cycles to end-of-life")
     ax.set_xlim([0, np.max(x_cont)])
     ax.set_ylim([0, np.max(x_cont)])
     ax.set_aspect('equal', 'box')
@@ -87,8 +87,10 @@ def linear_regression_with_plot(point_arr, eol_arr, x_cont, ax=None, unicode_tit
     #ax.grid(alpha=0.4)
     
     # Annotate the plot, using the axes fraction argument for text coordinates
-    ax.annotate(eqn_label, xy=(3,1), xycoords='data', xytext=(0.45, 0.1), textcoords='axes fraction')
-    ax.annotate(r2_label, xy=(3,1), xycoords='data', xytext=(0.45, 0.03), textcoords='axes fraction')
+    ax.annotate(eqn_label, xy=(3,1), xycoords='data', xytext=(0.98, 0.1),
+                textcoords='axes fraction', ha="right")
+    ax.annotate(r2_label, xy=(3,1), xycoords='data', xytext=(0.98, 0.03),
+                textcoords='axes fraction', ha="right")
     
 
 
@@ -114,12 +116,12 @@ eol_vals = data['EOL'].to_numpy()
 
 # Create a range of x values to use for line of best fit
 # Find the largest knee point or EOL value across all results
-max_val = np.max(np.max(data.iloc[:,1:]))
+max_val = np.max(np.max(data.iloc[:,1:])) + 75
 x_values = np.arange(max_val)
 
 
 # Create the figure
-fig, ax = plt.subplots(2,2)
+fig, ax = plt.subplots(2,2, figsize=(2 * config.FIG_WIDTH, 2 * config.FIG_WIDTH))
 ax = ax.ravel()
 
 # For each knee identification method, call this function to do the linear regression.

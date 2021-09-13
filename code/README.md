@@ -22,9 +22,12 @@ fig, ax = plt.subplots(figsize=(2 * config.FIG_WIDTH, config.FIG_HEIGHT), nrows=
 
 ## Saving figures
 
-Save figures to `config.FIG_PATH` in both `.png` and `.eps` format (`.png` for easy viewing, `.eps` for vector graphics for the final paper:
+Save figures to `config.FIG_PATH` in both `.png` and `.eps` format (`.png` for easy viewing, `.eps` for vector graphics for the final paper):
 
 ````
 fig.savefig(config.FIG_PATH / "[FIGURE_NAME].png", format="png")
 fig.savefig(config.FIG_PATH / "[FIGURE_NAME].eps", format="eps")
 ````
+
+## Requirements
+A simple `requirements.txt` file is present for creating a virtual environment.

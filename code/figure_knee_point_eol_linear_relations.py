@@ -1,10 +1,12 @@
 from pathlib import Path
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import pickle
-import config
 from sklearn.linear_model import LinearRegression
+
+import config
 
 
 # Load the data to be plotted from CSV file
@@ -43,7 +45,7 @@ y_pred = linreg.predict(x_cont)
 
 
 # Plotting data
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(config.FIG_WIDTH * 2, 2 * config.FIG_WIDTH))
 for source in data['src'].unique():
     # Get the plotting configuration for each source
     label, color, marker = plot_dict[source].values()
@@ -56,8 +58,8 @@ for source in data['src'].unique():
 # Plot configuration
 ax.set_xlim([0, ax_lim])
 ax.set_ylim([0, ax_lim])
-ax.set_xlabel("Knee Point (Cycles)")
-ax.set_ylabel("End of Life (Cycles)")
+ax.set_xlabel("Cycles to knee point")
+ax.set_ylabel("Cycles to end-of-life")
 
 # Plot the regression line
 ax.plot(x_cont, y_pred, color='black', linewidth=1)
@@ -86,7 +88,7 @@ else:
 # Add the R2 value
 ax.annotate(f'$R^2$ = {r2:.3f}', xy=(3,1), xytext=(0.05, 0.85), textcoords='axes fraction')
 
-ax.legend() 
+ax.legend(loc="lower right")
 #plt.show() 
    
 # Save figure to PNG and EPS, once configured correctly

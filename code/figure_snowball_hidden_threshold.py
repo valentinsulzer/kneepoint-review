@@ -44,7 +44,7 @@ ax[2].plot(cycle_numbers, knee_retention, color="tab:red")
 ax[3].plot(cycle_numbers, snowball_degradation, "--", color="tab:blue")
 ax[4].plot(cycle_numbers, hidden_degradation1, ":", color="tab:purple")
 ax[4].plot(cycle_numbers, hidden_degradation2, "--", color="tab:purple")
-ax[5].plot(cycle_numbers_subset1, threshold_degradation1, ":", color="tab:red")
+ax[5].plot(cycle_numbers_subset1, threshold_degradation1, "--", color="tab:red")
 ax[5].plot(cycle_numbers_subset2, threshold_degradation2, "--", color="tab:red")
 ax[5].axhline(threshold, linestyle="--", color="black")
 ax[5].annotate("threshold", (10,3.7))
@@ -68,7 +68,7 @@ ax[3].set_ylim([-0.5, 30])
 # Set legends
 ax[3].legend(["State 1"], loc="upper left", title="Snowball")
 ax[4].legend(["State 1", "State 2"], loc="upper left", title="Hidden")
-ax[5].legend(["State 1", "State 2"], loc="upper left", title="Threshold")
+ax[5].legend(["State 1"], loc="upper left", title="Threshold")
 
 # Save figure as both .PNG and .EPS
 fig.savefig(config.FIG_PATH / "snowball_hidden_threshold.png", format="png", dpi=300)

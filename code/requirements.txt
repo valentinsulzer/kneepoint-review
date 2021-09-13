@@ -1,0 +1,7 @@
+numpy
+scipy
+matplotlib
+git+git://github.com/pybamm-team/PyBaMM@degradation
+pandas
+scikit-learn
+openpyxl

@@ -77,8 +77,8 @@ def knee_point_identification(ax,time,capacity,colour):
     # ============== LATE LIFE LINEAR MODEL ================= #
     # find late life data (assumed last 5 points)
     n = time.shape[0]
-    t_late = time[n-5:,:].reshape((5,1))
-    q_late = capacity[n-5:,:].reshape((5,1))
+    t_late = time[n-50:,:].reshape((50,1))
+    q_late = capacity[n-50:,:].reshape((50,1))
     
     # late life model
     w_late = ols(t_late,q_late)
@@ -219,8 +219,8 @@ def diao_knee(ax,time,capacity,colour):
     # ============== LATE LIFE LINEAR MODEL ================= #
     # find late life data (assumed last 5 points)
     n = time.shape[0]
-    t_late = time[n-5:,:].reshape((5,1))
-    q_late = capacity[n-5:,:].reshape((5,1))
+    t_late = time[n-50:,:].reshape((50,1))
+    q_late = capacity[n-50:,:].reshape((50,1))
     
     kernel = RBF(1e2, (8e1, 1e4))
     gp = GaussianProcessRegressor(kernel=kernel)
@@ -318,14 +318,21 @@ def dq2dt2(ax,t,q,colour):
     ax.plot(t[4:],d2qdt2[2:]*1000,color=colour)
 
 path = Path().cwd() / "data"
-m = pd.read_csv(path / 'severson2019_b2c30_health_fig03.csv')
+m = pd.read_csv(path / 'severson2019_b2c30_health_fig04.csv')
 
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
 dqdv = np.array(m['dqdv']).reshape((m['dqdv'].shape[0],1))
 
-σ = .05
+σ = .0001
 qσ = q + (np.random.randn(q.shape[0],1)*σ)
+
+# smooth capacities
+kernel = RBF(1e2, (8e1, 1e4)); RBF()
+gp = GaussianProcessRegressor(kernel=kernel)
+gp.fit(t, q)
+t_gpm = np.linspace(t.min()+50,t.max(),1000).reshape((1000,1))
+q_gpm = gp.predict(t_gpm, return_std=False)
 
 # KNEE DEFINITION ============================
 fig, ax = plt.subplots(2,1,figsize=(config.FIG_WIDTH*1,config.FIG_HEIGHT*2))
@@ -337,21 +344,26 @@ ax[0].set_ylabel('Capacity retention (%)')
 ax[0].scatter(365,93.5,color="black")
 ax[0].text(365,92.5,'Visual knee point',color="black",
           horizontalalignment='right',verticalalignment='top')
-ax[0].scatter(m['cycs'][35],m['q'][35],color=gold)
-ax[0].text(m['cycs'][35],m['q'][35]*.99,'Mathematical knee point',
+ax[0].scatter(435,88,color=gold)
+ax[0].text(435,87,'Mathematical knee point',
            color=gold,
            horizontalalignment='right',verticalalignment='top')
 ax[0].set_ylim([75, 100])
 
 # profile with noise and using second derivative
-dq2dt2(ax[1],t,q,blue)
+dq2dt2(ax[1],t_gpm,q_gpm,blue)
 ax[1].set_ylabel('Second derivative of retention/1000 (%)')
 
-dq2dt2(ax[1],t,qσ,jade)
-ax[1].text(10,-3.0,'Added noise, σ=0.05%',color=jade)
-ax[1].plot([365, 365],[-3.5, 2.5],'--',color="black")
-ax[1].plot([425, 425],[-3.5, 2.5],'--',color=gold)
-ax[1].set_ylim([-4, 3])
+ax[1].plot([365, 365],[-2.5, .5],'--',color="black")
+ax[1].plot([435, 435],[-2.5, .5],'--',color=gold)
+ax[1].set_ylim([-3, 1])
+
+# # UNCOMMENT BELOW TO SEE NOISE IMPACT
+# σ = .00007
+# qσ_gpm = q_gpm + (np.random.randn(q_gpm.shape[0],1)*σ)
+# dq2dt2(ax[1],t_gpm,qσ_gpm,jade)
+# ax[1].text(10,-2.50,'Added noise, σ='+str(σ)+'% capacity',color=jade)
+
 
 for j in range(len(ax)):
     ax[j].set_xlabel('Cycle number')
@@ -368,6 +380,12 @@ fig.savefig(config.FIG_PATH / "knee_definition.eps", format="eps")
 
 
 # KNEE IDENTIFICATION METHODS ==================
+m = pd.read_csv(path / 'severson2019_b2c30_health_fig04.csv')
+
+t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
+q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
+dqdv = np.array(m['dqdv']).reshape((m['dqdv'].shape[0],1))
+
 fig, ax = plt.subplots(2,3,figsize=(config.FIG_WIDTH*2,config.FIG_HEIGHT*1.5),
                        sharex=True, sharey=True)
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
@@ -380,7 +398,7 @@ colours = [blue, jade, gold, red, black, grey]
 methods = ['Bacon-Watts','Kneedle','Diao et al.','Zhang et al.','Bisector',' ']
 
 # This line will be changed once everything else is sorted
-ref_nums = ['ref TBC','ref TBC','ref TBC','ref TBC','ref TBC','']
+ref_nums = ['15','32','14','33','34','']
 
 # the below code is all the stuff that applies to all plots. Yes, it is ugly.
 n = 0;
@@ -388,7 +406,7 @@ for j in range(ax.shape[0]):
     for jj in range(ax.shape[1]):
         ax[j,jj].set_title(chr(97 + n), loc="left", weight="bold")
         if n<5:
-            ax[j,jj].text(0,76,methods[n]+' ['+ref_nums[n]+']',color=colours[n])
+            ax[j,jj].text(0,76,methods[n]+'$^{'+ref_nums[n]+'}$',color=colours[n])
         n = n+1
         
         if n > 3:

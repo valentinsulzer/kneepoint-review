@@ -325,7 +325,7 @@ q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
 dqdv = np.array(m['dqdv']).reshape((m['dqdv'].shape[0],1))
 
 σ = .0001
-qσ = q + (np.random.randn(q.shape[0],1)*σ)
+# qσ = q + (np.random.randn(q.shape[0],1)*σ)
 
 # smooth capacities
 kernel = RBF(1e2, (8e1, 1e4)); RBF()
@@ -334,11 +334,11 @@ gp.fit(t, q)
 t_gpm = np.linspace(t.min()+50,t.max(),1000).reshape((1000,1))
 q_gpm = gp.predict(t_gpm, return_std=False)
 
-# KNEE DEFINITION ============================
+# KNEE DEFINITION ============================ FIGURE 3
 fig, ax = plt.subplots(2,1,figsize=(config.FIG_WIDTH*1,config.FIG_HEIGHT*2))
 
 # profile
-ax[0].plot(t,qσ,color=jade)
+# ax[0].plot(t,qσ,color=jade)
 ax[0].plot(t,q,color=blue)
 ax[0].set_ylabel('Capacity retention (%)')
 ax[0].scatter(365,93.5,color="black")
@@ -350,12 +350,25 @@ ax[0].text(435,87,'Mathematical knee point',
            horizontalalignment='right',verticalalignment='top')
 ax[0].set_ylim([75, 100])
 
-# profile with noise and using second derivative
+# calculating the knee points using second derivative
+
+# first, this is the REAL (i.e. measured) capacity curve, but downselected
+# to help the visibility of the noise issue:
+n0=0; n1=508; n2=5;
+dq2dt2(ax[1],t[np.array(range(n0,n1,n2))],q[np.array(range(n0,n1,n2))],grey)
+
+# second, this is a smoothed capacity curve which produces a nice results:
 dq2dt2(ax[1],t_gpm,q_gpm,blue)
+
+# add text to label the two curves
+ax[1].text(50,-1.8,'Observed capacity',color=grey)
+ax[1].text(50,-2.2,'Smoothed capacity',color=blue)
+
 ax[1].set_ylabel('Second derivative of retention/1000 (%)')
 
 ax[1].plot([365, 365],[-2.5, .5],'--',color="black")
 ax[1].plot([435, 435],[-2.5, .5],'--',color=gold)
+# set limit to focus on the smoothed result
 ax[1].set_ylim([-3, 1])
 
 # # UNCOMMENT BELOW TO SEE NOISE IMPACT
@@ -379,7 +392,7 @@ fig.savefig(config.FIG_PATH / "knee_definition.eps", format="eps")
 
 
 
-# KNEE IDENTIFICATION METHODS ==================
+# KNEE IDENTIFICATION METHODS ================== FIGURE 4
 m = pd.read_csv(path / 'severson2019_b2c30_health_fig04.csv')
 
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))

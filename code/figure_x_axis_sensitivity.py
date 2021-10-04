@@ -34,10 +34,10 @@ fig, ax = plt.subplots(figsize=(2 * config.FIG_WIDTH, 2 * config.FIG_HEIGHT),
 ax = ax.ravel()
 
 # Plot cycle number/throughput data
-ax[0].plot(cycle_numbers, deg1, color="tab:blue")
-ax[0].plot(cycle_numbers, deg2, color="tab:red")
-ax[1].plot(deg1_cum_capacity / 100, deg1, color="tab:blue")
-ax[1].plot(deg2_cum_capacity / 100, deg2, color="tab:red")
+ax[0].plot(cycle_numbers, deg1, color="tab:blue", label="Cell 1")
+ax[0].plot(cycle_numbers, deg2, color="tab:red", label="Cell 2")
+ax[1].plot(deg1_cum_capacity / 100, deg1, color="tab:blue", label="Cell 1")
+ax[1].plot(deg2_cum_capacity / 100, deg2, color="tab:red", label="Cell 2")
 
 # Set axes labels
 ax[0].set_xlabel("Cycle number")
@@ -49,6 +49,7 @@ for k in np.arange(2):
     ax[k].set_ylim([50, 100.5])
     ax[k].set_title(chr(97 + k), loc="left", weight="bold")
     ax[k].set_ylabel("Retention (%)")
+    ax[k].legend(loc="lower left", title="Synthetic data")
 
 # Plot Wang data (cycle number vs time)
 columns = wang_data["Cycle Number"].columns
@@ -66,9 +67,12 @@ for k in np.arange(5):
 
 # Settings
 for k in [2, 3]:
-    ax[k].legend()
+    ax[k].legend(title="Wang et al.[30]", loc="upper right")
     ax[k].set_title(chr(97 + k), loc="left", weight="bold")
     ax[k].set_ylabel("Capacity retention (%)")
+    
+ax[3].annotate("\nLFP\graphite cylindrical cells\nC/2 charge/discharge, 60°C",
+               xy = (5, 67))
 
 ax[2].set_xlim([-1, 1e4])
 ax[3].set_xlim([-1, 200])

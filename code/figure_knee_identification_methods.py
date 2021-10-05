@@ -424,7 +424,7 @@ t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
 IC = np.array(m['dqdv']).reshape((m['cycs'].shape[0],1))
 
-colours = [blue, jade, gold, red, black, grey]
+colours = [blue, jade, claret, red, black, gold, grey]
 
 # methods = ['Bacon-Watts','Kneedle','Diao et al.','Zhang et al.','Bisector','Comparison']
 methods = ['Bacon-Watts','Kneedle','Diao et al.','Zhang et al.','Bisector',' ']
@@ -448,7 +448,7 @@ for j in range(ax.shape[0]):
             ax[j,jj].set_ylabel('Capacity retention (%)')
 
 # Below are the actual calculations
-TK = np.zeros((5,2))
+TK = np.zeros((6,2))
 # Bacon-Watts
 TK[0,0],TK[0,1] = bacon_watts_knee(ax[0,0],t,q,colours[0])
 # Kneedle
@@ -459,12 +459,14 @@ TK[2,0],TK[2,1] = diao_knee(ax[0,2],t,q,colours[2])
 TK[3,0],TK[3,1] = zhang_knee(ax[1,0],t,q,dqdv,colours[3])
 # Bisector
 TK[4,0],TK[4,1] = knee_point_identification(ax[1,1],t,q,colours[4]);
+# second derivative
+TK[5,0] = 435; TK[5,1] = 88;
 
 # plot capacity
-ax[1,2].plot(t,q,color=colours[5])
+ax[1,2].plot(t,q,color=colours[6])
 # add in the knee estimates as a coloured scatter with vertical line for those 
 # incapable of zooming a pdf
-for j in range(5):   
+for j in range(6):   
     ax[1,2].scatter(TK[j,0],TK[j,1],color=colours[j],marker='x')
     ax[1,2].plot(np.array([TK[j,0],TK[j,0]]),np.array([80,98]),
                 '--',color=colours[j])
@@ -473,14 +475,14 @@ for j in range(5):
 # new axes
 ax_in = ax[1,2].inset_axes([10,80,310,12], transform=ax[1,2].transData)
 # capacity curve
-ax_in.plot(t,q,color=colours[5])
+ax_in.plot(t,q,color=colours[6])
 # add in the knee estimates
-for j in range(5):
+for j in range(6):
     ax_in.scatter(TK[j,0],TK[j,1],color=colours[j],marker='x')
     ax_in.plot(np.array([TK[j,0],TK[j,0]]),np.array([80,98]),
                 '--',color=colours[j])
 ax_in.set_yticks([])
-ax_in.set_xlim([365, 445])
+ax_in.set_xlim([360, 445])
 ax_in.set_ylim([85, 95])
     
 # completely unnecessary if you are the kind of wizard who doesn't sanity 

@@ -169,30 +169,51 @@ def kneedle_identification(ax,time,capacity,colour):
     # guarantee the inputs are column vectors
     time = time.reshape((time.shape[0],1))
     capacity = capacity.reshape((capacity.shape[0],1))
+
+    # actual kneedle algorithm from Satopaa
     
-    kernel = RBF(1e2, (9e1, 1e4))
-    gp = GaussianProcessRegressor(kernel=kernel)
-    gp.fit(time, capacity)
-    t_gpm = np.linspace(time.min(),time.max(),1000).reshape((1000,1))
-    q_gpm = gp.predict(t_gpm, return_std=False)
+    # nomalise the capacity curve
+    d_time = time.max()-time.min();
+    d_cap = capacity.max()-capacity.min();
+    q_norm = (capacity - capacity.min())/d_cap;
+    t_norm = (time - time.min())/d_time;
     
-    # find second derivative of smoothed function
-    d2q = d2qdt2(t_gpm,q_gpm)
-    knee_indx = np.argmin(d2q[500:])
-    t_knee = t_gpm[knee_indx+500]
-    q_knee = q_gpm[knee_indx+500]
+    # store 1/sqrt(2) = cos(\theta)
+    sqrt2 = .5**.5;
     
-    # plot smoothed second differential
-    ax.plot(t_gpm[100:t_gpm.shape[0]-2],d2q[100:]*5*10**3+94,':',color=grey)
+    # create new x variable
+    x = sqrt2*t_norm - sqrt2*q_norm;
+    # rotate to make the bisector the x-axis from 0 to 1;
+    y = sqrt2*t_norm + sqrt2*q_norm;
     
-    spl_cap = spline(t_gpm,q_gpm,k=5)
-    q_knee = spl_cap(t_knee)
+    # find maximum deviation
+    indx = np.argmax(y)
+    
+    x_indx = x[indx]; y_indx = y[indx];
+    
+    t_norm_knee = sqrt2*(x_indx+y_indx);
+    q_norm_knee = sqrt2*(-x_indx+y_indx);
+    
+    t_knee = (t_norm_knee*d_time) + time.min()
+    q_knee = (q_norm_knee*d_cap) + capacity.min()
+    
+    x_axis_x = sqrt2*(x+y_indx);
+    x_axis_y = sqrt2*(-x+y_indx);
+    x_axis_t = (x_axis_x*d_time) + time.min()
+    x_axis_q = (x_axis_y*d_cap) + capacity.min()
+    
+    # plot an example x-axis for the kneedle method
+    ax.plot(x_axis_t[40:]-140,x_axis_q[40:]-5,'--',color=grey)
+    
+    # plot the 45 degree bisector (this is not automated because I want to 
+    # make something that can be understood on Figure 4)
+    ax.plot(np.array([262,365]),np.array([86.8,93.53]),'--',color=grey)
     
     # mark the knee point
     ax.scatter(t_knee,q_knee,color="black",marker='s')
     ax.plot(np.array([t_knee,t_knee]),np.array([80,98]),
             '--',color=grey)
-    ax.text(100,90,'second derivative',color=grey)
+    # ax.text(-10,85,'peak height from chord',color=grey)
     
     return t_knee, q_knee
     
@@ -388,8 +409,6 @@ fig.tight_layout()
 # Save figure as both .PNG and .EPS
 fig.savefig(config.FIG_PATH / "knee_definition.png", format="png", dpi=300)
 fig.savefig(config.FIG_PATH / "knee_definition.eps", format="eps")
-
-
 
 
 # KNEE IDENTIFICATION METHODS ================== FIGURE 4

@@ -381,9 +381,16 @@ dq2dt2(ax[1],t[np.array(range(n0,n1,n2))],q[np.array(range(n0,n1,n2))],grey)
 # second, this is a smoothed capacity curve which produces a nice results:
 dq2dt2(ax[1],t_gpm,q_gpm,blue)
 
+# third a spline derivative that uses the spline package. the spline needs to 
+# run through data which has previously been smoothed. Fortunately that 
+spline_q = spline(t, q, k=5)
+spl_dq2 = spline_q.derivative(n=2)
+ax[1].plot(t,spl_dq2(t)*10**3,color=red)
+
 # add text to label the two curves
 ax[1].text(50,-1.8,'Observed capacity',color=grey)
-ax[1].text(50,-2.2,'Smoothed capacity',color=blue)
+ax[1].text(50,-2.2,'GP smoothed capacity',color=blue)
+ax[1].text(50,-2.6,'Polynomial spline',color=red)
 
 ax[1].set_ylabel('Second derivative of retention/1000 (%)')
 
@@ -398,7 +405,6 @@ ax[1].set_ylim([-3, 1])
 # dq2dt2(ax[1],t_gpm,qσ_gpm,jade)
 # ax[1].text(10,-2.50,'Added noise, σ='+str(σ)+'% capacity',color=jade)
 
-
 for j in range(len(ax)):
     ax[j].set_xlabel('Cycle number')
     ax[j].set_xlim([-5, 505])
@@ -409,7 +415,6 @@ fig.tight_layout()
 # Save figure as both .PNG and .EPS
 fig.savefig(config.FIG_PATH / "knee_definition.png", format="png", dpi=300)
 fig.savefig(config.FIG_PATH / "knee_definition.eps", format="eps")
-
 
 # KNEE IDENTIFICATION METHODS ================== FIGURE 4
 m = pd.read_csv(path / 'severson2019_b2c30_health_fig04.csv')

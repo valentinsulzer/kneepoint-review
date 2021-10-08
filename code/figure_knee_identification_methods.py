@@ -349,7 +349,10 @@ dqdv = np.array(m['dqdv']).reshape((m['dqdv'].shape[0],1))
 # qσ = q + (np.random.randn(q.shape[0],1)*σ)
 
 # smooth capacities
-kernel = RBF(1e2, (8e1, 1e4)); RBF()
+# this GP is set with a very high minimum of the lengthscale (200 cycles) to 
+# prevent annoying plot results. This is explicitly not a recommended GP
+# setup. We advise a minimum of 1e-4 (or similar)
+kernel = RBF(1e3, (2e2, 1e4)); 
 gp = GaussianProcessRegressor(kernel=kernel)
 gp.fit(t, q)
 t_gpm = np.linspace(t.min()+50,t.max(),1000).reshape((1000,1))
@@ -358,15 +361,19 @@ q_gpm = gp.predict(t_gpm, return_std=False)
 # KNEE DEFINITION ============================ FIGURE 3
 fig, ax = plt.subplots(2,1,figsize=(config.FIG_WIDTH*1,config.FIG_HEIGHT*2))
 
+# input the derivate calculated knee point manually. This helps with control.
+deriv_knee = np.array([442,87.1])
+
 # profile
-# ax[0].plot(t,qσ,color=jade)
-ax[0].plot(t,q,color=blue)
+
+ax[0].plot(t,q,color=blue);
+# ax[0].plot(t_gpm,q_gpm,color=jade)
 ax[0].set_ylabel('Capacity retention (%)')
 ax[0].scatter(365,93.5,color="black")
 ax[0].text(365,92.5,'Visual knee point',color="black",
           horizontalalignment='right',verticalalignment='top')
-ax[0].scatter(435,88,color=gold)
-ax[0].text(435,87,'Mathematical knee point',
+ax[0].scatter(deriv_knee[0],deriv_knee[1],color=gold)
+ax[0].text(deriv_knee[0]-3,deriv_knee[1]-.5,'Mathematical knee point',
            color=gold,
            horizontalalignment='right',verticalalignment='top')
 ax[0].set_ylim([75, 100])
@@ -394,8 +401,10 @@ ax[1].text(50,-2.6,'Polynomial spline',color=red)
 
 ax[1].set_ylabel('Second derivative of retention/1000 (%)')
 
+
+
 ax[1].plot([365, 365],[-2.5, .5],'--',color="black")
-ax[1].plot([435, 435],[-2.5, .5],'--',color=gold)
+ax[1].plot([deriv_knee[0], deriv_knee[0]],[-2.5, .5],'--',color=gold)
 # set limit to focus on the smoothed result
 ax[1].set_ylim([-3, 1])
 
@@ -465,7 +474,7 @@ TK[3,0],TK[3,1] = zhang_knee(ax[1,0],t,q,dqdv,colours[3])
 # Bisector
 TK[4,0],TK[4,1] = knee_point_identification(ax[1,1],t,q,colours[4]);
 # second derivative
-TK[5,0] = 435; TK[5,1] = 88;
+TK[5,0] = deriv_knee[0]; TK[5,1] = deriv_knee[1];
 
 # plot capacity
 ax[1,2].plot(t,q,color=colours[6])

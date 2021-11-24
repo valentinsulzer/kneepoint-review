@@ -59,7 +59,7 @@ for source in data['src'].unique():
 ax.set_xlim([0, ax_lim])
 ax.set_ylim([0, ax_lim])
 ax.set_xlabel("Cycles to knee point")
-ax.set_ylabel("Cycles to end-of-life")
+ax.set_ylabel("Cycles to end-of-life (80% of nominal capacity)")
 
 # Plot the regression line
 ax.plot(x_cont, y_pred, color='black', linewidth=1)

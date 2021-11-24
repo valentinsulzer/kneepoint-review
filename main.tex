@@ -593,7 +593,7 @@ In summary, the impact of interactions, heterogeneity, and variation on knee pat
 
 \section{Factors influencing the knee}
 
-With a foundation for the fundamentals of knee pathways and internal state trajectories in place, we surveyed the literature to identify empirical case studies in which the knee point can be controlled via changes to a single variable. Table A\ref{tab:} classifies these case studies into three categories based on the nature of the variable: cell design, testing conditions, and sampling/testing variability (a special case of these two categories). Some cell designs and testing conditions have a consistent impact on the emergence of the knee; for example, higher charging rates and wider cycling voltage ranges accelerate the appearance of the knee. However, the impact of other variables (e.g., discharging rate and rest times) is less clear and may depend on the specific cell design and operating conditions.
+With a foundation for the fundamentals of knee pathways and internal state trajectories in place, we surveyed the literature to identify empirical case studies in which the knee point can be controlled via changes to a single variable. Table A\ref{} classifies these case studies into three categories based on the nature of the variable: cell design, testing conditions, and sampling/testing variability (a special case of these two categories). Some cell designs and testing conditions have a consistent impact on the emergence of the knee; for example, higher charging rates and wider cycling voltage ranges accelerate the appearance of the knee. However, the impact of other variables (e.g., discharging rate and rest times) is less clear and may depend on the specific cell design and operating conditions.
 
 \subsection{Cell design}
 
@@ -697,7 +697,7 @@ We then offer an outlook on knee modeling and prediction work based on our findi
 
 \subsubsection{Empirical relationship between knees, resistance elbows, and end-of-life}
 
-While predicting knees is important, predicting end-of-life is more directly relevant for estimating product performance and warranty costs. In Figure \ref{fig:knees2EOL}, we display the relationship between knee locations and end-of-life (defined as 80\% of nominal capacity) across 17 datasets (303 cells) and different knee pathways, cell types (chemistry, geometry, size, lab-made vs. commericial, etc.), and testing conditions. The data used to generate Figure \ref{fig:knees2EOL} is summarized in Table \ref{table:experimental_summary} and Supplementary Discussion 3; data was obtained via direct access to the corresponding databases when possible\cite{baumhofer_production_2014,diao_accelerated_2019,severson_data-driven_2019,willenberg_high-precision_2020,attia_closed-loop_2020} or via \textit{WebPlotDigitizer}\cite{dos_reis_lithium-ion_2021}.
+While predicting knees is important, predicting end-of-life is more directly relevant for estimating product performance and warranty costs. In Figure \ref{fig:knees2EOL}, we display the relationship between knee locations and end-of-life (defined as 80\% of nominal capacity) across 17 datasets (303 cells) and different knee pathways, cell types (chemistry, geometry, size, lab-made vs. commericial, etc.), and testing conditions. The data used to generate Figure \ref{fig:knees2EOL} is summarized in Table A\ref{tab:experimental_summary} and Supplementary Discussion 3; data was obtained via direct access to the corresponding databases when possible\cite{baumhofer_production_2014,diao_accelerated_2019,severson_data-driven_2019,willenberg_high-precision_2020,attia_closed-loop_2020} or via \textit{WebPlotDigitizer}\cite{dos_reis_lithium-ion_2021}.
 We find a strong linear relationship from the knee point to the end-of-life. Apart from the data presented in Schuster et al.\cite{schuster_nonlinear_2015}, the knee points take place at or before the end-of-life.
 Thus, predicting the knee location can often provide an estimate of end-of-life as well.
 
@@ -713,7 +713,7 @@ Thus, predicting the knee location can often provide an estimate of end-of-life 
 %   \caption{Linear regression of knee-point to EOL point}
   \label{fig:kneepoint2EOL}
 % \end{subfigure}%
-\caption{Linear relation between knee point and capacity EOL (defined as 80\% capacity) for a total of 303 cells across 17 datasets. R-square goodness-of-fit measure is $0.874$. Bacon-Watts algorithm employed for knee point identification. For details on the data, see Table A\ref{table:experimental_summary} and Table SI in Section 3 of Supplementary Information.}
+\caption{Relationship between knee point and capacity end-of-life (defined as 80\% of nominal capacity) for a total of 303 cells across 17 datasets. The two metrics are linearly correlated ($R^2 = 0.874$). The Bacon-Watts algorithm was employed for knee point identification. For details on the data, see Table A\ref{tab:experimental_summary} and Supplementary Discussion 3.}
 \label{fig:knees2EOL}
 \end{figure}
 
@@ -989,7 +989,6 @@ Writing – review \& editing, P.M.A., G.d.R., M.D., P.G., S.G., D.A.H., E.K., Y
 \begin{landscape}
 \begin{table}[]
 \caption{Influence of experimental parameters on knee onset.}
-\label{table:experimental_summary}
 \scalebox{0.5}{
 \begin{tabular}{|c|c|l|l|l|l|l|}
 \hline
@@ -1104,6 +1103,7 @@ Writing – review \& editing, P.M.A., G.d.R., M.D., P.G., S.G., D.A.H., E.K., Y
  \hline
 \end{tabular}
 }
+\label{tab:experimental_summary}
 \end{table}
 
 \end{landscape}
@@ -1117,9 +1117,8 @@ Writing – review \& editing, P.M.A., G.d.R., M.D., P.G., S.G., D.A.H., E.K., Y
 % \begin{landscape}
 
 \begin{table}
-    % \caption{Knee case studies by category (in progress).}
     \caption{Knee case studies by category (in progress).}
-    \label{table:expt_summary}
+    \label{tab:model_summary}
     \centering
     \small
 \scalebox{0.7}{

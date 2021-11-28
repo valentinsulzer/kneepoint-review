@@ -16,7 +16,7 @@ cycle_numbers = np.arange(500)
 snowball_degradation = np.exp(cycle_numbers / 150) - 1
 
 hidden_degradation1 = cycle_numbers / 45
-hidden_degradation2 = np.exp(cycle_numbers / 150) - 1
+hidden_degradation2 = cycle_numbers / 8 - 36
 
 cycle_numbers_subset1 = np.arange(322)
 threshold_degradation1 = cycle_numbers_subset1 / 100

@@ -77,8 +77,8 @@ def knee_point_identification(ax,time,capacity,colour):
     # ============== LATE LIFE LINEAR MODEL ================= #
     # find late life data (assumed last 5 points)
     n = time.shape[0]
-    t_late = time[n-5:,:].reshape((5,1))
-    q_late = capacity[n-5:,:].reshape((5,1))
+    t_late = time[n-50:,:].reshape((50,1))
+    q_late = capacity[n-50:,:].reshape((50,1))
     
     # late life model
     w_late = ols(t_late,q_late)
@@ -169,30 +169,51 @@ def kneedle_identification(ax,time,capacity,colour):
     # guarantee the inputs are column vectors
     time = time.reshape((time.shape[0],1))
     capacity = capacity.reshape((capacity.shape[0],1))
+
+    # actual kneedle algorithm from Satopaa
     
-    kernel = RBF(1e2, (9e1, 1e4))
-    gp = GaussianProcessRegressor(kernel=kernel)
-    gp.fit(time, capacity)
-    t_gpm = np.linspace(time.min(),time.max(),1000).reshape((1000,1))
-    q_gpm = gp.predict(t_gpm, return_std=False)
+    # nomalise the capacity curve
+    d_time = time.max()-time.min();
+    d_cap = capacity.max()-capacity.min();
+    q_norm = (capacity - capacity.min())/d_cap;
+    t_norm = (time - time.min())/d_time;
     
-    # find second derivative of smoothed function
-    d2q = d2qdt2(t_gpm,q_gpm)
-    knee_indx = np.argmin(d2q[500:])
-    t_knee = t_gpm[knee_indx+500]
-    q_knee = q_gpm[knee_indx+500]
+    # store 1/sqrt(2) = cos(\theta)
+    sqrt2 = .5**.5;
     
-    # plot smoothed second differential
-    ax.plot(t_gpm[100:t_gpm.shape[0]-2],d2q[100:]*5*10**3+94,':',color=grey)
+    # create new x variable
+    x = sqrt2*t_norm - sqrt2*q_norm;
+    # rotate to make the bisector the x-axis from 0 to 1;
+    y = sqrt2*t_norm + sqrt2*q_norm;
     
-    spl_cap = spline(t_gpm,q_gpm,k=5)
-    q_knee = spl_cap(t_knee)
+    # find maximum deviation
+    indx = np.argmax(y)
+    
+    x_indx = x[indx]; y_indx = y[indx];
+    
+    t_norm_knee = sqrt2*(x_indx+y_indx);
+    q_norm_knee = sqrt2*(-x_indx+y_indx);
+    
+    t_knee = (t_norm_knee*d_time) + time.min()
+    q_knee = (q_norm_knee*d_cap) + capacity.min()
+    
+    x_axis_x = sqrt2*(x+y_indx);
+    x_axis_y = sqrt2*(-x+y_indx);
+    x_axis_t = (x_axis_x*d_time) + time.min()
+    x_axis_q = (x_axis_y*d_cap) + capacity.min()
+    
+    # plot an example x-axis for the kneedle method
+    ax.plot(x_axis_t[40:]-140,x_axis_q[40:]-5,'--',color=grey)
+    
+    # plot the 45 degree bisector (this is not automated because I want to 
+    # make something that can be understood on Figure 4)
+    ax.plot(np.array([262,365]),np.array([86.8,93.53]),'--',color=grey)
     
     # mark the knee point
     ax.scatter(t_knee,q_knee,color="black",marker='s')
     ax.plot(np.array([t_knee,t_knee]),np.array([80,98]),
             '--',color=grey)
-    ax.text(100,90,'second derivative',color=grey)
+    # ax.text(-10,85,'peak height from chord',color=grey)
     
     return t_knee, q_knee
     
@@ -219,8 +240,8 @@ def diao_knee(ax,time,capacity,colour):
     # ============== LATE LIFE LINEAR MODEL ================= #
     # find late life data (assumed last 5 points)
     n = time.shape[0]
-    t_late = time[n-5:,:].reshape((5,1))
-    q_late = capacity[n-5:,:].reshape((5,1))
+    t_late = time[n-50:,:].reshape((50,1))
+    q_late = capacity[n-50:,:].reshape((50,1))
     
     kernel = RBF(1e2, (8e1, 1e4))
     gp = GaussianProcessRegressor(kernel=kernel)
@@ -318,40 +339,80 @@ def dq2dt2(ax,t,q,colour):
     ax.plot(t[4:],d2qdt2[2:]*1000,color=colour)
 
 path = Path().cwd() / "data"
-m = pd.read_csv(path / 'severson2019_b2c30_health_fig03.csv')
+m = pd.read_csv(path / 'severson2019_b2c30_health_fig04.csv')
 
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
 dqdv = np.array(m['dqdv']).reshape((m['dqdv'].shape[0],1))
 
-σ = .05
-qσ = q + (np.random.randn(q.shape[0],1)*σ)
+σ = .0001
+# qσ = q + (np.random.randn(q.shape[0],1)*σ)
 
-# KNEE DEFINITION ============================
+# smooth capacities
+# this GP is set with a very high minimum of the lengthscale (200 cycles) to 
+# prevent annoying plot results. This is explicitly not a recommended GP
+# setup. We advise a minimum of 1e-4 (or similar)
+kernel = RBF(1e3, (2e2, 1e4)); 
+gp = GaussianProcessRegressor(kernel=kernel)
+gp.fit(t, q)
+t_gpm = np.linspace(t.min()+50,t.max(),1000).reshape((1000,1))
+q_gpm = gp.predict(t_gpm, return_std=False)
+
+# KNEE DEFINITION ============================ FIGURE 3
 fig, ax = plt.subplots(2,1,figsize=(config.FIG_WIDTH*1,config.FIG_HEIGHT*2))
 
+# input the derivate calculated knee point manually. This helps with control.
+deriv_knee = np.array([442,87.1])
+
 # profile
-ax[0].plot(t,qσ,color=jade)
-ax[0].plot(t,q,color=blue)
+
+ax[0].plot(t,q,color=blue);
+# ax[0].plot(t_gpm,q_gpm,color=jade)
 ax[0].set_ylabel('Capacity retention (%)')
 ax[0].scatter(365,93.5,color="black")
 ax[0].text(365,92.5,'Visual knee point',color="black",
           horizontalalignment='right',verticalalignment='top')
-ax[0].scatter(m['cycs'][35],m['q'][35],color=gold)
-ax[0].text(m['cycs'][35],m['q'][35]*.99,'Mathematical knee point',
+ax[0].scatter(deriv_knee[0],deriv_knee[1],color=gold)
+ax[0].text(deriv_knee[0]-3,deriv_knee[1]-.5,'Mathematical knee point',
            color=gold,
            horizontalalignment='right',verticalalignment='top')
 ax[0].set_ylim([75, 100])
 
-# profile with noise and using second derivative
-dq2dt2(ax[1],t,q,blue)
+# calculating the knee points using second derivative
+
+# first, this is the REAL (i.e. measured) capacity curve, but downselected
+# to help the visibility of the noise issue:
+n0=0; n1=508; n2=5;
+dq2dt2(ax[1],t[np.array(range(n0,n1,n2))],q[np.array(range(n0,n1,n2))],grey)
+
+# second, this is a smoothed capacity curve which produces a nice results:
+dq2dt2(ax[1],t_gpm,q_gpm,blue)
+
+# third a spline derivative that uses the spline package. the spline needs to 
+# run through data which has previously been smoothed. Fortunately that 
+spline_q = spline(t, q, k=5)
+spl_dq2 = spline_q.derivative(n=2)
+ax[1].plot(t,spl_dq2(t)*10**3,color=red)
+
+# add text to label the two curves
+ax[1].text(50,-1.8,'Observed capacity',color=grey)
+ax[1].text(50,-2.2,'GP smoothed capacity',color=blue)
+ax[1].text(50,-2.6,'Polynomial spline',color=red)
+
 ax[1].set_ylabel('Second derivative of retention/1000 (%)')
 
-dq2dt2(ax[1],t,qσ,jade)
-ax[1].text(10,-3.0,'Added noise, σ=0.05%',color=jade)
-ax[1].plot([365, 365],[-3.5, 2.5],'--',color="black")
-ax[1].plot([425, 425],[-3.5, 2.5],'--',color=gold)
-ax[1].set_ylim([-4, 3])
+
+
+ax[1].plot([365, 365],[-2.5, .5],'--',color="black")
+ax[1].plot([deriv_knee[0], deriv_knee[0]],[-2.5, .5],'--',color=gold)
+# set limit to focus on the smoothed result
+ax[1].set_ylim([-3, 1])
+
+# # UNCOMMENT BELOW TO SEE NOISE IMPACT
+# σ = .00007
+# qσ_gpm = q_gpm + (np.random.randn(q_gpm.shape[0],1)*σ)
+# dq2dt2(ax[1],t_gpm,qσ_gpm,jade)
+# ax[1].text(10,-2.50,'Added noise, σ='+str(σ)+'% capacity',color=jade)
 
 for j in range(len(ax)):
     ax[j].set_xlabel('Cycle number')
@@ -364,23 +425,26 @@ fig.tight_layout()
 fig.savefig(config.FIG_PATH / "knee_definition.png", format="png", dpi=300)
 fig.savefig(config.FIG_PATH / "knee_definition.eps", format="eps")
 
+# KNEE IDENTIFICATION METHODS ================== FIGURE 4
+m = pd.read_csv(path / 'severson2019_b2c30_health_fig04.csv')
 
+t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
+q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
+dqdv = np.array(m['dqdv']).reshape((m['dqdv'].shape[0],1))
 
-
-# KNEE IDENTIFICATION METHODS ==================
 fig, ax = plt.subplots(2,3,figsize=(config.FIG_WIDTH*2,config.FIG_HEIGHT*1.5),
                        sharex=True, sharey=True)
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
 IC = np.array(m['dqdv']).reshape((m['cycs'].shape[0],1))
 
-colours = [blue, jade, gold, red, black, grey]
+colours = [blue, jade, claret, red, black, gold, grey]
 
 # methods = ['Bacon-Watts','Kneedle','Diao et al.','Zhang et al.','Bisector','Comparison']
 methods = ['Bacon-Watts','Kneedle','Diao et al.','Zhang et al.','Bisector',' ']
 
 # This line will be changed once everything else is sorted
-ref_nums = ['ref TBC','ref TBC','ref TBC','ref TBC','ref TBC','']
+ref_nums = ['15','32','14','33','34','']
 
 # the below code is all the stuff that applies to all plots. Yes, it is ugly.
 n = 0;
@@ -388,7 +452,7 @@ for j in range(ax.shape[0]):
     for jj in range(ax.shape[1]):
         ax[j,jj].set_title(chr(97 + n), loc="left", weight="bold")
         if n<5:
-            ax[j,jj].text(0,76,methods[n]+' ['+ref_nums[n]+']',color=colours[n])
+            ax[j,jj].text(0,76,methods[n]+'$^{'+ref_nums[n]+'}$',color=colours[n])
         n = n+1
         
         if n > 3:
@@ -398,7 +462,7 @@ for j in range(ax.shape[0]):
             ax[j,jj].set_ylabel('Capacity retention (%)')
 
 # Below are the actual calculations
-TK = np.zeros((5,2))
+TK = np.zeros((6,2))
 # Bacon-Watts
 TK[0,0],TK[0,1] = bacon_watts_knee(ax[0,0],t,q,colours[0])
 # Kneedle
@@ -409,12 +473,14 @@ TK[2,0],TK[2,1] = diao_knee(ax[0,2],t,q,colours[2])
 TK[3,0],TK[3,1] = zhang_knee(ax[1,0],t,q,dqdv,colours[3])
 # Bisector
 TK[4,0],TK[4,1] = knee_point_identification(ax[1,1],t,q,colours[4]);
+# second derivative
+TK[5,0] = deriv_knee[0]; TK[5,1] = deriv_knee[1];
 
 # plot capacity
-ax[1,2].plot(t,q,color=colours[5])
+ax[1,2].plot(t,q,color=colours[6])
 # add in the knee estimates as a coloured scatter with vertical line for those 
 # incapable of zooming a pdf
-for j in range(5):   
+for j in range(6):   
     ax[1,2].scatter(TK[j,0],TK[j,1],color=colours[j],marker='x')
     ax[1,2].plot(np.array([TK[j,0],TK[j,0]]),np.array([80,98]),
                 '--',color=colours[j])
@@ -423,14 +489,14 @@ for j in range(5):
 # new axes
 ax_in = ax[1,2].inset_axes([10,80,310,12], transform=ax[1,2].transData)
 # capacity curve
-ax_in.plot(t,q,color=colours[5])
+ax_in.plot(t,q,color=colours[6])
 # add in the knee estimates
-for j in range(5):
+for j in range(6):
     ax_in.scatter(TK[j,0],TK[j,1],color=colours[j],marker='x')
     ax_in.plot(np.array([TK[j,0],TK[j,0]]),np.array([80,98]),
                 '--',color=colours[j])
 ax_in.set_yticks([])
-ax_in.set_xlim([365, 445])
+ax_in.set_xlim([360, 445])
 ax_in.set_ylim([85, 95])
     
 # completely unnecessary if you are the kind of wizard who doesn't sanity 

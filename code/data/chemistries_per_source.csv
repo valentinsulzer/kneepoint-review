@@ -1,0 +1,22 @@
+Dict entry,Reference,Year,Chemistry,Chemistry (other),Figures
+Aiken ('20),aiken,('20),NMC/Gr,,
+Attia ('20),attia,('20),LFP/Gr,,
+Baumhofer ('14),baumhofer,('14),NMC/Gr,,
+Broussely ('05),broussely,('05),NCA/Gr,,
+Burns ('13),burns,('13),NCA/Gr,,
+Burzynski ('21),burzynski,('21),LCO/Gr,,
+Coron ('20),coron,('20),NMC/Gr,LMO+NMC/Gr,
+Diao ('19),diao,('19),LCO/Gr,,
+Dubarry ('11),dubarry,('11),LMO/Gr,,
+Epding ('19),epding,('19),LMO+NMC/Gr,,
+Keil ('16),keil_charging,('16),LMO+NMC/Gr,,Fig 8c 3A CCCV + 50mV (C); Fig 10a 1A CCCV (A);
+Keil ('16),keil_charging,('16),LMO+LCO/Gr,,Fig 10a 1A CCCV (A); Fig 10b 3A CCCV (B);
+Keil ('16),keil_charging,('16),LFP/Gr,,Fig 10c 5A CCCV (C)
+Keil ('19),keil_linear,('19),NMC/Gr,,
+Klett ('14),klett,('14),LFP/Gr,,
+Martinez-Laserna ('18),martinez,('18),NMC/Gr,,
+Petzl ('15),petzl,('15),LFP/Gr,,
+Schuster ('15),schuster,('15),NMC/Gr,,
+Severson ('19),severson,('19),LFP/Gr,,
+Willenberg ('20),willenberg,('20),NCA/Gr+Si,,
+Zhang ('20),zhang,('20),NMC/Gr,,

@@ -33,6 +33,7 @@ fig, ax = plt.subplots(figsize=(config.FIG_WIDTH, config.FIG_HEIGHT * 2),
 ax = ax.ravel()
 
 # Plot
+# Since some of the series are duplicate cells, keep track of them
 previous_label = ""
 label_counter = 0
 for k in np.arange(len(df_capacity.columns) / 2):

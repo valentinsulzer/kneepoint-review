@@ -72,9 +72,9 @@ for k in np.arange(2):
 ax[0].set_xlim([0, 1800])
 ax[1].set_xlim([0, 600])
 
-ax[0].annotate("48 NMC/graphite cylindrical cells\n~1C/~1C between 3.5 V and 3.9 V\n25°C",
+ax[0].annotate("Baumhöfer et al.\n48 NMC/graphite cylindrical cells\n~1C/~1C between 3.5 V and 3.9 V\n25°C",
                xy=(90, 62))
-ax[1].annotate("24 LCO/graphite pouch cells\n1C/10C between 3.0 V and 4.35 V\n25°C",
+ax[1].annotate("Harris et al.\n24 LCO/graphite pouch cells\n1C/10C between 3.0 V and 4.35 V\n25°C",
                xy=(30, 62))
 
 # Save figure as both .PNG and .EPS

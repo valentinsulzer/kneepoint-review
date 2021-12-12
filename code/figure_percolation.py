@@ -63,7 +63,7 @@ ax.set_xlim([0, 1])
 ax.set_ylim([0, 1])
 
 # Add legend
-ax.legend(bbox_to_anchor=(0, 1.02), loc='lower left')
+ax.legend(bbox_to_anchor=(0, 1.02), loc='lower left', title="Kupper et al.")
 
 # Save figure as both .PNG and .EPS
 fig.savefig(config.FIG_PATH / "percolation.png", format="png", dpi=300)

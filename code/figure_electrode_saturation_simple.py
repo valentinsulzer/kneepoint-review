@@ -83,8 +83,10 @@ ax[1].set_xlim([0, 11.5])
 ax[0].set_ylim([0, 100])
 
 # Add legends
-ax[0].legend()
-ax[1].legend()
+l1 = ax[0].legend(title="Dubarry et al.")
+l2 = ax[1].legend(title="Smith et al.")
+l1._legend_box.align = "left"
+l2._legend_box.align = "left"
 
 ax[0].set_title("a", loc="left", weight="bold")
 ax[1].set_title("b", loc="left", weight="bold")

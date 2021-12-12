@@ -62,10 +62,11 @@ for k, (key, value) in enumerate(data_dict["epding_restgood"].items()):
                label="2C/1C, " + key.replace('-', '/').replace("2 day", "48h"),
                color=colors_rest[k])
     
+titles = ["Omar et al.", "Keil et al.", "Keil et al.", "Epding et al."]
 for k in range(len(ax)):
     ax[k].set_ylabel('Capacity retention (%)')
     ax[k].set_title(chr(97 + k), loc="left", weight="bold")
-    ax[k].legend()
+    ax[k].legend(title=titles[k], loc="lower left" if k == 3 else "best")
     
 ax[0].set_xlabel("Cycles")
 ax[1].set_xlabel("Equivalent full cycles")
@@ -110,7 +111,7 @@ for k in range(len(ax)):
     ax[k].set_xlabel("Estimated cycle time (h)")
     ax[k].set_ylabel("Capacity retention (%)")
     ax[k].set_title(chr(97 + k), loc="left", weight="bold")
-    ax[k].legend()
+    ax[k].legend(title=titles[k], loc="lower left" if k == 3 else "best")
     
 fig.tight_layout()
 

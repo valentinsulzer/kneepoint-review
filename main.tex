@@ -327,23 +327,23 @@ Figure \ref{fig:summary} displays the connection between the six knee pathways a
 
 \subsection{Lithium plating knees}
 
-\pbox{
-We still need to make a figure for all Li plating modes
-}
-
 Lithium plating occurs when lithium ions form metallic lithium on the surface of the electrode rather than intercalating into it. The plating reaction is favorable when the reaction potential of Li/Li$^+$ is greater than the equilibrium potential for other alternative reaction pathways for Li$^+$ (i.e., graphite intercalation).\cite{gao_interplay_2021} Plating can be either ``rate-independent'', i.e.\ plating that occurs independent of the applied current, or ``rate-dependent'', i.e.\ plating that only occurs if the applied current exceeds some value.  Furthermore, lithium plating can occur either reversibly or irreversibly, depending on the ratio of lithium plated during charge that is recovered in the subsequent discharge.\cite{baure_synthetic_2019, dubarry_big_2020} In contrast to irreversible plating, reversible plating does not contribute to long-term degradation. Thus, we use ``plating'' to refer to irreversible plating throughout the remainder of this discussion.
 
 Generally, lithium plating on graphite follows heterogeneous nucleation and growth kinetics, in which rapid growth proceeds quickly after an initial nucleation phase.\cite{ely_heterogeneous_2013, pei_nanoscale_2017, gao_interplay_2021}
 Thus, lithium plating can often be considered a ``snowballing'' knee (Figure \ref{fig:snowball_vs_hidden_vs_threshold}a and \ref{fig:snowball_vs_hidden_vs_threshold}d). However, some lithium plating pathways (e.g., lithium plating driven by active material loss from the negative electrode, a hidden trajectory) leads to knees independent of the nucleation and growth of plated lithium.
 In these cases, the nucleation and growth kinetics of lithium plating will only exacerbate these degradation mechanisms, and the degradation will be a combination of the hidden and snowball trajectories.
 
-Historically, lithium plating has been considered to be a primary driver for capacity knees. Here, we discuss the mechanisms by which plating can lead to a knee (Figure X). We suggest Waldmann et al.\cite{waldmann_li_2018} and Gao et al.\cite{gao_interplay_2021} for comprehensive general overviews of lithium plating.
+Historically, lithium plating has been considered to be a primary driver for capacity knees. Here, we discuss the mechanisms by which plating can lead to a knee (Figure \ref{fig:plating_pathways}). We suggest Waldmann et al.\cite{waldmann_li_2018} and Gao et al.\cite{gao_interplay_2021} for comprehensive general overviews of lithium plating.
 
-\begin{figure}[p]
+\begin{figure}[tp]
     \centering
-    \includegraphics[scale=1]{figures/thermo_plating_dubarry.eps}
-    \caption{} 
-    \label{fig:plating_overview}
+    \includegraphics[scale=1]{figures/plating_pathways.eps}
+    \caption{Sub-pathways for lithium plating knees.
+    (a) Fresh cell lithium plating.
+    (b) Aged cell lithium plating due to loss of active material (LAM). LAM can lead to rate-independent lithium plating if the amount of LAM 
+    (c) Aged cell lithium plating due to SEI growth. SEI growth can lead to rate-dependent lithium plating by decreasing the porosity of the electrode, which will decrease electrolyte transport kinetics, or by decreasing the lithium transport kinetics through the SEI, which will decrease the charge transfer kinetics.
+    Each of these sub-pathways also have nucleation and growth kinetics } 
+    \label{fig:plating_pathways}
 \end{figure}
 
 \subsubsection{Rate-independent lithium plating}

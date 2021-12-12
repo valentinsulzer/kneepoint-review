@@ -71,7 +71,7 @@ for k in [2, 3]:
     ax[k].set_title(chr(97 + k), loc="left", weight="bold")
     ax[k].set_ylabel("Capacity retention (%)")
     
-ax[3].annotate("\nLFP\graphite cylindrical cells\nC/2 charge/discharge, 60°C",
+ax[3].annotate("\nLFP/graphite cylindrical cells\nC/2 charge/discharge, 60°C",
                xy = (5, 67))
 
 ax[2].set_xlim([-1, 1e4])

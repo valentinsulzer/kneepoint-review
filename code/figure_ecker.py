@@ -24,7 +24,7 @@ df_capacity = pd.read_excel(file, sheet_name="Capacity")
 df_resistance = pd.read_excel(file, sheet_name="Resistance")
 
 # Define colors
-colors = cm.get_cmap('bone')(np.linspace(0.8, 0.0, 7))
+colors = cm.get_cmap('copper')(np.linspace(0.8, 0.0, 7))
 
 # Plot vs. cycle number
 # Generate figure handles

@@ -67,7 +67,7 @@ for k in np.arange(5):
 
 # Settings
 for k in [2, 3]:
-    ax[k].legend(title="Wang et al.[30]", loc="upper right")
+    ax[k].legend(title="Wang et al.", loc="upper right")
     ax[k].set_title(chr(97 + k), loc="left", weight="bold")
     ax[k].set_ylabel("Capacity retention (%)")
     

@@ -60,7 +60,6 @@ for k in range(2):
     ax[k].set_xlabel("Cycle number")
     ax[k].set_xlim([0, 3250])
     ax[k].set_title(chr(97 + k), loc="left", weight="bold")
-    ax[k].legend(loc="upper left")
 
 ax[0].set_ylabel("Total capacity loss (%)")
 ax[1].set_ylabel("Capacity loss per cycle (%)")

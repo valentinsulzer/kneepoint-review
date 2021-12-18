@@ -432,7 +432,7 @@ t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
 dqdv = np.array(m['dqdv']).reshape((m['dqdv'].shape[0],1))
 
-fig, ax = plt.subplots(2,3,figsize=(config.FIG_WIDTH*2,config.FIG_HEIGHT*1.5),
+fig, ax = plt.subplots(2,3,figsize=(config.FIG_WIDTH*2, config.FIG_HEIGHT*1.5),
                        sharex=True, sharey=True)
 t = np.array(m['cycs']).reshape((m['cycs'].shape[0],1))
 q = np.array(m['q']).reshape((m['cycs'].shape[0],1))
@@ -441,10 +441,7 @@ IC = np.array(m['dqdv']).reshape((m['cycs'].shape[0],1))
 colours = [blue, jade, claret, red, black, gold, grey]
 
 # methods = ['Bacon-Watts','Kneedle','Diao et al.','Zhang et al.','Bisector','Comparison']
-methods = ['Bacon-Watts','Kneedle','Diao et al.','Zhang et al.','Bisector',' ']
-
-# This line will be changed once everything else is sorted
-ref_nums = ['15','32','14','33','34','']
+methods = ['Bacon-Watts','Kneedle','Tangent-ratio','Quantile regression','Bisector',' ']
 
 # the below code is all the stuff that applies to all plots. Yes, it is ugly.
 n = 0;
@@ -452,7 +449,7 @@ for j in range(ax.shape[0]):
     for jj in range(ax.shape[1]):
         ax[j,jj].set_title(chr(97 + n), loc="left", weight="bold")
         if n<5:
-            ax[j,jj].text(0,76,methods[n]+'$^{'+ref_nums[n]+'}$',color=colours[n])
+            ax[j,jj].text(0,76,methods[n],color=colours[n])
         n = n+1
         
         if n > 3:
@@ -460,6 +457,8 @@ for j in range(ax.shape[0]):
         
         if jj in [0, 3]:
             ax[j,jj].set_ylabel('Capacity retention (%)')
+        
+        ax[j, jj].set_xlim([-10, 540])
 
 # Below are the actual calculations
 TK = np.zeros((6,2))
@@ -480,24 +479,24 @@ TK[5,0] = deriv_knee[0]; TK[5,1] = deriv_knee[1];
 ax[1,2].plot(t,q,color=colours[6])
 # add in the knee estimates as a coloured scatter with vertical line for those 
 # incapable of zooming a pdf
-for j in range(6):   
+for j in range(5):   
     ax[1,2].scatter(TK[j,0],TK[j,1],color=colours[j],marker='x')
     ax[1,2].plot(np.array([TK[j,0],TK[j,0]]),np.array([80,98]),
                 '--',color=colours[j])
     
 # add in a zoomed in version into the bottom right plot
 # new axes
-ax_in = ax[1,2].inset_axes([10,80,310,12], transform=ax[1,2].transData)
+ax_in = ax[1,2].inset_axes([20,80,310,12], transform=ax[1,2].transData)
 # capacity curve
 ax_in.plot(t,q,color=colours[6])
 # add in the knee estimates
-for j in range(6):
+for j in range(5):
     ax_in.scatter(TK[j,0],TK[j,1],color=colours[j],marker='x')
     ax_in.plot(np.array([TK[j,0],TK[j,0]]),np.array([80,98]),
                 '--',color=colours[j])
 ax_in.set_yticks([])
-ax_in.set_xlim([360, 445])
-ax_in.set_ylim([85, 95])
+ax_in.set_xlim([360, 400])
+ax_in.set_ylim([87, 97])
     
 # completely unnecessary if you are the kind of wizard who doesn't sanity 
 # check your results

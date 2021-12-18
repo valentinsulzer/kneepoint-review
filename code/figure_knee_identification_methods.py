@@ -441,7 +441,7 @@ IC = np.array(m['dqdv']).reshape((m['cycs'].shape[0],1))
 colours = [blue, jade, claret, red, black, gold, grey]
 
 # methods = ['Bacon-Watts','Kneedle','Diao et al.','Zhang et al.','Bisector','Comparison']
-methods = ['Bacon-Watts','Kneedle','Tangent-ratio','Quantile regression','Bisector',' ']
+methods = ['Kneedle','Bacon-Watts','Tangent-ratio','Bisector','Quantile regression',' ']
 
 # the below code is all the stuff that applies to all plots. Yes, it is ugly.
 n = 0;
@@ -462,16 +462,16 @@ for j in range(ax.shape[0]):
 
 # Below are the actual calculations
 TK = np.zeros((6,2))
-# Bacon-Watts
-TK[0,0],TK[0,1] = bacon_watts_knee(ax[0,0],t,q,colours[0])
 # Kneedle
-TK[1,0],TK[1,1] = kneedle_identification(ax[0,1],t,q,colours[1])
+TK[0,0],TK[0,1] = kneedle_identification(ax[0,0],t,q,colours[0])
+# Bacon-Watts
+TK[1,0],TK[1,1] = bacon_watts_knee(ax[0,1],t,q,colours[1])
 # Diao et al.
 TK[2,0],TK[2,1] = diao_knee(ax[0,2],t,q,colours[2])
-# Zhang et al.
-TK[3,0],TK[3,1] = zhang_knee(ax[1,0],t,q,dqdv,colours[3])
 # Bisector
-TK[4,0],TK[4,1] = knee_point_identification(ax[1,1],t,q,colours[4]);
+TK[3,0],TK[3,1] = knee_point_identification(ax[1,0],t,q,colours[3]);
+# Zhang et al.
+TK[4,0],TK[4,1] = zhang_knee(ax[1,1],t,q,dqdv,colours[4])
 # second derivative
 TK[5,0] = deriv_knee[0]; TK[5,1] = deriv_knee[1];
 

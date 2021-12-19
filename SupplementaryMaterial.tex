@@ -149,7 +149,7 @@
 
 \section{Supplementary Discussion 1. Knees across identification algorithms}
 
-Figure \ref{fig:severson_knee_eol_all_algorithms} presents linear regressions of knee-point to end-of-life for the capacity curves of the Severson et al. \cite{severson_data-driven_2019} dataset across the knee identification algorithms discussed (except the Zhang et al.\cite{zhang_identifying_2020} method). We mention that there is no ``ground truth'' for the true knee. For the Bacon-Watts and Kneedle identified knees, the linear regression holds with a goodness-of-fit $R^2\approx 99\%$ (and reduced variance between fit and residuals). With this metric, close by is the bisector\cite{greenbank_automated_nodate} identified knees with $R^2\approx 96\%$. The tangent-ratio\cite{diao_algorithm_2019} identified knees show a higher fit-to-residuals variability.  
+Figure \ref{fig:severson_knee_eol_all_algorithms} presents linear regressions of knee-point to end-of-life for the capacity curves of the Severson et al. \cite{severson_data-driven_2019} dataset across the knee identification algorithms discussed (except the Zhang et al.\cite{zhang_identifying_2020} method). We mention that there is no ``ground truth'' for the true knee. For the Bacon-Watts and Kneedle identified knees, the linear regression holds with a goodness-of-fit $R^2\approx 99\%$ (and reduced variance between fit and residuals). With this metric, close by is the bisector\cite{greenbank_automated_2021} identified knees with $R^2\approx 96\%$. The tangent-ratio\cite{diao_algorithm_2019} identified knees show a higher fit-to-residuals variability.  
 
 \begin{figure}[ht]
 \centering
@@ -160,7 +160,7 @@ Figure \ref{fig:severson_knee_eol_all_algorithms} presents linear regressions of
 %   \caption{Linear regression of knee-point to EOL point}
   \label{fig:kneepoint2EOL}
 % \end{subfigure}%
-\caption{Linear relationship between identified knees and end-of-life (EOL) per knee identification algorithm over the Severson et al. \cite{severson_data-driven_2019} dataset. (a) Bacon-Watts\cite{fermin-cueto_identification_2020}, (b) Kneedle\cite{satopaa_finding_2011}, (c) Tangent-ratio\cite{diao_algorithm_2019}, (d) Bisector\cite{greenbank_automated_nodate}.
+\caption{Linear relationship between identified knees and end-of-life (EOL) per knee identification algorithm over the Severson et al. \cite{severson_data-driven_2019} dataset. (a) Bacon-Watts\cite{fermin-cueto_identification_2020}, (b) Kneedle\cite{satopaa_finding_2011}, (c) Tangent-ratio\cite{diao_algorithm_2019}, (d) Bisector\cite{greenbank_automated_2021}.
 }.
 \label{fig:severson_knee_eol_all_algorithms}
 \end{figure}
@@ -229,13 +229,13 @@ The data was obtained extracted via direct access to the corresponding databases
  &  & Ma et al. 2019 \cite{ma_editors_2019} & Lab-made pouch NMC/Gr & 0--20\% methyl acetate additive &   &   \\ 
  \cline{2-7} 
  & \multirow{3}{*}{\textbf{Salt concentration}} & Aiken et al. 2020 \cite{aiken_accelerated_2020} & Lab-made pouch NMC/Gr & 0.2--1.2M LiPF6 & 4 & 
- \begin{tabular}[c]{@{}l@{}} Fig 3d 0.8M, 1.2M;\\ Fig 10a: 'red circle' and 'blue circle' \end{tabular}
+ \begin{tabular}[c]{@{}l@{}} Fig 3d 0.8M, 1.2M;\\ Fig 10a: `red circle' and `blue circle' \end{tabular}
   \\ 
  \cline{3-7} 
  &  & Ma et al. 2019 \cite{ma_editors_2019} & Lab-made pouch NMC/Gr & 1.2--1.5M LiPF6 &   & 
  \\ 
  \cline{3-7} 
- &  & Wang et al. {[}x{]} & Lab-made pouch LCO/Gr & 0.5--2M LiPF6 &  &  
+ &  & Wang et al. 2014 \cite{wang_systematic_2014} & Lab-made pouch LCO/Gr & 0.5--2M LiPF6 &  &  
  \\ 
  \hline
 \multirow{34}{*}{%\textbf{Testing Conditions}
@@ -256,8 +256,8 @@ The data was obtained extracted via direct access to the corresponding databases
  Fig 4a 1.20V (CC) (A); Fig 4a 0.94V (CC) (A);   \\
  Fig 6a 0.5C/0.5C (A); Fig 6a 1.0C/0.5C (A); Fig 6a 0.5C/1.0C (A);   \\
  Fig 9 1.20 V (CC); Fig 9 1.20 V (CCCV); Fig 9 1.20 V (2CCCV); \\
- Fig 10a 35degC(deltaV down) (A); Fig 10a 35degC(deltaV up) (A); \\
- Fig 10a 50degC(deltaV up) (A); Fig 10a 25degC(deltaV up) (A);  \end{tabular}
+ Fig 10a 35\degree C(deltaV down) (A); Fig 10a 35\degree C(deltaV up) (A); \\
+ Fig 10a 50\degree C(deltaV up) (A); Fig 10a 25\degree C(deltaV up) (A);  \end{tabular}
  \\ 
  \cline{3-7} 
  &  & Severson et al. 2019 \cite{severson_data-driven_2019} & A123 APR18650M1A LFP/Gr & 3.6--8C & 120 & Database access 
@@ -340,7 +340,7 @@ Fig 8a procedure 2 0 SOC  \end{tabular}
  &  & Waldmann et al. 2014 \cite{waldmann_temperature_2014} & Commercial 18650 NMC+LMO/Gr & -20--70\degree C &   &   \\ 
  \cline{3-7} 
  &  & Coron et al. 2020 \cite{coron_impact_2020} & \begin{tabular}[c]{@{}l@{}}Commercial 18650 NMC+LMO/Gr\\  Commercial 18650 NMC/Gr\end{tabular} & 0--25\degree C & 5 &  
- \begin{tabular}[c]{@{}l@{}}Fig 1c: 'red crosses', 'red squares',\\ 'blue crosses', 'blue squares' and  'blue circles' \end{tabular}
+ \begin{tabular}[c]{@{}l@{}}Fig 1c: `red crosses', `red squares',\\ `blue crosses', `blue squares' and  `blue circles' \end{tabular}
  \\ 
  \cline{3-7} 
  &  & Waldmann et al. 2015 \cite{waldmann_optimization_2015} & Cylindrical NCA/Gr & 0--60\degree C & & 

@@ -147,7 +147,48 @@
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Supplementary Discussion 1. Knees across identification algorithms}
+\section{Supplementary Discussion 1. Knee points across identification algorithms}
+
+Figure \ref{fig:severson_knee_eol_all_algorithms} presents linear regressions of various knee point estimation algorithms for the capacity curves of the Severson et al. \cite{severson_data-driven_2019} dataset (except the Zhang et al.\cite{zhang_identifying_2020} method). We mention that the true knee point has no ``ground truth''.
+For the Bacon-Watts and Kneedle identified knees, the linear regression holds with a goodness-of-fit $R^2\approx 99\%$ (and reduced variance between fit and residuals). With this metric, close by is the bisector\cite{greenbank_automated_2021} identified knees with $R^2\approx 96\%$. The tangent-ratio\cite{diao_algorithm_2019} identified knees show a higher fit-to-residuals variability.  
+
+\begin{figure}[ht]
+\centering
+% \begin{subfigure}{.5\textwidth}
+%   \centering
+% \includegraphics[scale=0.70]{figures/AcrossDatasetsknee-to-EOL}
+\includegraphics[scale=1.0]{figures/severson_knee_eol_all_algorithms.eps}
+%   \caption{Linear regression of knee-point to EOL point}
+  \label{fig:kneepoint2EOL}
+% \end{subfigure}%
+\caption{Linear relationship between identified knees and end-of-life (EOL) per knee identification algorithm over the Severson et al. \cite{severson_data-driven_2019} dataset.
+(a) Bacon-Watts\cite{fermin-cueto_identification_2020}{},
+(b) Kneedle\cite{satopaa_finding_2011}{},
+(c) Tangent-ratio\cite{diao_algorithm_2019}{},
+(d) Bisector\cite{greenbank_automated_2021}{}.
+}.
+\label{fig:severson_knee_eol_all_algorithms}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Supplementary Discussion 2. Impact of $x$ axis visualization choice on knee onset}
+
+Capacity fade plots are typically presented with a cycle-based axis; however, this choice may obscure the influence of calendar aging phenomena. The influence of time is most notable for the study of variables like charge/discharge rate and rest time. 
+In Figure \ref{fig:discharge-rest_time}, we replotted the data in Figure 20 with a time-based axis instead of a cycle number-based axis. Raw data from the corresponding studies were not available, so the cycle times were estimated from the given C rates and rest times. The trends in discharge rate and rest time influence on knee onset are largely the same as in the cycle-based figure. However, the change from Figure 20c to Figure \ref{fig:discharge-rest_time}c suggests that much of the reason that longer rest times at top-of-charge and bottom-of-discharge decrease cycle life (at least in this study) is calendar aging, not greater degradation at the voltage extremes.    
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale = 1.0]{figures/discharge_rate_rest_time.eps}
+\caption{Mixed effects of discharge rate and rest time on knee onset, depending on the testing conditions.
+Data replotted from Figure 20 with a time-based $x$ axis (estimated from C rates).
+(a) Higher discharge rate can accelerate knee onset. Adapted from Figure 8 of Omar et al.\cite{omar_lithium_2014} (b) Lower discharge rate can accelerate knee onset. Adapted from Figure 2a of Keil et al.\cite{keil_linear_2019} (c) Longer rest time can accelerate knee onset. Adapted from  Figure 2a of Keil et al.\cite{keil_linear_2019} (d) Shorter rest time can accelerate knee onset. Adapted from Figure 1a of Epding et al.\cite{epding_investigation_2019}.}
+\label{fig:discharge-rest_time}
+\end{figure}
+
+
+\section{Supplementary Discussion 3. Knees across identification algorithms}
 
 Figure \ref{fig:severson_knee_eol_all_algorithms} presents linear regressions of knee-point to end-of-life for the capacity curves of the Severson et al. \cite{severson_data-driven_2019} dataset across the knee identification algorithms discussed (except the Zhang et al.\cite{zhang_identifying_2020} method). We mention that there is no ``ground truth'' for the true knee. For the Bacon-Watts and Kneedle identified knees, the linear regression holds with a goodness-of-fit $R^2\approx 99\%$ (and reduced variance between fit and residuals). With this metric, close by is the bisector\cite{greenbank_automated_2021} identified knees with $R^2\approx 96\%$. The tangent-ratio\cite{diao_algorithm_2019} identified knees show a higher fit-to-residuals variability.  
 
@@ -160,37 +201,14 @@ Figure \ref{fig:severson_knee_eol_all_algorithms} presents linear regressions of
 %   \caption{Linear regression of knee-point to EOL point}
   \label{fig:kneepoint2EOL}
 % \end{subfigure}%
-\caption{Linear relationship between identified knees and end-of-life (EOL) per knee identification algorithm over the Severson et al. \cite{severson_data-driven_2019} dataset. (a) Bacon-Watts\cite{fermin-cueto_identification_2020}, (b) Kneedle\cite{satopaa_finding_2011}, (c) Tangent-ratio\cite{diao_algorithm_2019}, (d) Bisector\cite{greenbank_automated_2021}.
+\caption{Linear relationship between identified knees and end-of-life (EOL) per knee identification algorithm over the Severson et al. \cite{severson_data-driven_2019} dataset.
+(a) Bacon-Watts\cite{fermin-cueto_identification_2020}{},
+(b) Kneedle\cite{satopaa_finding_2011}{},
+(c) Tangent-ratio\cite{diao_algorithm_2019}{},
+(d) Bisector\cite{greenbank_automated_2021}{}.
 }.
 \label{fig:severson_knee_eol_all_algorithms}
 \end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Supplementary Discussion 2. Impact of $x$ axis visualization choice on knee onset}
-
-Capacity fade plots are typically presented with a cycle-based axis; however, this choice may obscure the influence of calendar aging phenomena. The influence of time is most notable for the study of variables like charge/discharge rate and rest time. 
-In Figure \ref{fig:discharge-rest_time}, we replotted the data in Figure \textbf{18} 
-%\ref{fig:discharge-rest_cycle} 
-with a time-based axis instead of a cycle number-based axis. Raw data from the corresponding studies were not available, so the cycle times were estimated from the given C rates and rest times. The trends in discharge rate and rest time influence on knee onset are largely the same as in the cycle-based figure. However, the change from Figure 18c
-%  \ref{fig:discharge-rest_cycle}c
-to Figure \ref{fig:discharge-rest_time}c suggests that much of the reason that longer rest times at top-of-charge and bottom-of-discharge decrease cycle life (at least in this study) is calendar aging, not greater degradation at the voltage extremes.    
-
-\begin{figure}[ht]
-\centering
-\includegraphics[scale = 1.0]{figures/discharge_rate_rest_time.eps}
-\caption{Mixed effects of discharge rate and rest time on knee onset, depending on the testing conditions.
-Data replotted from Figure \textbf{X} with a time-based $x$ axis (estimated from C rates).
-(a) Higher discharge rate can accelerate knee onset. Adapted from Figure 8 of Omar et al.\cite{omar_lithium_2014} (b) Lower discharge rate can accelerate knee onset. Adapted from Figure 2a of Keil et al.\cite{keil_linear_2019} (c) Longer rest time can accelerate knee onset. Adapted from  Figure 2a of Keil et al.\cite{keil_linear_2019} (d) Shorter rest time can accelerate knee onset. Adapted from Figure 1a of Epding et al.\cite{epding_investigation_2019}.}
-\label{fig:discharge-rest_time}
-\end{figure}
-
-
-
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -200,7 +218,7 @@ Data replotted from Figure \textbf{X} with a time-based $x$ axis (estimated from
 \newgeometry{margin=2.5cm}
 \begin{landscape}
 \begin{table}[p]
-\caption{Summary of references used to generate Figure \textbf{20} in the main manuscript.
+\caption{Summary of references used to generate Figure 22 in the main manuscript.
 The data was obtained extracted via direct access to the corresponding databases when possible \cite{baumhofer_production_2014,diao_accelerated_2019,severson_data-driven_2019,willenberg_high-precision_2020,attia_closed-loop_2020} or via \textit{WebPlotDigitizer}\cite{dos_reis_lithium-ion_2021}.}
 \label{table:experimental_summary_DATASOURCES}
 \scalebox{0.5}{

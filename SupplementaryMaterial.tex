@@ -140,57 +140,40 @@
 \thispagestyle{empty}
 
 
- %
- 
- 
- 
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Supplementary Discussion 1. Knee points across identification algorithms}
+\section{Supplementary Discussion 1. Impact of $x$ axis visualization choice on knee onset}
 
-Figure \ref{fig:severson_knee_eol_all_algorithms} presents linear regressions of various knee point estimation algorithms for the capacity curves of the Severson et al. \cite{severson_data-driven_2019} dataset (except the Zhang et al.\cite{zhang_identifying_2020} method). We mention that the true knee point has no ``ground truth''.
-For the Bacon-Watts and Kneedle identified knees, the linear regression holds with a goodness-of-fit $R^2\approx 99\%$ (and reduced variance between fit and residuals). With this metric, close by is the bisector\cite{greenbank_automated_2021} identified knees with $R^2\approx 96\%$. The tangent-ratio\cite{diao_algorithm_2019} identified knees show a higher fit-to-residuals variability.  
+Capacity fade plots are typically presented with a cycle-based axis; however, this choice may obscure the influence of calendar aging phenomena. The influence of time is most notable for the study of variables like charge/discharge rate and rest time. 
+In Figure \ref{fig:discharge-rest_time}, we replotted the data in Figure 20 with a time-based axis instead of a cycle number-based axis. Raw data from the corresponding studies were not available, so the cycle times were estimated from the given C rates and rest times. The trends in discharge rate and rest time influence on knee onset are largely the same as in the cycle-based figure. However, the change from Figure 20c to Figure \ref{fig:discharge-rest_time}c suggests that much of the reason that longer rest times at top-of-charge and bottom-of-discharge decrease cycle life (at least in this study) is calendar aging, not greater degradation at the voltage extremes.
 
-\begin{figure}[ht]
+
+\begin{figure}[hb]
 \centering
 % \begin{subfigure}{.5\textwidth}
 %   \centering
 % \includegraphics[scale=0.70]{figures/AcrossDatasetsknee-to-EOL}
-\includegraphics[scale=1.0]{figures/severson_knee_eol_all_algorithms.eps}
+\includegraphics[scale=1.0]{figures/severson_knee_compare_all_algorithms.eps}
 %   \caption{Linear regression of knee-point to EOL point}
-  \label{fig:kneepoint2EOL}
 % \end{subfigure}%
-\caption{Linear relationship between identified knees and end-of-life (EOL) per knee identification algorithm over the Severson et al. \cite{severson_data-driven_2019} dataset.
-(a) Bacon-Watts\cite{fermin-cueto_identification_2020}{},
-(b) Kneedle\cite{satopaa_finding_2011}{},
-(c) Tangent-ratio\cite{diao_algorithm_2019}{},
-(d) Bisector\cite{greenbank_automated_2021}{}.
+\caption{
+Linear regressions comparing various knee point estimation algorithms for the capacity curves of the Severson et al. \cite{severson_data-driven_2019} dataset (except the quantile regression method\cite{zhang_identifying_2020}). We mention that the true knee point has no ``ground truth''.
+The results from the Kneedle\cite{satopaa_finding_2011} and Bacon-Watts\cite{fermin-cueto_identification_2020} methods are highly correlated with each other ($R^2\approx 1$). The bisector\cite{greenbank_automated_2021} is also highly correlated with these two methods ($R^2\approx 0.96$). The tangent-ratio method \cite{diao_algorithm_2019} has the poorest correlation with the others.
 }.
-\label{fig:severson_knee_eol_all_algorithms}
+\label{fig:severson_knee_compare_all_algorithms}
 \end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Supplementary Discussion 2. Impact of $x$ axis visualization choice on knee onset}
-
-Capacity fade plots are typically presented with a cycle-based axis; however, this choice may obscure the influence of calendar aging phenomena. The influence of time is most notable for the study of variables like charge/discharge rate and rest time. 
-In Figure \ref{fig:discharge-rest_time}, we replotted the data in Figure 20 with a time-based axis instead of a cycle number-based axis. Raw data from the corresponding studies were not available, so the cycle times were estimated from the given C rates and rest times. The trends in discharge rate and rest time influence on knee onset are largely the same as in the cycle-based figure. However, the change from Figure 20c to Figure \ref{fig:discharge-rest_time}c suggests that much of the reason that longer rest times at top-of-charge and bottom-of-discharge decrease cycle life (at least in this study) is calendar aging, not greater degradation at the voltage extremes.    
 
 \begin{figure}[ht]
 \centering
 \includegraphics[scale = 1.0]{figures/discharge_rate_rest_time.eps}
 \caption{Mixed effects of discharge rate and rest time on knee onset, depending on the testing conditions.
 Data replotted from Figure 20 with a time-based $x$ axis (estimated from C rates).
-(a) Higher discharge rate can accelerate knee onset. Adapted from Figure 8 of Omar et al.\cite{omar_lithium_2014} (b) Lower discharge rate can accelerate knee onset. Adapted from Figure 2a of Keil et al.\cite{keil_linear_2019} (c) Longer rest time can accelerate knee onset. Adapted from  Figure 2a of Keil et al.\cite{keil_linear_2019} (d) Shorter rest time can accelerate knee onset. Adapted from Figure 1a of Epding et al.\cite{epding_investigation_2019}.}
+(a) Higher discharge rate can accelerate knee onset. Adapted from Figure 8 of Omar et al.\cite{omar_lithium_2014}
+Note that while the environmental test temperature was $\sim$25\degree C, the temperature at the surface reached as high as 55\degree C for the high rate discharge tests.
+(b) Lower discharge rate can accelerate knee onset. Adapted from Figure 2a of Keil et al.\cite{keil_linear_2019} (c) Longer rest time can accelerate knee onset. Adapted from  Figure 2a of Keil et al.\cite{keil_linear_2019} (d) Shorter rest time can accelerate knee onset. Adapted from Figure 1a of Epding et al.\cite{epding_investigation_2019}.}
 \label{fig:discharge-rest_time}
 \end{figure}
-
-
-\section{Supplementary Discussion 3. Knees across identification algorithms}
-
-Figure \ref{fig:severson_knee_eol_all_algorithms} presents linear regressions of knee-point to end-of-life for the capacity curves of the Severson et al. \cite{severson_data-driven_2019} dataset across the knee identification algorithms discussed (except the Zhang et al.\cite{zhang_identifying_2020} method). We mention that there is no ``ground truth'' for the true knee. For the Bacon-Watts and Kneedle identified knees, the linear regression holds with a goodness-of-fit $R^2\approx 99\%$ (and reduced variance between fit and residuals). With this metric, close by is the bisector\cite{greenbank_automated_2021} identified knees with $R^2\approx 96\%$. The tangent-ratio\cite{diao_algorithm_2019} identified knees show a higher fit-to-residuals variability.  
 
 \begin{figure}[ht]
 \centering
@@ -199,19 +182,15 @@ Figure \ref{fig:severson_knee_eol_all_algorithms} presents linear regressions of
 % \includegraphics[scale=0.70]{figures/AcrossDatasetsknee-to-EOL}
 \includegraphics[scale=1.0]{figures/severson_knee_eol_all_algorithms.eps}
 %   \caption{Linear regression of knee-point to EOL point}
-  \label{fig:kneepoint2EOL}
 % \end{subfigure}%
 \caption{Linear relationship between identified knees and end-of-life (EOL) per knee identification algorithm over the Severson et al. \cite{severson_data-driven_2019} dataset.
 (a) Bacon-Watts\cite{fermin-cueto_identification_2020}{},
 (b) Kneedle\cite{satopaa_finding_2011}{},
 (c) Tangent-ratio\cite{diao_algorithm_2019}{},
 (d) Bisector\cite{greenbank_automated_2021}{}.
-}.
+We mention that there is no ``ground truth'' for the true knee. For the Bacon-Watts and Kneedle identified knees, the linear regression holds with a goodness-of-fit of $R^2\approx 99\%$ (and reduced variance between fit and residuals). With this metric, close by is the bisector\cite{greenbank_automated_2021} with a correlation of $R^2\approx 0.96$. The tangent-ratio\cite{diao_algorithm_2019} identified knees show a higher fit-to-residuals variability ($R^2\approx 0.86$).}.
 \label{fig:severson_knee_eol_all_algorithms}
 \end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \gbox{refer to Yulia's table "SI-EXP Table"// Table \ref{table:experimental_summary}},
 

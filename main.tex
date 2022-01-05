@@ -709,7 +709,7 @@ Lastly, Keil et al.\cite{keil_charging_2016} illustrated how discharging current
 The authors did not identify a mechanism. 
 
 While more work is needed to understand these results, one hypothesis for these observations is decreased calendar aging for cells with faster discharge rates.
-In other words, cells with less time spent cycling simply have less calendar aging. In Figure S2, we revisualized the Keil et al.\cite{keil_linear_2019} dataset using estimated time on the $x$ axis; we found that the knee locations appeared closer together, suggesting calendar aging is at least partially responsible for the discharge rate sensitivity (see Supplementary Discussion 1 for details). This hypothesis further highlights the sensitivity of the apparent severity of the knee to the choice of $x$ axis (as illustrated in Figure 2).
+In other words, cells with less time spent cycling simply have less calendar aging. In Figure S2b, we revisualized the Keil et al.\cite{keil_linear_2019} dataset shown in Figure \ref{fig:discharge-rest_cycle}b using estimated time on the $x$ axis; we found that the knee locations appeared closer together, suggesting calendar aging is at least partially responsible for the discharge rate sensitivity (see also Supplementary Discussion 1). This hypothesis further highlights the sensitivity of the apparent severity of the knee to the choice of $x$ axis (as illustrated in Figure 2).
 
 \subsubsection{Voltage limits} 
 A wider voltage window generally accelerates the onset of the knee point \cite{ecker_calendar_2014, pfrang_long-term_2018, klett_non-uniform_2014, ma_novel_2019, petzl_lithium_2015, schuster_nonlinear_2015}. In one of the broadest studies, Ecker et al. \cite{ecker_calendar_2014} considered six DODs (100, 80, 50, 20, 10, and 0.5 \%) with up to six voltage windows per DOD. The authors found that the EFC systematically decreased with increased DOD (Figure \ref{fig:ecker_capacity_and_resistance}). By 1000 EFC, all cells with DODs greater than 25-75\% had a capacity below 80\% and exhibited a knee. When varying the voltage window with fixed DOD, the authors observed the highest degradation in cells cycled at low and high SOCs; the lowest degradation was observed for a midpoint SOC of 50\%. Other studies also observed accelerated degradation at extreme SOCs. \cite{aiken_accelerated_2020,ma_novel_2019, zhu_investigation_2021}
@@ -733,15 +733,15 @@ Like discharging rate, the effect of rests during cycling on the knee occurrence
 Keil et al.\cite{keil_linear_2019} found that decreasing rest time from 900 seconds to 10 seconds after both charge and discharge delayed the knee in NMC/graphite cylindrical cells (Figure \ref{fig:discharge-rest_cycle}c).
 Ma et al.\cite{ma_editors_2019} found a similar result: removing the 30-minute rests after both charge and discharge delayed the knee, but only with an upper cutoff voltage of 4.3 V. The rest time had no effect at 4.1 V.
 These observations were rationalized by less time at high potential when plotted as a function of cycle number, which can induce knees driven by side reaction product buildup.
-In fact, if the data in Figure \ref{fig:discharge-rest_cycle}c is replotted as a function of estimated time instead of cycle number, the curves become much more similar (Figure S2c)---suggesting that the degradation is primarily driven by time and not cycle number.
+In fact, if the data in Figure \ref{fig:discharge-rest_cycle}c is replotted as a function of estimated time instead of cycle number, the curves become much more similar (Figure S2c)---suggesting that the degradation is primarily driven by time and not cycle number (see also Supplementary Discussion 1).
 In contrast, Epding et al.\cite{epding_investigation_2019} found that longer rest times between cycles delayed the knee occurrence (Figure \ref{fig:discharge-rest_cycle}d). The authors proposed that these rests offered reversibly plated lithium time to reintercalate; another possibility is that the rests allowed for greater utilization of cycleable lithium\cite{rashid_effect_2015}.
 Note that periodic rests interspersed throughout a cycling test can substantially improve lifetime in some cases\cite{raj_investigation_2020}.
 
 Increased rest periods may delay the onset of knees driven by high overpotentials (e.g., rate-dependent lithium plating at high rates or low temperatures).
 For knees driven by side reaction product buildup (e.g., porosity decrease, positive electrode resistance growth, etc.), increased rest may be beneficial or harmful for lifetime.
-Longer rests at high temperature and high state of charge may exacerbate the onset of these knees; in fact, Ecker et al.\cite{ecker_calendar_2014} found that NMC/graphite cells stored at 50\degree C, 100\% SOC exhibited a knee after 100 days of storage, while a cell stored at 50\degree C, 100\% SOC did not exhibit a knee even after 400 days of storage.
-However, increased LLI from high temperature, high state-of-charge rests may delay electrode saturation knees by increasing the amount of LAM required for knee onset.\cite{mao_calendar_2017, uddin_viability_2018}
-Increased rest after high rate cycling will also allow for the internal temperature of the cell to decrease, which will decrease side reaction rates and delay knee onset.
+Longer rests at high temperature and high state of charge may exacerbate the onset of these knees; in fact, Ecker et al.\cite{ecker_calendar_2014} found that NMC/graphite cells stored at 50\degree C, 100\% SOC (4.162 V) exhibited a knee after 100 days of storage, while cells stored at 50\degree C and  85\% SOC (4.018 V) or below did not exhibit knees even after 400 days of storage.
+However, increased LLI from high temperature, high SOC rests may delay electrode saturation knees by increasing the amount of LAM required for knee onset.\cite{mao_calendar_2017, uddin_viability_2018}
+Increased rest after high rate cycling will also allow for the internal temperature of the cell to decrease, which will decrease side reaction rates and delay knee onset; fully accounting for the relationship between internal cell temperature, heating due to (dis)charging, and cooling during rests requires detailed cell thermal characterization and modeling.
 More work is needed to understand the sensitivity of knees to rest at both low and high state of charge across different cell designs and usage conditions.
 
 
@@ -769,7 +769,9 @@ Heterogeneous compression in the test fixture can accelerate the knee point even
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale = 1.0]{figures/temperature_pressure_sweet_spot.eps}
-\caption{Transition in degradation mechanism based on (a) environmental temperature and (b) applied pressure, illustrating an intermediate optimum for each variable that balances two competing degradation mechanisms exacerbated at extreme temperatures and pressures. Reproduced with permission from Figure 3 of Waldman et al.\cite{waldmann_temperature_2014}{}, Copyright 2014, Elsevier and Figure 5 of Cannarella and Arnold\cite{cannarella_stress_2014}{}, Copyright 2014, Elsevier.}
+\caption{Transition in degradation mechanism based on (a) environmental temperature and (b) applied pressure, illustrating an intermediate optimum for each variable that balances two competing degradation mechanisms exacerbated at extreme temperatures and pressures.
+In panel (b), error bars represent one standard deviation of the average of three cells. 
+Reproduced with permission from Figure 3 of Waldman et al.\cite{waldmann_temperature_2014}{}, Copyright 2014, Elsevier and Figure 5 of Cannarella and Arnold\cite{cannarella_stress_2014}{}, Copyright 2014, Elsevier.}
 \label{fig:temperature_and_pressure}
 \end{figure}
 
@@ -785,7 +787,7 @@ We then offer an outlook on knee modeling and prediction work based on our findi
 
 \subsubsection{Empirical relationship between knees, resistance elbows, and end-of-life}
 
-While predicting knees is important, predicting end-of-life is more directly relevant for estimating product performance and warranty costs. In Figure \ref{fig:knees2EOL}, we display the relationship between knee locations and end-of-life (defined as 80\% of nominal capacity) across 17 datasets (303 cells) and different knee pathways, cell types (chemistry, geometry, size, lab-made vs. commericial, etc.), and testing conditions. The data used to generate Figure \ref{fig:knees2EOL} is summarized in Table SI; data was obtained via direct access to the corresponding databases when possible\cite{baumhofer_production_2014,diao_accelerated_2019,severson_data-driven_2019,willenberg_high-precision_2020,attia_closed-loop_2020} or via \textit{WebPlotDigitizer}\cite{dos_reis_lithium-ion_2021}{}.
+While predicting knees is important, predicting end-of-life is more directly relevant for estimating product performance and warranty costs. In Figure \ref{fig:knees2EOL}, we display the relationship between knee locations and end-of-life (defined as 80\% of nominal capacity) across 17 datasets (303 cells) and different knee pathways, cell types (chemistry, geometry, size, lab-made vs. commericial, etc.), and testing conditions. The data used to generate Figure \ref{fig:knees2EOL} is summarized in Table SI; data was obtained via direct access to the corresponding databases when possible\cite{baumhofer_production_2014,diao_accelerated_2019,severson_data-driven_2019,willenberg_high-precision_2020,attia_closed-loop_2020} or via \textit{WebPlotDigitizer}\cite{Rohatgi2021}{}.
 We find a strong linear relationship from the knee point to the end-of-life. Apart from the data presented in Schuster et al.\cite{schuster_nonlinear_2015}{}, the knee points take place at or before the end-of-life.
 Thus, predicting the knee location can often provide an estimate of end-of-life as well.
 For the Severson et al.\cite{severson_data-driven_2019} method, this correlation holds independent of the knee point identification algorithm used (Figure S3).
@@ -912,8 +914,8 @@ G.d.R. acknowledges support from the {Funda{\c c}$\tilde{\text{a}}$o para a Ci$\
 P.G. is supported by National Renewable Energy Laboratory which is operated by Alliance for Sustainable Energy, LLC, for the U.S. Department of Energy (DOE) under Contract No. DE-AC36-08GO28308. 
 E.K. acknowledges funding by Agency for Science, Technology and Research (A*STAR) under the Career Development Fund (C210112037).
 Y.P. was supported by the US Department of Energy Office of Electricity, Energy Storage Program under the direction of Dr.~Imre Gyuk. Sandia National Laboratories is a multi-mission laboratory managed and operated by National Technology and Engineering Solutions of Sandia, LLC., a wholly owned subsidiary of Honeywell International, Inc., for the U.S.~Department of Energy’s National Nuclear Security Administration under contract DE-NA-0003525.
-S.S. thanks support from the Carnegie Mellon University Presidential Fellowship.
 This paper describes objective technical results and analysis. Any subjective views or opinions that might be expressed in the paper do not necessarily represent the views of the U.S.~Department of Energy or the United States Government.
+S.S. thanks support from the Carnegie Mellon University Presidential Fellowship.
 
 \section{CRediT author contributions statement}
 

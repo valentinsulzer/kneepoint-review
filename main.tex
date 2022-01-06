@@ -180,7 +180,7 @@ Avoiding or delaying knees is critical to ensure long battery lifetimes; further
 
 \begin{figure}[t]
 \centering
-\includegraphics[scale=1]{figures/degradation_rates.eps}
+\includegraphics[scale=1]{final_figures/degradation_rates.pdf}
 \caption{Schematic of the three lithium-ion battery aging trajectories: sublinear, linear, and superlinear degradation (``knees''). Here, the $x$ axis is labeled ``cycle number'', although it could also represent equivalent full cycles, capacity or energy throughput, time, or similar. Similarly, the $y$ axis is labeled ``retention'', which could represent capacity, energy, or power retention; furthermore, these values can be either at moderate-high rates from a cycling experiment or from low-rate periodic diagnostic tests. We use this convention (``retention vs. cycle number'') in conceptual figures throughout this work.}
 \label{fig:degradation_shapes}
 \end{figure}
@@ -204,7 +204,7 @@ Finally, we mention that resistance can also be used on the $y$ axis, but these 
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=1]{figures/x_axis_sensitivity.eps}
+\includegraphics[scale=1]{final_figures/x_axis_sensitivity.pdf}
 \caption{Sensitivity of knees to data visualization choices.
 (a) Retention vs.~cycle number. The data is artificially generated from an exponential function. 
 (b) Retention vs.~capacity throughput, normalized by the nominal capacity. The throughput is calculated by taking the cumulative sum of the retention values.
@@ -239,7 +239,7 @@ We mention that Satop{\"a}{\"a} et al.\cite{satopaa_finding_2011} review additio
 
 \begin{figure}[h!tb]
 \centering
-\includegraphics[scale=1]{figures/knee_identification_methods.eps}
+\includegraphics[scale=1]{final_figures/knee_identification_methods.pdf}
 \caption{Results of various knee identification methods proposed in the literature illustrated on the batch 2, channel 12 cell from the Severson et al.\cite{severson_data-driven_2019} dataset (arbitrarily selected). The capacity is normalized by the nominal capacity of the cell.
 (a) Kneedle method, proposed by Satop{\"a}{\"a} et al.\cite{satopaa_finding_2011}
 (b) Bacon-Watts method, proposed by Fermín-Cueto et al. \cite{fermin-cueto_identification_2020} for use in battery aging trajectories.
@@ -271,7 +271,7 @@ First, we identified six knee pathways, or failure modes leading to knees groupe
 
 \begin{figure}[h!tb]
 \centering
-\includegraphics[scale=0.9]{figures/knee_pathways_v2.eps}
+\includegraphics[scale=0.9]{final_figures/knee_pathways_v2.pdf}
 \caption{Schematics of the six knee ``pathways'' identified in the literature. Each of these pathways may have multiple degradation modes (e.g., loss of active material), and each of these modes may have multiple degradation mechanisms (e.g., electrode delamination). This figure emphasizes particle- and electrode-level effects, although many of these mechanisms occur on the nano- and macroscales as well.
 (a) Lithium plating, in which metallic lithium deposits on the surface of the negative electrode particles.
 (b) Electrode saturation, in which the number of active sites in the electrode constrains the lithium inventory.
@@ -292,7 +292,7 @@ Finally, \textit{threshold} trajectories (Figure \ref{fig:snowball_vs_hidden_vs_
 
 \begin{figure}[htp]
     \centering
-    \includegraphics[scale=1]{figures/snowball_hidden_threshold.eps}
+    \includegraphics[scale=1]{final_figures/snowball_hidden_threshold.pdf}
     \caption{Schematic of the three types of ``internal state trajectories'' leading to a knee. In each case, the retention curve looks the same (a--c), but the underlying internal trajectories lead to knees via different mechanisms. (d) ``Snowball'' trajectory, in which the state variable is exponentially increasing. (e) ``Hidden'' trajectory, in which a slowly-increasing state variable (state 1) is dominated by a rapidly-increasing state variable (state 2). (f) ``Threshold'' trajectory, in which a dramatic change in observable state is triggered by a state variable reaching a threshold.
     The functional forms for the internal state variables for the hidden and threshold trajectories may be linear, sublinear, or superlinear.
     Note that the curves in panels a--c are illustrative and not explicitly derived from panels d--f.
@@ -314,7 +314,7 @@ Figure \ref{fig:summary} displays the connection between the six knee pathways a
 
 \begin{figure}[p]
     \centering
-    \includegraphics[scale=0.85]{figures/pathway_trajectory_summary.eps}
+    \includegraphics[scale=0.85]{final_figures/pathway_trajectory_summary.pdf}
     \caption{
     Connection between the six knee pathways (Figure \ref{fig:knee_pathways}) and the three internal state trajectories (Figure \ref{fig:snowball_vs_hidden_vs_threshold}).
     A knee pathway may have multiple internal state trajectories if multiple degradation mechanisms can occur for the same pathway.
@@ -336,7 +336,7 @@ Historically, lithium plating has been considered to be a primary driver for cap
 
 \begin{figure}[tbph]
     \centering
-    \includegraphics[scale=0.9]{figures/plating_pathways.eps}
+    \includegraphics[scale=0.9]{final_figures/plating_pathways.pdf}
     \caption{Sub-pathways for lithium plating knees.
     (a) Fresh cell lithium plating. Rate-independent lithium plating (``overcharging'') in fresh cells will occur if the cell has more positive electrode capacity than negative electrode capacity.
     Rate-dependent lithium plating (``fast charging'') in fresh cells will occur if the use case is too aggressive for what the cell can support; often, rate-dependent plating in fresh cells occurs due to low temperatures, high currents, or high compression.
@@ -366,7 +366,7 @@ Lastly, we note that the high predictive performance of features sourced from vo
 
 \begin{figure}[p]
     \centering
-    \includegraphics[scale=1]{figures/thermo_plating_dubarry.eps}
+    \includegraphics[scale=1]{final_figures/thermo_plating_dubarry.pdf}
     \caption{Rate-independent lithium plating driven by loss of active negative electrode material. (a) Evolution of aging parameters with cycling of cell degradation. The left axis shows the experimental normalized cell capacity at C/25 (triangle markers) from reference performance tests occurring throughout cycling, and the dashed black line shows the results of cell capacity simulations with the calculated aging modes at C/25. The right axis shows the evolution of the degradation induced by the calculated aging modes (markers and dashed lines) with cycling. Note that $\mathrm{LAM_{deNE}}$ increases linearly, and at a rate higher than LLI. At cycle 750, the negative electrode becomes the capacity-limiting electrode during charge, at which point plating begins.
     (b) Capacity vs. cycle number at C/25, depicting the contributions to the total capacity fade as a function of cycle number. The yellow region represents LLI from non-plating sources (i.e., SEI growth), the green region represents LLI from irreversible lithium plating, and the red region represents reversible plating estimated from incremental capacity analysis (the reversible plating does not contribute to the capacity fade). The total capacity fade, represented by triangles (same as above panel), comes from the sum of LLI from SEI growth and LLI from irreversible plating.
     Reproduced with permission from Figures 7 and 8 of Anse\'an et al.\cite{ansean_operando_2017} Copyright 2017, Elsevier.} 
@@ -425,7 +425,7 @@ We note that measuring local porosity distributions in a commercially relevant f
 
 \begin{figure}[hp]
     \centering
-    \includegraphics[scale=1]{figures/yang_remade.eps}
+    \includegraphics[scale=1]{final_figures/yang_remade.pdf}
     \caption{Rate-dependent lithium plating due to pore clogging, as modeled by Yang et al.\cite{yang_modeling_2017} (a) Lithium inventory loss contributed by SEI growth and lithium plating, respectively. (b) Lithium inventory loss per cycle contributed by SEI growth and lithium plating, respectively. The ``snowballing'' growth of lithium plating occurs due to the accelerating decrease in porosity, which creates high transport overpotentials in the electrolyte and drives additional lithium plating. (c) Schematic illustration of pore clogging driven initially by SEI growth and then by plating. Adapted from Figure 8 of Yang et al.\cite{yang_modeling_2017}}
     \label{fig:pore_clogging}
 \end{figure}
@@ -448,7 +448,7 @@ This pathway can apply for either electrode, but loss of active material from th
 
 \begin{figure}[hp]
 \centering
-\includegraphics[scale = 1]{figures/electrode_saturation.eps}
+\includegraphics[scale = 1]{final_figures/electrode_saturation.pdf}
 \caption{Early models of ``hidden'' knee mechanisms due to electrode saturation. (a) The exponentially increasing positive electrode loss eventually limits the capacity and causes a knee. Adapted from Figure 17 of Dubarry et al.\cite{dubarry_synthesize_2012}
 (b) The linearly decreasing negative electrode capacity eventually overtakes the sublinearly decreasing lithium inventory, causing a knee in the relative capacity. Adapted from Figure 1 of Smith et al.\cite{smith_life_2017}
 }
@@ -457,7 +457,7 @@ This pathway can apply for either electrode, but loss of active material from th
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=\linewidth]{figures/stoich_knee.eps}
+    \includegraphics[width=\linewidth]{final_figures/stoich_knee.pdf}
     \caption{Simulation showing a knee point due to positive electrode saturation, from Sulzer et al.\cite{sulzer_accelerated_2021} Initially, all variables (LLI, $\mathrm{LAM_{ne}}$, and $\mathrm{LAM_{pe}}$) increase linearly with cycle number. Around cycle 600, the maximum stoichiometry in the positive electrode reaches unity, i.e., the electrode saturates. Electrode saturation causes a knee in the capacity curve despite nearly linear rates of LAM and LLI.
     Note that $\mathrm{LAM_{ne}}$ and $\mathrm{LAM_{pe}}$ do not directly correspond to LAM of lithiated or delithiated electrode sites; see Sulzer et al.\cite{sulzer_accelerated_2021} for more information.}
     \label{fig:electrode_sat_simulation}
@@ -489,7 +489,7 @@ Finally, we note that ``resistance pseudo-knees'' may also occur due to a stoich
 
 \begin{figure}[p]
 \centering
-\includegraphics[scale = 1]{figures/resistance_growth_knee_2.eps}
+\includegraphics[scale = 1]{final_figures/resistance_growth_knee_2.pdf}
 \caption{Simple model illustrating ``pseudo-knees'' due to resistance growth; we use the term ``pseudo-knees'' here since the knee location is a function of rate and lower cutoff voltage. Inspired by Figure 16 of Ma et al.\cite{ma_editors_2019} and the work of Mandli et al.\cite{mandli_analysis_2019}. (a) Assumed overpotential growth vs. cycle number for a 1C and 2C discharge. The assumed resistance growth rate is 0.2 m$\Omega$/cycle. (b) Discharge capacity and energy vs. the minimum discharge voltage for an example NMC/graphite cell. Data obtained from Preger et al.\cite{preger_degradation_2020} (c, d) Voltage vs. capacity as a function of cycle number for the (c) 1C discharge and (d) 2C discharge cases. The final discharge capacity for each cycle is denoted by a marker. (e--g) (e) Discharge capacity, (f) discharge energy, and (g) discharge power (discharge energy/discharge time) retention vs.\ cycle number as a function of discharge current and the minimum voltage.
 }
 \label{fig:dcr_knee}
@@ -533,7 +533,7 @@ This knee pathway is exacerbated by high upper cutoff voltages \cite{petibon_stu
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale = 0.9]{figures/fec_depletion.eps}
+\includegraphics[scale = 0.9]{final_figures/fec_depletion.pdf}
 \caption{Additive depletion knees.
 (a) The capacity retention of a LCO/silicon-graphite pouch cell with 15\% Si in the negative electrode exhibits a knee at around 250 cycles, the same point at which the FEC is depleted from the electrolyte (from destructive gas chromatography-mass spectrometry measurements of FEC concentration). Adapted from Figure 8 of Petibon et al.\cite{petibon_studies_2016} CC-BY 4.0.
 (b) In half cells with 100\% Si negative electrodes, the cycle number of the knee increases with the FEC concentration in the electrolyte.
@@ -570,7 +570,7 @@ If this effect is experimentally validated, we expect that identifying both the 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[scale=1.0]{figures/percolation.eps}
+    \includegraphics[scale=1.0]{final_figures/percolation.pdf}
     \caption{Two activity-saturation relationships describing percolation-limited electrolyte dry-out, adapted from Figure 5 of Kupper et al.\cite{kupper_end--life_2018} Relationships 3 and 4 model percolation of the liquid electrolyte where activity depends nonlinearly on saturation. The key feature of both relationships is the presence of a percolation threshold value ($s=0.5$), around which activity varies rapidly between $0$ and $1$.
     The sensitivity of activity to small changes in saturation is apparent.}
     \label{fig:percolation}
@@ -586,7 +586,7 @@ Here, we focus on knees more explicitly linked to mechanical effects.
 
 \begin{figure}[hp]
 \centering
-\includegraphics[scale = 1]{figures/mechanical.eps}
+\includegraphics[scale = 1]{final_figures/mechanical.pdf}
 \caption{Positive feedback mechanisms between mechanical effects that can lead to knees. During cycling, both particles and the SEI expand and crack, leading to the regrowth of additional SEI. In addition, covering layers may form on the surface of the negative electrode. Pressure due to volume expansion can subsequently lead to jelly roll deformation in cylindrical cells. This deformation can cause loss of active material, leading to more SEI/covering layer growth and potentially lithium plating.}
 \label{fig:knee_mechanical}
 \end{figure}
@@ -603,7 +603,7 @@ Further investigation of these covering layers is needed to understand this seem
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale = 1.0]{figures/CoveringLayers.eps}
+\includegraphics[scale = 1.0]{final_figures/CoveringLayers.pdf}
 \caption{``Covering layers'' as found via post-mortem analysis in cells with knees. Covering layers are commonly observed in cells with knees but are a poorly understood source of active material loss.
 a) A covering layer in the middle of the negative electrode of an unwound cylindrical cell, along with laser microscope images of top, middle and bottom sections and scanning electron micrographs of the middle section with a covering layer. The red arrow corresponds to a thickness of 10 $\mathrm{\mu m}$. Reproduced with permission from Figure 5 of Lewerenz et al. \cite{lewerenz_post-mortem_2017} Copyright 2017, Elsevier. b) Optical microscopy cross-sections of fresh and aged electrodes with a visible covering layer. Reproduced with permission from Figure 12 of Stiaszny et al. \cite{stiaszny_electrochemical_2014} Copyright 2014, Elsevier. c) Covering layer in the middle of the negative electrode of an unwound cylindrical cell, as identified by post-mortem dissection and confocal laser microscopy. Reproduced from Figures 11 and 12 of Willenberg et al.\cite{willenberg_development_2020} CC-BY-4.0.} 
 \label{fig:covering_layers}
@@ -633,7 +633,7 @@ Lifetime variability highlights the high sensitivity of knees to manufacturing a
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale=1]{figures/variation_exp.eps}
+\includegraphics[scale=1]{final_figures/variation_exp.pdf}
 \caption{Experimental studies of sample and testing variation with knees, illustrating the sensitivity of knees to these sources of variation.
 (a) Retention vs. cycle number for 48 commercial NMC/graphite cylindrical cells. Adapted from Figure 6 of Baumhöfer et al. \cite{baumhofer_production_2014}
 (b) Retention vs. cycle number for 24 commercial lithium cobalt oxide (LCO)/graphite pouch cells. Adapted from Figure 2a of Harris et al.\cite{harris_failure_2017}
@@ -645,7 +645,7 @@ In Figure \ref{fig:var_model}, we develop a simple model to consider the sensiti
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale=0.7]{figures/variation_model.eps}
+\includegraphics[scale=0.7]{final_figures/variation_model.pdf}
 \caption{Impact of cell-to-cell and/or testing variation on knees.
 (a) A simple, one-parameter exponential model is defined to simulate a retention curve with a knee, $Q=100 - \exp(cn)$, where $n$ represents cycle number.
 The adjustable parameter, $c$, is given an initial value of 1/150.
@@ -716,7 +716,7 @@ A wider voltage window generally accelerates the onset of the knee point \cite{e
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale=1.0]{figures/ecker_remade.eps}
+\includegraphics[scale=1.0]{final_figures/ecker_remade.pdf}
 \caption{Sensitivity of knees to voltage window/depth of discharge, and the correlation between capacity knees and ``resistance elbows''.
 (a) Normalized capacity and (b) normalized resistance vs. equivalent full cycles for NMC/graphite cylindrical cells cycled at 1 C/1C and 35$^{\circ}$C.
 Different depths of discharge around a mean SOC of 50\% are compared. Each trend displays a single cell. The number of equivalent full cycles increased for cells with smaller depths of discharge. Furthermore, the correlation between capacity knees and resistance elbows is evident.
@@ -747,7 +747,7 @@ More work is needed to understand the sensitivity of knees to rest at both low a
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale = 1.0]{figures/discharge_rate_rest_cycles.eps}
+\includegraphics[scale = 1.0]{final_figures/discharge_rate_rest_cycles.pdf}
 \caption{Mixed effects of discharge rate and rest time on knee onset, depending on the testing conditions. (a) Higher discharge rate can accelerate knee onset. Adapted from Figure 8 of Omar et al.\cite{omar_lithium_2014}
 Note that while the environmental test temperature was $\sim$25\degree C, the temperature at the surface reached as high as 55\degree C for the high rate discharge tests.
 (b) Lower discharge rate can accelerate knee onset. Adapted from Figure 2a of Keil et al.\cite{keil_linear_2019} (c) Longer rest time can accelerate knee onset. Here, TOC and BOD refer to top-of-charge and bottom-of-discharge, respectively. Adapted from  Figure 2a of Keil et al.\cite{keil_linear_2019} (d) Shorter rest time can accelerate knee onset. Adapted from Figure 1a of Epding et al.\cite{epding_investigation_2019}. To isolate the influence of calendar aging, these data are replotted with an estimated time axis in Figure S2.}
@@ -768,7 +768,7 @@ Heterogeneous compression in the test fixture can accelerate the knee point even
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale = 1.0]{figures/temperature_pressure_sweet_spot.eps}
+\includegraphics[scale = 1.0]{final_figures/temperature_pressure_sweet_spot.pdf}
 \caption{Transition in degradation mechanism based on (a) environmental temperature and (b) applied pressure, illustrating an intermediate optimum for each variable that balances two competing degradation mechanisms exacerbated at extreme temperatures and pressures.
 In panel (b), error bars represent one standard deviation of the average of three cells. 
 Reproduced with permission from Figure 3 of Waldman et al.\cite{waldmann_temperature_2014}{}, Copyright 2014, Elsevier and Figure 5 of Cannarella and Arnold\cite{cannarella_stress_2014}{}, Copyright 2014, Elsevier.}
@@ -800,7 +800,7 @@ For the Severson et al.\cite{severson_data-driven_2019} method, this correlation
 % \begin{subfigure}{.5\textwidth}
 %   \centering
 % \includegraphics[scale=0.70]{figures/AcrossDatasetsknee-to-EOL}
-\includegraphics[scale=1.0]{figures/knee_point_eol_linear_relations.eps}
+\includegraphics[scale=1.0]{final_figures/knee_point_eol_linear_relations.pdf}
 %   \caption{Linear regression of knee-point to EOL point}
   \label{fig:kneepoint2EOL}
 % \end{subfigure}%

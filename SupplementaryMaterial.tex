@@ -143,12 +143,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Supplementary Discussion 1. Impact of $x$ axis visualization choice on knee onset}
-
-Capacity fade plots are typically presented with a cycle-based axis; however, this choice may obscure the influence of calendar aging phenomena. The influence of time is most notable for the study of variables like charge/discharge rate and rest time. 
-In Figure \ref{fig:discharge-rest_time}, we replotted the data in Figure 20 with a time-based axis instead of a cycle number-based axis. Raw data from the corresponding studies were not available, so the cycle times were estimated from the given C rates and rest times. The trends in discharge rate and rest time influence on knee onset are largely the same as in the cycle-based figure. However, the change from Figure 20c to Figure \ref{fig:discharge-rest_time}c suggests that much of the reason that longer rest times at top-of-charge and bottom-of-discharge decrease cycle life (at least in this study) is calendar aging, not greater degradation at the voltage extremes.
-
-
 \begin{figure}[hb]
 \centering
 % \begin{subfigure}{.5\textwidth}
@@ -169,6 +163,9 @@ The results from the Kneedle\cite{satopaa_finding_2011} and Bacon-Watts\cite{fer
 \includegraphics[scale = 1.0]{final_figures/discharge_rate_rest_time.pdf}
 \caption{Mixed effects of discharge rate and rest time on knee onset, depending on the testing conditions.
 Data replotted from Figure 20 with a time-based $x$ axis (estimated from C rates).
+Raw data from the corresponding studies were not available, so the cycle times were estimated from the given C rates and rest times.
+While the trends in discharge rate and rest time influence on knee onset are largely the same as in the cycle-based figure (Figure 20), the change from Figure 20c to Figure \ref{fig:discharge-rest_time}c suggests that much of the reason that longer rest times at top-of-charge and bottom-of-discharge decrease cycle life (at least in this study) is calendar aging, not greater degradation at the voltage extremes.
+Thus, the use of a cycle-based $x$ axis may obscure calendar aging phenomena. 
 (a) Higher discharge rate can accelerate knee onset. Adapted from Figure 8 of Omar et al.\cite{omar_lithium_2014}
 Note that while the environmental test temperature was $\sim$25\degree C, the temperature at the surface reached as high as 55\degree C for the high rate discharge tests.
 (b) Lower discharge rate can accelerate knee onset. Adapted from Figure 2a of Keil et al.\cite{keil_linear_2019} (c) Longer rest time can accelerate knee onset. Adapted from  Figure 2a of Keil et al.\cite{keil_linear_2019} (d) Shorter rest time can accelerate knee onset. Adapted from Figure 1a of Epding et al.\cite{epding_investigation_2019}.}
@@ -194,190 +191,53 @@ We mention that there is no ``ground truth'' for the true knee. For the Bacon-Wa
 
 % \gbox{refer to Yulia's table "SI-EXP Table"// Table \ref{table:experimental_summary}},
 
+% generated via https://www.latex-tables.com
 \newgeometry{margin=2.5cm}
 \begin{landscape}
 \begin{table}[p]
 \caption{Summary of references used to generate Figure 22 in the main manuscript.
 The data was obtained extracted via direct access to the corresponding databases when possible \cite{baumhofer_production_2014,diao_accelerated_2019,severson_data-driven_2019,willenberg_high-precision_2020,attia_closed-loop_2020} or via \textit{WebPlotDigitizer}\cite{Rohatgi2021}.}
 \label{table:experimental_summary_DATASOURCES}
-\scalebox{0.5}{
-\begin{tabular}{|c|c|l|l|l|c|l|}
+\scalebox{0.75}{\begin{tabular}{|l|l|c|l|} 
 \hline
-\multicolumn{1}{|l|}{} & \multicolumn{1}{l|}{\textbf{Variable}} & \textbf{Reference} & \textbf{Cell Description} & \textbf{Range of Variable} & \textbf{Number of cells} & \textbf{Capacity curve references} \\ \hline
-\multirow{9}{*}{\textbf{Cell design}} & \textbf{Electrode loading} & Ma et al. 2019 \cite{ma_editors_2019} & Lab-made pouch NMC/Gr & 14.4--21.2 mg/cm2 & &  
-\\ \cline{2-7} 
- & 
-%  \textbf{Positive electrode coating} 
- \begin{tabular}[c]{@{}l@{}} \textbf{Positive electrode}\\ \textbf{coating}\end{tabular}
- & Ma et al. 2019 \cite{ma_editors_2019} & Lab-made pouch NMC/Gr & Ti-based coating &  &  
- \\ \cline{2-7} 
- & \textbf{Graphite type} & Ma et al. 2019 \cite{ma_editors_2019} & Lab-made pouch NMC/Gr & Artificial (Kaijin AML-400), natural (BTR-918) &  & 
- \\ 
- \cline{2-7} 
- & \multirow{3}{*}{
-%  \textbf{Additive package and concentration}
- \begin{tabular}[c]{@{}l@{}} \textbf{Additive package}\\ \textbf{and concentration}\end{tabular}
-  } & Petibon et al. 2016 \cite{petibon_studies_2016} & Lab-made pouch LCO/Gr-Si & N/A &   &   
-  \\ 
- \cline{3-7} 
- &  & Jung et al. 2016 \cite{jung_consumption_2016} & Lab-made coin LFP/Gr-Si & 0--20 wt.\% FEC &   &   
- \\ 
- \cline{3-7} 
- &  & Ma et al. 2019 \cite{ma_editors_2019} & Lab-made pouch NMC/Gr & 0--20\% methyl acetate additive &   &   \\ 
- \cline{2-7} 
- & \multirow{3}{*}{\textbf{Salt concentration}} & Aiken et al. 2020 \cite{aiken_accelerated_2020} & Lab-made pouch NMC/Gr & 0.2--1.2M LiPF6 & 4 & 
- \begin{tabular}[c]{@{}l@{}} Fig 3d 0.8M, 1.2M;\\ Fig 10a: `red circle' and `blue circle' \end{tabular}
-  \\ 
- \cline{3-7} 
- &  & Ma et al. 2019 \cite{ma_editors_2019} & Lab-made pouch NMC/Gr & 1.2--1.5M LiPF6 &   & 
- \\ 
- \cline{3-7} 
- &  & Wang et al. 2014 \cite{wang_systematic_2014} & Lab-made pouch LCO/Gr & 0.5--2M LiPF6 &  &  
- \\ 
- \hline
-\multirow{34}{*}{%\textbf{Testing Conditions}
-\begin{tabular}[c]{@{}l@{}} \textbf{Testing}\\ \textbf{conditions}\end{tabular}
-} & \multirow{8}{*}{\textbf{Charging rate}} & Lewerenz et al. 2017 \cite{lewerenz_systematic_2017}, \cite{lewerenz_post-mortem_2017} & OMT OMLIFE-8AH-HP LFP/Gr & 1--8C &  & 
-\\ \cline{3-7} 
- &  & Petzl et al. 2015 \cite{petzl_lithium_2015} & Commercial 26650 LFP/Gr & 0.5--1C &  & 
- \\ 
- \cline{3-7} 
- &  & Burns et al. 2015 \cite{burns_-situ_2015} & Panasonic 18650 NCA/Gr & 0.1--1C & 2 & Fig1b circles and squares \\ 
- \cline{3-7} 
- &  & Waldmann et al. 2015 \cite{waldmann_optimization_2015} & Cylindrical NCA/Gr & 0.25--1C, single vs. multi-step CC, optional CV &   & 
- \\ 
- \cline{3-7} 
- &  & Schuster et al. 2015 \cite{schuster_nonlinear_2015} & E-One Moli Energy IHR18650A NMC/Gr & 0.2--1C & 15 & 
-  \begin{tabular}[c]{@{}l@{}}  
-  Fig 1a; Fig 4a 1.30V (CCCV) (A); Fig 4a 1.20V (CCCV) (A);  \\
- Fig 4a 1.20V (CC) (A); Fig 4a 0.94V (CC) (A);   \\
- Fig 6a 0.5C/0.5C (A); Fig 6a 1.0C/0.5C (A); Fig 6a 0.5C/1.0C (A);   \\
- Fig 9 1.20 V (CC); Fig 9 1.20 V (CCCV); Fig 9 1.20 V (2CCCV); \\
- Fig 10a 35\degree C(deltaV down) (A); Fig 10a 35\degree C(deltaV up) (A); \\
- Fig 10a 50\degree C(deltaV up) (A); Fig 10a 25\degree C(deltaV up) (A);  \end{tabular}
- \\ 
- \cline{3-7} 
- &  & Severson et al. 2019 \cite{severson_data-driven_2019} & A123 APR18650M1A LFP/Gr & 3.6--8C & 120 & Database access 
- \\ 
- \cline{3-7} 
- &  & Schindler et al. 2018 \cite{schindler_fast_2018} &  Samsung ICR18560-26F NMC/Gr & 
-%  0.25-2C with AC pulse, current derating, current interrupt
-  \begin{tabular}[c]{@{}l@{}}0.25--2C with AC pulse, \\ current derating, current interrupt\end{tabular}
- & &   
- \\ 
- \cline{3-7} 
- &  & 
- Keil et al. 2019 \cite{keil_linear_2019} & Cylindrical NMC/Gr & 0.7--1C & 6 & 
-   \begin{tabular}[c]{@{}l@{}}  
-Fig 2a procedure 1 and 2; Fig 8a procedure 1 100 SOC;  \\
-Fig 8a procedure 1 0 SOC; Fig 8a procedure 2 100 SOC;   \\
-Fig 8a procedure 2 0 SOC  \end{tabular}
- \\ 
- \cline{2-7} 
- & \multirow{5}{*}{\textbf{Discharging rate}} & 
- Keil et al. 2016 \cite{keil_charging_2016} & \begin{tabular}[c]{@{}l@{}}a) Sanyo UR18650SA LMO+NMC/Gr\\ b) Sony US18650VT1 LMO+LCO/Gr\\ c) A123 APR18650M1A LFP/Gr\end{tabular} 
- & \begin{tabular}[c]{@{}l@{}}a) 2.4--4C\\ b) 2.7--4.5C\\ c) 2.7--4.5C\end{tabular} & 5 & 
-  \begin{tabular}[c]{@{}l@{}}Fig 8c 3A CCCV +50mV (C); Fig 10a 1A CCCV (A);\\ Fig 10a 1A CCCV (A); Fig 10b 3A CCCV (B);\\ Fig 10c 5A CCCV (C) \end{tabular}
-  \\ 
- \cline{3-7} 
- &  & 
- Keil et al. 2019 \cite{keil_linear_2019} & Cylindrical NMC/Gr & 1--2C & see above & see above \\ 
- \cline{3-7} 
- &  & Atalay et al. 2020 \cite{atalay_theory_2020} & Commercial 18650 NCA/Gr & 1--4C &   &   
- \\ 
- \cline{3-7} 
- &  & Omar et al. 2014 \cite{omar_lithium_2014} & Commercial cylindrical LFP/Gr & 1--15C &   &   
- \\ 
- \cline{3-7} 
- &  & Diao et al. 2019 \cite{diao_accelerated_2019} & Pouch LCO/Gr & 0.7--2C & 34 &  Database access
- \\
- \cline{2-7} 
- & \multirow{8}{*}{\textbf{Voltage limits}} & Broussely et al. 2005 \cite{broussely_main_2005} & Saft VLE NCA/Gr & 50\%--100\% storage SOC & 2 &  Fig 2 red and green 
- \\ 
- \cline{3-7} 
- &  & Aiken et al. 2020 \cite{aiken_accelerated_2020} & Lab-made pouch NMC/Gr & 4.3--4.4V charge cutoff voltage &  & 
- \\ 
- \cline{3-7} 
- &  & 
- \begin{tabular}[c]{@{}l@{}} Ecker et al. 2014 \cite{ecker_calendar_2014},\\ Pfrang et al. 2018 \cite{pfrang_long-term_2018}\end{tabular}
-%  Ecker et al. 2014 \cite{ecker_calendar_2014}, Pfrang et al. 2018 \cite{pfrang_long-term_2018} 
- & Sanyo UR18650E NMC/Gr & \begin{tabular}[c]{@{}l@{}}1) 0.5\%--100\% DOD, 50\% SOC midpoint\\ 2) 10\% DOD and midpoint SOC of 10\%--95\%\end{tabular} &  &  
- \\ 
- \cline{3-7} 
- &  & Klett et al. 2014 \cite{klett_non-uniform_2014} & Commercial 26650 LFP/Gr & 30--50\% vs. 5--95\% SOC & 1 & Figure 2a CCC \\ 
- \cline{3-7} 
- &  & Schuster et al. 2015 \cite{schuster_nonlinear_2015} & E-One Moli Energy IHR18650A NMC/Gr & 0.56--1.2V DOD, 3.6V midpoint & See above & See above \\ 
- \cline{3-7} 
- &  & Ma et al. 2019 \cite{ma_novel_2019} & Commercial prismatic NMC+LMO/Gr & 0--20\%, 20--60\%, 60--100\%, 0--100\% SOC &  & \\ 
- \cline{3-7} 
- &  & Petzl et al. 2015 \cite{petzl_lithium_2015} & Commercial 26650 LFP/Gr & 0--80\% vs. 0--100\% SOC & 3 & Fig 1a blue, red, black 
- \\ 
- \cline{3-7} 
- &  & Zhu et al. 2021 \cite{zhu_investigation_2021} & Samsung INR 18650 25R NMC+NCA/Gr & 20--60\% DOD, 15--85\% SOC midpoint &  &  
- \\ 
- \cline{2-7} 
- & \multirow{3}{*}{\textbf{Rests}} & Keil et al. 2019 \cite{keil_linear_2019} & Cylindrical NMC/Gr & 10--900s at TOC and BOD & See above & See above \\ 
- \cline{3-7} 
- &  & Ma et al. 2019 \cite{ma_editors_2019} & Lab-made pouch NMC/Gr & 0--30min at TOC and BOD &   & 
- \\ 
- \cline{3-7} 
- &  & Epding et al. 2019 \cite{epding_investigation_2019} & Commercial prismatic NMC/Gr & 0--every 100 cycles & 3 & Fig 1a black and green; Fig 7a black cell 2
- \\ 
- \cline{2-7} 
- & \multirow{7}{*}{\textbf{Temperature}} & Zhang et al. 2019 \cite{zhang_accelerated_2019} & NMC/Gr & 25--45\degree C &  &  
- \\ 
- \cline{3-7} 
- &  & Broussely et al. 2005 \cite{broussely_main_2005} & Saft VLE NCA/Gr & 20--60C & &  
- \\ \cline{3-7} 
- &  & Schuster et al. 2015 \cite{schuster_nonlinear_2015} & E-One Moli Energy IHR18650A NMC/Gr & 25--50\degree C & See above & See above \\ 
- \cline{3-7} 
- &  & Safari et al. 2011 \cite{safari_aging_2011} & Commercial 26650 LFP/Gr & 25--45\degree C &   &   
- \\ 
- \cline{3-7} 
- &  & Waldmann et al. 2014 \cite{waldmann_temperature_2014} & Commercial 18650 NMC+LMO/Gr & -20--70\degree C &   &   \\ 
- \cline{3-7} 
- &  & Coron et al. 2020 \cite{coron_impact_2020} & \begin{tabular}[c]{@{}l@{}}Commercial 18650 NMC+LMO/Gr\\  Commercial 18650 NMC/Gr\end{tabular} & 0--25\degree C & 5 &  
- \begin{tabular}[c]{@{}l@{}}Fig 1c: `red crosses', `red squares',\\ `blue crosses', `blue squares' and  `blue circles' \end{tabular}
- \\ 
- \cline{3-7} 
- &  & Waldmann et al. 2015 \cite{waldmann_optimization_2015} & Cylindrical NCA/Gr & 0--60\degree C & & 
- \\ 
- \cline{2-7} 
- & \multirow{3}{*}{\textbf{Pressure}} & Wunsch et al. 2019 \cite{wunsch_investigation_2019} & Commercial pouch NMC/Gr & 4 bracing approaches &  &  \\ 
- \cline{3-7} 
- &  & Cannarella et al. 2014 \cite{cannarella_stress_2014} & Pouch LCO/Gr & 0--5 MPa & & 
- \\ \cline{3-7} 
- &  & Bach et al. 2016 \cite{bach_nonlinear_2016} & E-One Moli Energy IHR18650A NMC/Gr & With and without hose clamp &  & \\ 
- \hline
-\multirow{4}{*}{%\textbf{Cell-to-cell Variation}
-\begin{tabular}[c]{@{}l@{}} \textbf{Cell-to-cell}\\ \textbf{variation}\end{tabular}
-} & \multicolumn{1}{l|}{\multirow{4}{*}{\textbf{}}} & Harris et al. 2017 \cite{harris_failure_2017} & Commercial pouch LCO/Gr & 24 cells &  &  \\ 
-\cline{3-7} 
- & \multicolumn{1}{l|}{} & Baumhofer et al. 2014 \cite{baumhofer_production_2014} & Sanyo UR18650E NMC/Gr & 48 cells & 48 & Database access \\ 
- \cline{3-7} 
- & \multicolumn{1}{l|}{} & Willenberg et al. 2020 \cite{willenberg_high-precision_2020} & Samsung INR18650 35E NCA/Gr+Si & 4 cells & 4 & Database access \\ 
- \cline{3-7} 
- & \multicolumn{1}{l|}{} & Stiaszny et al. 2014 \cite{stiaszny_electrochemical_2014} & Commercial 18650 NMC+LMO/Gr & 6 cells &  &  \\ 
- \hline
+\textbf{Reference}     & \textbf{Cell Description}                                                                                                          & \textbf{Number of cells} & \textbf{Capacity curve references}                                                                                                                                                                                                                                                                                                                                                                                    \\ 
+\hline
+Aiken et al.\cite{aiken_accelerated_2020} 2020      & Lab-made pouch NMC/Gr                                                                                                              & 4                        & \begin{tabular}[c]{@{}l@{}}Fig 3d 0.8M, 1.2M;\\ Fig 10a: \`{}red circle' and \`{}blue circle'\end{tabular}                                                                                                                                                                                                                                                                                                            \\ 
+\hline
+Baumh\"{o}fer et al.\cite{baumhofer_production_2014} 2014  & Sanyo UR18650E NMC/Gr                                                                                                              & 48                       & Database access                                                                                                                                                                                                                                                                                                                                                                                                       \\ 
+\hline
+Broussely et al.\cite{broussely_main_2005} 2005  & Saft VLE NCA/Gr                                                                                                                    & 2                        & Fig 2 red and green                                                                                                                                                                                                                                                                                                                                                                                                   \\ 
+\hline
+Burns et al.\cite{burns_-situ_2015} 2015      & Panasonic 18650 NCA/Gr                                                                                                             & 2                        & Fig1b circles and squares                                                                                                                                                                                                                                                                                                                                                                                             \\ 
+\hline
+Coron et al.\cite{coron_impact_2020} 2020      & \begin{tabular}[c]{@{}l@{}}Commercial 18650 NMC+LMO/Gr\\ Commercial 18650 NMC/Gr\end{tabular}                                      & 5                        & \begin{tabular}[c]{@{}l@{}}Fig 1c: \`{}red crosses', \`{}red squares',\\ \`{}blue crosses', \`{}blue squares' and \`{}blue circles'\end{tabular}                                                                                                                                                                                                                                                                      \\ 
+\hline
+Diao et al.\cite{diao_accelerated_2019} 2019       & Pouch LCO/Gr                                                                                                                       & 34                       & Database access                                                                                                                                                                                                                                                                                                                                                                                                       \\ 
+\hline
+Epding et al.\cite{epding_investigation_2019} 2019     & Commercial prismatic NMC/Gr                                                                                                        & 3                        & Fig 1a black and green; Fig 7a black cell 2                                                                                                                                                                                                                                                                                                                                                                           \\ 
+\hline
+Keil et al.\cite{keil_charging_2016} 2016       & \begin{tabular}[c]{@{}l@{}}a) Sanyo UR18650SA LMO+NMC/Gr\\ b) Sony US18650VT1 LMO+LCO/Gr\\ c) A123 APR18650M1A LFP/Gr\end{tabular} & 5                        & \begin{tabular}[c]{@{}l@{}}Fig 8c 3A CCCV +50mV (C); Fig 10a 1A CCCV (A);\\ Fig 10a 1A CCCV (A); Fig 10b 3A CCCV (B);\\ Fig 10c 5A CCCV (C)\end{tabular}                                                                                                                                                                                                                                                              \\ 
+\hline
+Keil et al.\cite{keil_linear_2019} 2019       & Cylindrical NMC/Gr                                                                                                                 & 6                        & \begin{tabular}[c]{@{}l@{}}Fig 2a procedure 1 and 2; Fig 8a procedure 1 100 SOC; \\Fig 8a procedure 1 0 SOC; Fig 8a procedure 2 100 SOC; \\Fig 8a procedure 2 0 SOC\end{tabular}                                                                                                                                                                                                                                      \\ 
+\hline
+Klett et al.\cite{klett_non-uniform_2014} 2014      & Commercial 26650 LFP/Gr                                                                                                            & 1                        & Figure 2a CCC                                                                                                                                                                                                                                                                                                                                                                                                         \\ 
+\hline
+Petzl et al.\cite{petzl_lithium_2015} 2015      & Commercial 26650 LFP/Gr                                                                                                            & 3                        & Fig 1a blue, red, black                                                                                                                                                                                                                                                                                                                                                                                               \\ 
+\hline
+Schuster et al.\cite{schuster_nonlinear_2015} 2015   & E-One Moli Energy IHR18650A NMC/Gr                                                                                                 & 15                       & \begin{tabular}[c]{@{}l@{}}Fig 1a; Fig 4a 1.30V (CCCV) (A); Fig 4a 1.20V (CCCV) (A); \\ Fig 4a 1.20V (CC) (A); Fig 4a 0.94V (CC) (A); \\ Fig 6a 0.5C/0.5C (A); Fig 6a 1.0C/0.5C (A); Fig 6a 0.5C/1.0C (A); \\ Fig 9 1.20 V (CC); Fig 9 1.20 V (CCCV); Fig 9 1.20 V (2CCCV); \\ Fig 10a 35 C(deltaV down) (A); Fig 10a 35 C(deltaV up) (A); \\ Fig 10a 50 C(deltaV up) (A); Fig 10a 25 C(deltaV up) (A);\end{tabular}  \\ 
+\hline
+Severson et al.\cite{severson_data-driven_2019} 2019   & A123 APR18650M1A LFP/Gr                                                                                                            & 120                      & Database access                                                                                                                                                                                                                                                                                                                                                                                                       \\ 
+\hline
+Willenberg et al.\cite{willenberg_high-precision_2020} 2020 & Samsung INR18650 35E NCA/Gr+Si                                                                                                     & 4                        & Database access                                                                                                                                                                                                                                                                                                                                                                                                       \\
+\hline
 \end{tabular}
 }
 \end{table}
 
 \end{landscape}
- \restoregeometry
+\restoregeometry
 
 
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \bibliographystyle{myIEEEtran}
 \bibliography{refs_zotero}
 

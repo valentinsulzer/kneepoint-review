@@ -3,5 +3,6 @@ This repository contains LaTeX, data, code, and figures for our publication enti
 
 To recreate any programmatically-generated figures, please visit the `\code` directory.
 The scripts in this directory output programmatically-generated figures to the `\figures` directory.
+PDF versions of the final figures were then saved to the `\final_figures` directory.
 
 Schematic figures were generated using either [Affinity Designer](https://affinity.serif.com/en-us/designer/) or PowerPoint.

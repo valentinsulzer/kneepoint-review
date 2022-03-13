@@ -28,6 +28,13 @@
 %usepackage{authblk}
 \usepackage{multirow}
  
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BIBLIOGRAPHY EXPERIMENTS %% See entry [141] for an et al example
+% \usepackage[maxbibnames=99]{biblatex} %% This fumbles :(
+
+\setkeys{acs}{maxauthors = 0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % units
 % \SI{X}{\UNIT} will write the value X with units \UNIT. 
 % eg. \SI{30}{\celsius}
@@ -942,6 +949,7 @@ Writing – review \& editing, P.M.A., G.d.R., M.D., P.G., S.G., D.A.H., E.K., Y
 \newpage
 % \bibliographystyle{myIEEEtran}
 \bibliography{refs_zotero}
+
 
 \appendix
 

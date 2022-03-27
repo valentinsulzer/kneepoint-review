@@ -145,10 +145,24 @@
 \maketitle
 \thispagestyle{empty}
 
+\section{Supplementary Discussion 1: Comparison of knee point estimation methods}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Here, we detail five offline knee point estimation methods investigated in this work. The well-accepted ``Kneedle'' method (Figure 3a), proposed by Satop{\"a}{\"a} et al.\cite{satopaa_finding_2011}{}, calculates the knee as the maximum distance of the aging trajectory from a line drawn from beginning to end of life.
+The most common approaches use the intersection of two lines fit to the beginning and end of the aging trajectory.
+The ``Bacon-Watts'' method (Figure 3b), proposed by Fermín-Cueto et al. \cite{fermin-cueto_identification_2020} for use in battery aging trajectories, estimates the transition between two intersecting lines fitted to an aging trajectory; this method also provides an estimate of the ``knee-onset'', or the point where the aging trajectory is no longer linear.
+The ``tangent-ratio'' method (Figure 3c), proposed by Diao et al.\cite{diao_algorithm_2019}{}, defines the knee based on a tangent ratio at the inflection and maximum slope points of the aging trajectory.
+Similarly, the bisector method (Figure 3d), proposed by Greenbank and Howey\cite{greenbank_automated_2021}{}, combines linear extrapolations of early and late life with an angle bisector to identify the knee.
+A final method was designed specifically for the battery use case: Zhang et al.\cite{zhang_accelerated_2019} proposed the quantile regression method (Figure 3e), which approximates early life with a linear regression and then defines the knee as when the aging trajectory falls below a defined band below that regression line.
+Unlike other methods that use only the aging trajectory, this method requires the use of voltage data.
+For each of these methods, smoothing the aging trajectories prior to knee identification may result in more accurate or consistent knee point detection\cite{strange_elbows_2021}{}, but again, the results may be sensitive to the smoothing choices made.
+Of these five methods, the Kneedle, Bacon-Watts, and bisector methods are arguably also the easiest to implement, since all avoid the use of derivatives and voltage data.
+We mention that Satop{\"a}{\"a} et al.\cite{satopaa_finding_2011} review additional knee point identification algorithms that were not considered here.
 
+We also investigated the correlations between the knee points estimated by these algorithms across the Severson et al.\cite{severson_data-driven_2019} dataset (Figure \ref{fig:severson_knee_compare_all_algorithms}).
+The Kneedle and Bacon-Watts knee points were highly correlated with each other ($R^2\approx 1.00$); the bisector method also correlated well to these methods ($R^2\approx 0.96$), but the tangent-ratio method correlated fairly poorly to the others ($R^2\approx 0.86$).
+These results suggest that the Kneedle, Bacon-Watts, and bisector methods produce nearly identical results for offline knee point estimation.
+
+\newpage
 \begin{figure}[hb]
 \centering
 % \begin{subfigure}{.5\textwidth}

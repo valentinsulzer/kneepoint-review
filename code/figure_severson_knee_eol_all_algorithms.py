@@ -6,7 +6,14 @@ import config
 from sklearn.linear_model import LinearRegression
 
 
-def linear_regression_with_plot(point_arr, eol_arr, x_cont, ax=None, unicode_title=None):
+def linear_regression_with_plot(
+    point_arr,
+    eol_arr, 
+    x_cont, 
+    ax=None, 
+    unicode_title=None, 
+    x_axis_appendix=None
+):
     '''
     Given two arrays, fit an sklearn LinearRegression instance and generate
     the line of best fit over the range of x value
@@ -31,6 +38,9 @@ def linear_regression_with_plot(point_arr, eol_arr, x_cont, ax=None, unicode_tit
     unicode_title (type: int)
         Value to be passed to built-in function chr, to return a unicode string.
         Used to set the titles for ax in a subplot setting.
+        
+    x_axis_appendix (type: str)
+        X axis appendix
     
     '''
 
@@ -77,7 +87,10 @@ def linear_regression_with_plot(point_arr, eol_arr, x_cont, ax=None, unicode_tit
     ax.plot(x_cont, x_cont, linestyle='dashed', color='gray')
     
     # Plot configuration
-    ax.set_xlabel("Cycles to knee point")
+    if x_axis_appendix is not None:
+        ax.set_xlabel(f"Cycles to knee point: {x_axis_appendix}")
+    else:
+        ax.set_xlabel("Cycles to knee point")
     ax.set_ylabel("Cycles to end-of-life")
     ax.set_xlim([0, np.max(x_cont)])
     ax.set_ylim([0, np.max(x_cont)])
@@ -126,10 +139,10 @@ ax = ax.ravel()
 
 # For each knee identification method, call this function to do the linear regression.
 # Notice one subplot axis is passed to this function, for each method
-linear_regression_with_plot(bw_points, eol_vals, x_cont=x_values, ax=ax[0], unicode_title=97)
-linear_regression_with_plot(kneedle_points, eol_vals, x_cont=x_values, ax=ax[1], unicode_title=98)
-linear_regression_with_plot(diao_points, eol_vals, x_cont=x_values, ax=ax[2], unicode_title=99)
-linear_regression_with_plot(bisector_points, eol_vals, x_cont=x_values, ax=ax[3], unicode_title=100)
+linear_regression_with_plot(bw_points, eol_vals, x_cont=x_values, ax=ax[0], unicode_title=97, x_axis_appendix="Bacon-Watts")
+linear_regression_with_plot(kneedle_points, eol_vals, x_cont=x_values, ax=ax[1], unicode_title=98, x_axis_appendix="Kneedle")
+linear_regression_with_plot(diao_points, eol_vals, x_cont=x_values, ax=ax[2], unicode_title=99, x_axis_appendix="Tangent-ratio")
+linear_regression_with_plot(bisector_points, eol_vals, x_cont=x_values, ax=ax[3], unicode_title=100, x_axis_appendix="Bisector")
 
 plt.tight_layout()
 

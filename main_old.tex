@@ -107,6 +107,47 @@
 \setlength{\textwidth}{6.5in}
 
 
+%%%%%%% added <<<<<<<<<<<<<<<<
+\usepackage{etoolbox}% needed for the patch  <<<
+
+\makeatletter
+\renewcommand*{\acs@author@fnsymbol@symbol}[1]{% Use numbers instead of symbols, * is for email
+    \ifcase #1 *\or
+    1\or
+    2\or
+    3\or
+    4\or
+    5\or
+    6\or
+    7\or
+    8\or
+    9\or
+    10
+    \fi
+}
+        
+\renewcommand*\acs@contact@details{% addd * before  E-mail
+    {\sffamily *\,E-mail: \acs@email@list }%
+    \acs@number@list
+}           
+
+\patchcmd{\acs@address@list@auxii}% superscript for numbers in affiliations
+{\acs@author@fnsymbol{\acs@affil@marker@cnt}}
+{\textsuperscript{\acs@author@fnsymbol{\acs@affil@marker@cnt}}}
+{}{}
+
+\patchcmd{\acs@address@list@auxii}% superscript for numbers in affiliations
+{{\acs@author@fnsymbol{\acs@affil@marker@cnt}\@nameuse{@altaffil@\@roman\@tempcnta}\par}}
+{{\textsuperscript{\acs@author@fnsymbol{\acs@affil@marker@cnt}}\@nameuse{@altaffil@\@roman\@tempcnta}\par}}
+{}{}        
+
+\makeatother    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
 \author{Peter M. Attia}
 \email{peter.m.attia@gmail.com}
 \affiliation{\scriptsize{Department of Materials Science and Engineering, Stanford University, Stanford, CA, USA}}
@@ -145,7 +186,7 @@
 \author{Edwin Khoo}  
 \affiliation{Institute for Infocomm Research, Agency for Science, Technology, and Research (A*STAR), Connexis, Singapore}
 \author{Yuliya Preger}  
-\affiliation{Sandia National Laboratories, Albuquerque, NM, USA}
+\affiliation[12]{Sandia National Laboratories, Albuquerque, NM, USA}
 \author{Abhishek Soni}
 \affiliation{Department of Mechanical Engineering, University of Cincinnati, Cincinnati, OH, USA}
 \author{Shashank Sripad} 

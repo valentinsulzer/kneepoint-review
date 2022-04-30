@@ -39,6 +39,7 @@
 % \SI{X}{\UNIT} will write the value X with units \UNIT. 
 % eg. \SI{30}{\celsius}
 \usepackage{siunitx} 
+\usepackage{amsmath} 
 
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
@@ -93,7 +94,8 @@
 
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks=false,
+    colorlinks=False,
+    urlcolor=cyan,
     pdftitle={Knees in lithium-ion battery aging trajectories}
 }
 
@@ -106,65 +108,98 @@
 \setlength{\oddsidemargin}{0in}
 \setlength{\textwidth}{6.5in}
 
+\newcommand*\mycommand[1]{\texttt{\emph{#1}}}
 
-\author{Peter M. Attia}
+
+
+% %%% Delete this for old one 
+% %%%%%%% added <<<<<<<<<<<<<<<<
+% \usepackage{etoolbox}% needed for the patch  <<<
+
+% \makeatletter
+% \renewcommand*{\acs@author@fnsymbol@symbol}[1]{% Use numbers instead of symbols, * is for email
+%     \ifcase #1 *\or
+%     1\or
+%     2\or
+%     3\or
+%     4\or
+%     5\or
+%     6\or
+%     7\or
+%     8\or
+%     9\or
+%     10
+%     \fi
+% }
+        
+% \renewcommand*\acs@contact@details{% addd * before  E-mail
+%     {\sffamily *\,E-mail: \acs@email@list }%
+%     \acs@number@list
+% }           
+
+% \patchcmd{\acs@address@list@auxii}% superscript for numbers in affiliations
+% {\acs@author@fnsymbol{\acs@affil@marker@cnt}}
+% {\textsuperscript{\acs@author@fnsymbol{\acs@affil@marker@cnt}}}
+% {}{}
+
+% \patchcmd{\acs@address@list@auxii}% superscript for numbers in affiliations
+% {{\acs@author@fnsymbol{\acs@affil@marker@cnt}\@nameuse{@altaffil@\@arabic\@tempcnta}\par}}
+% {{\textsuperscript{\acs@author@fnsymbol{\acs@affil@marker@cnt}}\@nameuse{@altaffil@\@arabic\@tempcnta}\par}}
+% {}{}        
+
+% \makeatother    
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\def\acs@author@fnsymbol#1{}
+\makeatother
+
+
+\author{Peter M. Attia$\mathrm{^{1,*}}$}
 \email{peter.m.attia@gmail.com}
-\affiliation{\scriptsize{Department of Materials Science and Engineering, Stanford University, Stanford, CA, USA}}
-\author{Alexander Bills} 
-\affiliation{Department of Mechanical Engineering, Carnegie Mellon University, Pittsburgh, PA, USA}
-\author{Ferran Brosa Planella} 
-\affiliation{WMG, University of Warwick, Coventry, UK, and Faraday Institution, Harwell, UK}
-\author{Philipp Dechent} 
-\affiliation{Institute for Power Electronics and Electrical Drives (ISEA), RWTH Aachen University, Aachen, Germany}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\author{Gon\c{c}alo dos Reis} 
-% Goncalo's ORCID: 0000-0002-4993-2672
-% Email: G.dosReis@ed.ac.uk
-\affiliation{School of Mathematics, University of Edinburgh, Edinburgh, UK and Centro de Matem\'atica e Aplica\c c$\tilde{\text{o}}$es (CMA), FCT, UNL, Caparica, Portugal}
-% \affiliation{School of Mathematics, University of Edinburgh, Edinburgh, UK}
-% \affiliation{Centro de Matem\'atica e Aplica\c c$\tilde{\text{o}}$es (CMA), FCT, UNL, Caparica, Portugal}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\author{Matthieu Dubarry}
-\affiliation{Hawaii Natural Energy Institute, University of Hawaii at Manoa, Honolulu, HI, USA}
-\author{Paul Gasper} 
-\affiliation{National Renewable Energy Laboratory, Golden, CO, USA}
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\author{Richard Gilchrist} 
-% % Richard's ORCID: 0000-0002-1606-2607,
-%% Richard's email: richard.gilchrist@ed.ac.uk
-\affiliation{School of Mathematics, University of Edinburgh, Edinburgh, UK}
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\author{Samuel Greenbank} 
-\affiliation{Department of Engineering Science, University of Oxford, Oxford, UK}
-\author{David Howey} 
-\affiliation{Department of Engineering Science, University of Oxford,  Oxford, UK, and Faraday Institution, Harwell, UK}
-% email: david.howey@eng.ox.ac.uk
-% ORCID: 0000-0002-0620-3955
-\author{Ouyang Liu} 
-\affiliation{Institute for Infocomm Research, Agency for Science, Technology, and Research (A*STAR), Connexis, Singapore}
-\author{Edwin Khoo}  
-\affiliation{Institute for Infocomm Research, Agency for Science, Technology, and Research (A*STAR), Connexis, Singapore}
-\author{Yuliya Preger}  
-\affiliation{Sandia National Laboratories, Albuquerque, NM, USA}
-\author{Abhishek Soni}
-\affiliation{Department of Mechanical Engineering, University of Cincinnati, Cincinnati, OH, USA}
-\author{Shashank Sripad} 
-\affiliation{Department of Mechanical Engineering, Carnegie Mellon University, Pittsburgh, PA, USA}
-\author{Anna G. Stefanopoulou}  
-\affiliation{Department of Mechanical Engineering, University of Michigan, Ann Arbor, MI, USA}
-\author{Valentin Sulzer}
-\affiliation{Department of Mechanical Engineering, University of Michigan, Ann Arbor, MI, USA}
-
+\affiliation{\footnotesize1. Department of Materials Science and Engineering, Stanford University, Stanford, CA, USA}
+\author{Alexander Bills$\mathrm{^2}$}
+\affiliation{2. Department of Mechanical Engineering, Carnegie Mellon University, Pittsburgh, PA, USA}
+\author{Ferran Brosa Planella$\mathrm{^{3, 4}}$} 
+\affiliation{3. WMG, University of Warwick, Coventry, UK}
+\affiliation{4. Faraday Institution, Harwell, UK}
+\author{Philipp Dechent$\mathrm{^5}$} 
+\affiliation{5. Institute for Power Electronics and Electrical Drives (ISEA), RWTH Aachen University, Aachen, Germany}
+\author{Gon\c{c}alo dos Reis$\mathrm{^{6, 7}}$} 
+\affiliation{6. School of Mathematics, University of Edinburgh, Edinburgh, UK} 
+\affiliation{7. Centro de Matem\'atica e Aplica\c c$\tilde{\text{o}}$es (CMA), FCT, UNL, Caparica, Portugal}
+\author{Matthieu Dubarry$\mathrm{^8}$}
+\affiliation{8. Hawaii Natural Energy Institute, University of Hawaii at Manoa, Honolulu, HI, USA}
+\author{Paul Gasper$\mathrm{^9}$} 
+\affiliation{9. Energy Conversion and Storage Systems Center, National Renewable Energy Laboratory, Golden, CO, USA}
+\author{Richard Gilchrist$\mathrm{^{6}}$} 
+\affiliation{6. School of Mathematics, University of Edinburgh, Edinburgh, UK}
+\author{Samuel Greenbank$\mathrm{^{10}}$} 
+\affiliation{10. Department of Engineering Science, University of Oxford, Oxford, UK}
+\author{David Howey$\mathrm{^{4, 10}}$} 
+\affiliation{4. Faraday Institution, Harwell, UK}
+\affiliation{10. Department of Engineering Science, University of Oxford,  Oxford, UK}
+\author{Ouyang Liu$\mathrm{^{11}}$} 
+\affiliation{11. Institute for Infocomm Research, Agency for Science, Technology, and Research (A*STAR), Connexis, Singapore}
+\author{Edwin Khoo$\mathrm{^{11}}$}  
+\affiliation{11. Institute for Infocomm Research, Agency for Science, Technology, and Research (A*STAR), Connexis, Singapore}
+\author{Yuliya Preger$\mathrm{^{12}}$}  
+\affiliation{12. Energy Storage Technology and Systems, Sandia National Laboratories, Albuquerque, NM, USA}
+\author{Abhishek Soni$\mathrm{^{13}}$}
+\affiliation{13. Department of Mechanical Engineering, University of Cincinnati, Cincinnati, OH, USA}
+\author{Shashank Sripad$\mathrm{^{2}}$} 
+\affiliation{2. Department of Mechanical Engineering, Carnegie Mellon University, Pittsburgh, PA, USA}
+\author{Anna G. Stefanopoulou$\mathrm{^{14}}$}  
+\affiliation{14. Department of Mechanical Engineering, University of Michigan, Ann Arbor, MI, USA}
+\author{Valentin Sulzer$\mathrm{^{14}}$}
+\affiliation{14. Department of Mechanical Engineering, University of Michigan, Ann Arbor, MI, USA}
 
 \title{``Knees'' in lithium-ion battery aging trajectories}
-
-\date{}
+\thispagestyle{empty}
+\clearpage
+\setcounter{page}{0}
 
 \begin{document}
-
-\maketitle
-
-%**PREVIOUS DRAFT IS NOW IN main\_old\_experiment\_then\_model.tex**
+\normalsize
 
 \section{Abstract} % 131 words
 
@@ -934,7 +969,7 @@ Many of these research directions will require substantial effort; however, with
 
 \section{Data and code availability}
 
-All data and code are publicly available on GitHub (https://github.com/tinosulzer/kneepoint-review).
+All data and code are publicly available on GitHub (\url{https://github.com/tinosulzer/kneepoint-review}).
 
 \section{Acknowledgments}
 %\pbox{Add *necessary* funding here; keep in mind no one was paid for this paper :)}
